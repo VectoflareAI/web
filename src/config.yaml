@@ -11,7 +11,7 @@ metadata:
   title:
     default: Vectoflare
     template: '%s — Vectoflare'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "\U0001F680 搭建AI运行环境， 工作流程自动化 全面优化客户大数据库 + 优化品牌形象."
   robots:
     index: true
     follow: true
