@@ -6,6 +6,9 @@ import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Steps from '~/components/widgets/Steps.astro';
 
+// ✨ 修复关键：必须从底层的 permalinks 工具库中导入 getPermalink 函数
+import { getPermalink } from '~/utils/permalinks';
+
 const metadata = {
   title: '自动化工作流定制 — Vectoflare',
   description: '为外贸B2B企业量身打造的高效工作流定制方案，涵盖询盘自动化、客户追踪与数据采集。',
@@ -76,7 +79,7 @@ const metadata = {
     items={[
       {
         title: '工业级数据安全体系',
-        description: '严格保护您的客户资产与核心机密，数据通道采用多层加密，绝不外泄。',
+        description: '严格保护您的客户资产与核心机密，数据通道采用多层加密，绝不外泄 Club。',
         icon: 'tabler:shield-lock',
       },
       {
