@@ -56,12 +56,16 @@ export const headerData = {
         },
       ],
     },
-        {
+    {
       text: '产品中心',
       links: [
         {
-          text: 'Products1 (Anchor Link)',
-          href: products1('/#features'),
+          text: '产品中心总览',
+          href: getPermalink('/products'), // 完美打通并指向你新建的 src/pages/products.astro
+        },
+        {
+          text: '功能特性锚点',
+          href: getPermalink('/#features'), // 修复原本的报错，改为标准的首页锚点跳转
         },
         {
           text: 'Services',
