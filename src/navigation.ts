@@ -76,10 +76,6 @@ export const headerData = {
           href: getPermalink('/tools'),     // ✨ 修复：改用标准的 getPermalink 函数
         },
         {
-          text: '各种脚本',
-          href: getPermalink('/scrips'),   // ✨ 修复：改用标准的 getPermalink 函数
-        },
-        {
           text: '功能特性锚点',
           href: getPermalink('/#features'), 
         },
@@ -98,14 +94,6 @@ export const headerData = {
         {
           text: '联系我们',
           href: getPermalink('/contact'),
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
         },
       ],
     },
