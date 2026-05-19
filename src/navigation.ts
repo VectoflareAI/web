@@ -72,10 +72,6 @@ export const headerData = {
           href: getPermalink('/workflow'),
         },
         {
-          text: '各种脚本',
-          href: getPermalink('/scrips'),
-        },
-        {
           text: '智能体',
           href: getPermalink('/AIagentt'),
         },
@@ -94,7 +90,7 @@ export const headerData = {
       ],
     },
     {
-      text: 'Landing',
+      text: '案例展示',
       links: [
         {
           text: 'Lead Generation',
