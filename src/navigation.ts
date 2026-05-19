@@ -68,27 +68,27 @@ export const headerData = {
           href: getPermalink('/#features'), // 修复原本的报错，改为标准的首页锚点跳转
         },
         {
-          text: 'Services',
+          text: '工作流',
           href: getPermalink('/services'),
         },
         {
-          text: 'Pricing',
+          text: '各种脚本',
           href: getPermalink('/pricing'),
         },
         {
-          text: '关于我们',
+          text: '智能体',
           href: getPermalink('/about'),
         },
         {
-          text: '联系我们',
+          text: '各种工具',
           href: getPermalink('/contact'),
         },
         {
-          text: 'Terms',
+          text: '运行环境',
           href: getPermalink('/terms'),
         },
         {
-          text: 'Privacy policy',
+          text: '基础教程',
           href: getPermalink('/privacy'),
         },
       ],
