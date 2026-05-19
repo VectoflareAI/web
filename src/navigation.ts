@@ -61,36 +61,56 @@ export const headerData = {
       links: [
         {
           text: '产品中心总览',
-          href: getPermalink('/products'), // 完美打通并指向你新建的 src/pages/products.astro
-        },
-        {
-          text: '功能特性锚点',
-          href: getPermalink('/#features'), // 修复原本的报错，改为标准的首页锚点跳转
+          href: getPermalink('/products'), 
         },
         {
           text: '工作流定制',
-          href: getPermalink('/workflow'),
+          href: getPermalink('/workflow'), // ✨ 修复：改用标准的 getPermalink 函数
         },
         {
           text: '智能体应用',
-          href: getPermalink('/AIagentt'),
+          href: getPermalink('/AIagentt'), // ✨ 修复：改用标准的 getPermalink 函数
         },
         {
           text: '专业工具定制',
-          href: getPermalink('/tools'),
+          href: getPermalink('/tools'),     // ✨ 修复：改用标准的 getPermalink 函数
         },
         {
-          text: '运行环境搭建',
-          href: getPermalink('/conditons'),
+          text: '各种脚本',
+          href: getPermalink('/scrips'),   // ✨ 修复：改用标准的 getPermalink 函数
         },
         {
-          text: '基础教程',
-          href: getPermalink('/basicterms'),
+          text: '功能特性锚点',
+          href: getPermalink('/#features'), 
+        },
+        {
+          text: 'Services',
+          href: getPermalink('/services'),
+        },
+        {
+          text: 'Pricing',
+          href: getPermalink('/pricing'),
+        },
+        {
+          text: '关于我们',
+          href: getPermalink('/about'),
+        },
+        {
+          text: '联系我们',
+          href: getPermalink('/contact'),
+        },
+        {
+          text: 'Terms',
+          href: getPermalink('/terms'),
+        },
+        {
+          text: 'Privacy policy',
+          href: getPermalink('/privacy'),
         },
       ],
     },
     {
-      text: '案例展示',
+      text: 'Landing',
       links: [
         {
           text: 'Lead Generation',
