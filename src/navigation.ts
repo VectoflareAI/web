@@ -98,7 +98,7 @@ export const headerData = {
       ],
     },
     {
-      text: 'Landing',
+      text: '服务案例',
       links: [
         {
           text: 'Lead Generation',
