@@ -68,19 +68,19 @@ export const headerData = {
           href: getPermalink('/#features'), // 修复原本的报错，改为标准的首页锚点跳转
         },
         {
-          text: '工作流',
+          text: '工作流定制',
           href: getPermalink('/workflow'),
         },
         {
-          text: '智能体',
+          text: '智能体应用',
           href: getPermalink('/AIagentt'),
         },
         {
-          text: '各种工具',
+          text: '专业工具定制',
           href: getPermalink('/tools'),
         },
         {
-          text: '运行环境',
+          text: '运行环境搭建',
           href: getPermalink('/conditons'),
         },
         {
