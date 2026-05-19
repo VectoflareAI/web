@@ -1,0 +1,95 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+
+const metadata = {
+  title: '外贸自动化工作流定制 — VectoflareAI',
+  description: '为外贸B2B企业量身打造的高效工作流定制方案，涵盖询盘自动化、客户追踪与数据采集。',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="专业外贸解决方案"
+    title="智能化外贸工作流定制服务"
+    subtitle="告别繁琐的手工重复劳动。我们为 B2B 外贸企业量身打造自动化工作流系统，涵盖多平台询盘自动响应、客户数据精准采集、AI 邮件智能跟进，助力您的国际市场开发效率提升 300%。"
+    actions={[{ variant: 'primary', text: '立即定制您的工作流', href: getPermalink('/contact') }]}
+  />
+
+  <Features3
+    title="专为外贸场景打造的自动化能力"
+    subtitle="打通获客、跟进、管理全链路，让获客变得更简单"
+    columns={3}
+    items={[
+      {
+        title: 'B2B 潜在客户自动采集',
+        description: '支持自动化采集海外社交媒体（如 Facebook、LinkedIn）及 Google Maps 上的目标客户信息与联系方式，告别手动搜寻。',
+        icon: 'tabler:search',
+      },
+      {
+        title: '智能全天候询盘响应',
+        description: '集成 AI 视觉与文本生成引擎，收到海外买家询盘后秒级智能回复，不错过任何一个时区的高质量订单机会。',
+        icon: 'tabler:mail-fast',
+      },
+      {
+        title: '多渠道客户自动追踪',
+        description: '科学构建外贸开发信流转体系，根据客户的已读、未读状态自动触发阶梯式跟进动作，大幅提高复盘转化率。',
+        icon: 'tabler:git-fork',
+      },
+    ]}
+  />
+
+  <Steps
+    title="量身定制外贸工作流只需 4 步"
+    items={[
+      {
+        title: '步骤 1: 业务场景诊断',
+        description: '资深市场开发经理与您一对一沟通，梳理您现有的平台配置（如 365 邮箱、独立站、社媒矩阵）及业务痛点。',
+        icon: 'tabler:device-analytics',
+      },
+      {
+        title: '步骤 2: 架构方案设计',
+        description: '根据需求设计专属的自动化逻辑（如基于 Pandas / Playwright 等底层技术的自动化数据流转蓝图）。',
+        icon: 'tabler:vector-bezier',
+      },
+      {
+        title: '步骤 3: 专属系统部署',
+        description: '进行高效的软硬件与 API 集成，接入 Cloudflare 全球边缘加速网络，确保数据流安全、秒级响应。',
+        icon: 'tabler:plug',
+      },
+      {
+        title: '步骤 4: 交付与稳定运行',
+        description: '系统正式上线，提供长期的技术维护与数据链路更新支持，保障外贸获客引擎 24 小时无间断运行。',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  />
+
+  <Features2
+    title="为什么选择 VectoflareAI 的定制服务？"
+    subtitle="用数字化技术标准，为您的出海业务保驾护航"
+    columns={2}
+    items={[
+      {
+        title: '工业级数据安全体系',
+        description: '严格保护您的客户资产与核心机密，数据通道采用多层加密，绝不外泄。',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: '顶尖技术团队支撑',
+        description: '精通现代化前端架构与边缘计算，拒绝臃肿的传统插件，系统运行轻量、丝滑且极速。',
+        icon: 'tabler:cpu',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[{ variant: 'primary', text: '在线询盘 / 预约演示', href: getPermalink('/contact') }]}
+    title="让您的外贸业务步入自动化时代"
+    subtitle="立即联系我们，获取免费的初始工作流评估报告与专业商务报价。"
+  />
+</Layout>
