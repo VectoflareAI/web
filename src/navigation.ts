@@ -56,6 +56,39 @@ export const headerData = {
         },
       ],
     },
+        {
+      text: '产品中心',
+      links: [
+        {
+          text: 'Products1 (Anchor Link)',
+          href: products1('/#features'),
+        },
+        {
+          text: 'Services',
+          href: getPermalink('/services'),
+        },
+        {
+          text: 'Pricing',
+          href: getPermalink('/pricing'),
+        },
+        {
+          text: '关于我们',
+          href: getPermalink('/about'),
+        },
+        {
+          text: '联系我们',
+          href: getPermalink('/contact'),
+        },
+        {
+          text: 'Terms',
+          href: getPermalink('/terms'),
+        },
+        {
+          text: 'Privacy policy',
+          href: getPermalink('/privacy'),
+        },
+      ],
+    },
     {
       text: 'Landing',
       links: [
