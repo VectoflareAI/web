@@ -6,7 +6,7 @@ import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Steps from '~/components/widgets/Steps.astro';
 
-// ✨ 修复关键：必须从底层的 permalinks 工具库中导入 getPermalink 函数
+// ✨ 必须加上这一行导入，否则 Cloudflare 编译直接崩溃报错
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -79,7 +79,7 @@ const metadata = {
     items={[
       {
         title: '工业级数据安全体系',
-        description: '严格保护您的客户资产与核心机密，数据通道采用多层加密，绝不外泄 Club。',
+        description: '严格保护您的客户资产与核心机密，数据通道采用多层加密，绝不外泄。',
         icon: 'tabler:shield-lock',
       },
       {
