@@ -69,27 +69,27 @@ export const headerData = {
         },
         {
           text: '工作流',
-          href: getPermalink('/services'),
+          href: getPermalink('/workflow'),
         },
         {
           text: '各种脚本',
-          href: getPermalink('/pricing'),
+          href: getPermalink('/scrips'),
         },
         {
           text: '智能体',
-          href: getPermalink('/about'),
+          href: getPermalink('/AIagentt'),
         },
         {
           text: '各种工具',
-          href: getPermalink('/contact'),
+          href: getPermalink('/tools'),
         },
         {
           text: '运行环境',
-          href: getPermalink('/terms'),
+          href: getPermalink('/conditons'),
         },
         {
           text: '基础教程',
-          href: getPermalink('/privacy'),
+          href: getPermalink('/basicterms'),
         },
       ],
     },
