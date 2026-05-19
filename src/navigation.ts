@@ -3,7 +3,7 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'Homes',
+      text: '首页',
       links: [
         {
           text: 'SaaS',
@@ -39,11 +39,11 @@ export const headerData = {
           href: getPermalink('/pricing'),
         },
         {
-          text: 'About us',
+          text: '关于我们',
           href: getPermalink('/about'),
         },
         {
-          text: 'Contact',
+          text: '联系我们',
           href: getPermalink('/contact'),
         },
         {
@@ -86,10 +86,10 @@ export const headerData = {
       ],
     },
     {
-      text: 'Blog',
+      text: '社区',
       links: [
         {
-          text: 'Blog List',
+          text: '新闻',
           href: getBlogPermalink(),
         },
         {
@@ -115,7 +115,7 @@ export const headerData = {
       href: '#',
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind', target: '_blank' }],
+  actions: [{ text: 'Download', href: 'https://github.com/VectoflareAI/web', target: '_blank' }],
 };
 
 export const footerData = {
@@ -174,7 +174,7 @@ export const footerData = {
     { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/VectoflareAI/web' },
   ],
   footNote: `
     Made by <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo"> Arthelokyo</a> · All rights reserved.
