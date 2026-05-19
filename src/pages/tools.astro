@@ -1,0 +1,86 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+// 导入标准的路由函数
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: '外贸专业工具与数据采集定制 — Vectoflare',
+  description: '面向外贸B2B客户提供行业数据采集、社媒联系方式挖掘、Email群发防封及数据清洗等全套工具化定制服务。',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="外贸专属技术工具箱"
+    title="专业化外贸工具与数据智能定制"
+    subtitle="用技术打通外贸获客的最底层链路。我们为外贸企业深度定制各类自动化工具，涵盖多维度数据精准采集、高效邮箱检测、安全防封群发系统及精准数据清洗，助您打造无懈可击的获客武器库。"
+    actions={[{ variant: 'primary', text: '立即定制您的专属工具', href: getPermalink('/contact') }]}
+  />
+
+  <Features3
+    title="全方位外贸工具定制能力"
+    subtitle="针对外贸开发的核心痛点，提供高效率的精细化工具方案"
+    columns={3}
+    items={[
+      {
+        title: '行业客户数据采集',
+        description: '根据目标行业与特定关键词，跨平台全网检索潜在买家，实现批量、精准的客户名录自动化导出。',
+        icon: 'tabler:database-search',
+      },
+      {
+        title: '客户网站信息采集',
+        description: '定向深度解析目标客户的官方网站，全自动提取公司简介、主营产品、表单入口及关键业务信息。',
+        icon: 'tabler:world-search',
+      },
+      {
+        title: '社交媒体联系信息采集',
+        description: '自动化跨平台（Facebook、LinkedIn、Instagram等）挖掘目标决策人的公开联系方式、电话及社媒主页。',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        title: 'Email 有效性检测',
+        description: '批量清洗开发信名单，秒级识别无效邮箱、垃圾箱陷阱及停用账户，将退信率（Bounce Rate）降至最低。',
+        icon: 'tabler:mail-check',
+      },
+      {
+        title: 'Email (防封) 群发系统',
+        description: '独家定制企业级邮件流转防护机制，科学配置多域名、多IP动态轮转与智能语义替换，完美绕过海外反垃圾邮件风控。',
+        icon: 'tabler:send-triggered',
+      },
+      {
+        title: '采集数据清洗与去重',
+        description: '提供专业的数据降噪、去重及结构化整理工具，自动标记合并重复的机构ID，让外贸销售线索绝对纯净。',
+        icon: 'tabler:braces-filter',
+      },
+    ]}
+  />
+
+  <Features2
+    title="1对1 特殊定制数据采集服务"
+    subtitle="标准工具无法满足的复杂场景？我们为您量身写脚本、布节点"
+    columns={2}
+    items={[
+      {
+        title: '复杂反爬虫突破定制',
+        description: '针对有严密防护的海外B2B黄页或行业展会网站，利用现代高级反自动化突破技术，确保数据安全合规、完整无损地导出。',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: '定制化 API 数据看板对接',
+        description: '可将采集到的海量外贸客户数据，无缝清洗并实时推送到您的私有 CRM 或者是自动化看板系统中。',
+        icon: 'tabler:api',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[{ variant: 'primary', text: '在线询盘 / 提定制需求', href: getPermalink('/contact') }]}
+    title="用技术工具，建立您的出海壁垒"
+    subtitle="立即联系我们的技术开发团队，免费获取您专属工具的初步技术可行性评估与定制方案报价。"
+  />
+</Layout>
