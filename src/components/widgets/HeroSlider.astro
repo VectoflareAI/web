@@ -1,11 +1,7 @@
 ---
 /**
  * 首页轮播图组件
- * 将原有的单张 Hero 图片替换为 3 张轮播图自动播放
- * 照片位置说明（见下方 images 数组中各注释）：
- *   第 1 张：品牌形象照片（左上角区域）
- *   第 2 张：工业制造场景照片（中部区域）
- *   第 3 张：全球商务市场照片（右下区域）
+ * 每张轮播图上叠加可编辑的文字内容，半透明渐变背景确保文字清晰
  */
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
@@ -33,51 +29,6 @@ const {
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="py-12 md:py-20">
-      <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
-        {
-          tagline && (
-            <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-              set:html={tagline}
-            />
-          )
-        }
-        {
-          title && (
-            <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-              set:html={title}
-            />
-          )
-        }
-        <div class="max-w-3xl mx-auto">
-          {
-            subtitle && (
-              <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-                set:html={subtitle}
-              />
-            )
-          }
-          {
-            actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-                {Array.isArray(actions) ? (
-                  actions.map((action) => (
-                    <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
-                    </div>
-                  ))
-                ) : (
-                  <Fragment set:html={actions} />
-                )}
-              </div>
-            )
-          }
-        </div>
-        {content && <Fragment set:html={content} />}
-      </div>
-
       <!-- 轮播图容器 -->
       <div
         class="relative m-auto max-w-5xl intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
@@ -88,8 +39,8 @@ const {
             id="carousel-track"
             class="flex transition-transform duration-700 ease-in-out"
           >
-            <!-- 轮播图 第1张：品牌形象照片（网页左上角突出位置） -->
-            <div class="min-w-full">
+            <!-- 轮播图 第1张：品牌形象照片，文字叠加在图片上方 -->
+            <div class="min-w-full relative">
               {
                 images[0] && (
                   <Image
@@ -105,9 +56,37 @@ const {
                   />
                 )
               }
+              <!-- 半透明渐变遮罩，确保文字在任何底色上都清晰可见 -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-md"></div>
+              <!-- 叠加文字内容 -->
+              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
+                {
+                  title && (
+                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                  )
+                }
+                {
+                  subtitle && (
+                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                  )
+                }
+                {
+                  actions && (
+                    <div class="flex flex-wrap justify-center gap-3">
+                      {Array.isArray(actions) ? (
+                        actions.map((action) => (
+                          <Button {...(action || {})} class="!shadow-lg" />
+                        ))
+                      ) : (
+                        <Fragment set:html={actions} />
+                      )}
+                    </div>
+                  )
+                }
+              </div>
             </div>
-            <!-- 轮播图 第2张：工业制造/产品场景照片（页面中部区域） -->
-            <div class="min-w-full">
+            <!-- 轮播图 第2张：工业制造/产品场景照片，文字叠加在图片上方 -->
+            <div class="min-w-full relative">
               {
                 images[1] && (
                   <Image
@@ -123,9 +102,35 @@ const {
                   />
                 )
               }
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-md"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
+                {
+                  title && (
+                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                  )
+                }
+                {
+                  subtitle && (
+                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                  )
+                }
+                {
+                  actions && (
+                    <div class="flex flex-wrap justify-center gap-3">
+                      {Array.isArray(actions) ? (
+                        actions.map((action) => (
+                          <Button {...(action || {})} class="!shadow-lg" />
+                        ))
+                      ) : (
+                        <Fragment set:html={actions} />
+                      )}
+                    </div>
+                  )
+                }
+              </div>
             </div>
-            <!-- 轮播图 第3张：全球商务/市场拓展照片（页面右下区域） -->
-            <div class="min-w-full">
+            <!-- 轮播图 第3张：全球商务/市场拓展照片，文字叠加在图片上方 -->
+            <div class="min-w-full relative">
               {
                 images[2] && (
                   <Image
@@ -141,6 +146,32 @@ const {
                   />
                 )
               }
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-md"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
+                {
+                  title && (
+                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                  )
+                }
+                {
+                  subtitle && (
+                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                  )
+                }
+                {
+                  actions && (
+                    <div class="flex flex-wrap justify-center gap-3">
+                      {Array.isArray(actions) ? (
+                        actions.map((action) => (
+                          <Button {...(action || {})} class="!shadow-lg" />
+                        ))
+                      ) : (
+                        <Fragment set:html={actions} />
+                      )}
+                    </div>
+                  )
+                }
+              </div>
             </div>
           </div>
         </div>
