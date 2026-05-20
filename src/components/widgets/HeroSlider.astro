@@ -1,0 +1,212 @@
+---
+/**
+ * 首页轮播图组件
+ * 将原有的单张 Hero 图片替换为 3 张轮播图自动播放
+ * 照片位置说明（见下方 images 数组中各注释）：
+ *   第 1 张：品牌形象照片（左上角区域）
+ *   第 2 张：工业制造场景照片（中部区域）
+ *   第 3 张：全球商务市场照片（右下区域）
+ */
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+
+import type { Hero as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  content = await Astro.slots.render('content'),
+  actions = await Astro.slots.render('actions'),
+  images = [],
+  id,
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <slot name="bg">
+      {bg ? <Fragment set:html={bg} /> : null}
+    </slot>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class="py-12 md:py-20">
+      <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+        {
+          tagline && (
+            <p
+              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html={tagline}
+            />
+          )
+        }
+        {
+          title && (
+            <h1
+              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              set:html={title}
+            />
+          )
+        }
+        <div class="max-w-3xl mx-auto">
+          {
+            subtitle && (
+              <p
+                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+                set:html={subtitle}
+              />
+            )
+          }
+          {
+            actions && (
+              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+                {Array.isArray(actions) ? (
+                  actions.map((action) => (
+                    <div class="flex w-full sm:w-auto">
+                      <Button {...(action || {})} class="w-full sm:mb-0" />
+                    </div>
+                  ))
+                ) : (
+                  <Fragment set:html={actions} />
+                )}
+              </div>
+            )
+          }
+        </div>
+        {content && <Fragment set:html={content} />}
+      </div>
+
+      <!-- 轮播图容器 -->
+      <div
+        class="relative m-auto max-w-5xl intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        id="hero-carousel"
+      >
+        <div class="overflow-hidden rounded-md">
+          <div
+            id="carousel-track"
+            class="flex transition-transform duration-700 ease-in-out"
+          >
+            <!-- 轮播图 第1张：品牌形象照片（网页左上角突出位置） -->
+            <div class="min-w-full">
+              {
+                images[0] && (
+                  <Image
+                    class="mx-auto w-full"
+                    widths={[400, 768, 1024, 2040]}
+                    sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                    loading="eager"
+                    fetchpriority="high"
+                    width={1024}
+                    height={576}
+                    format="webp"
+                    {...images[0]}
+                  />
+                )
+              }
+            </div>
+            <!-- 轮播图 第2张：工业制造/产品场景照片（页面中部区域） -->
+            <div class="min-w-full">
+              {
+                images[1] && (
+                  <Image
+                    class="mx-auto w-full"
+                    widths={[400, 768, 1024, 2040]}
+                    sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                    loading="eager"
+                    fetchpriority="high"
+                    width={1024}
+                    height={576}
+                    format="webp"
+                    {...images[1]}
+                  />
+                )
+              }
+            </div>
+            <!-- 轮播图 第3张：全球商务/市场拓展照片（页面右下区域） -->
+            <div class="min-w-full">
+              {
+                images[2] && (
+                  <Image
+                    class="mx-auto w-full"
+                    widths={[400, 768, 1024, 2040]}
+                    sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                    loading="eager"
+                    fetchpriority="high"
+                    width={1024}
+                    height={576}
+                    format="webp"
+                    {...images[2]}
+                  />
+                )
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- 轮播导航圆点 -->
+        <div class="flex justify-center gap-3 mt-6" id="carousel-dots">
+          <button data-slide="0" class="w-3 h-3 rounded-full bg-primary/80 hover:bg-primary transition-colors" aria-label="切换到第1张"></button>
+          <button data-slide="1" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors" aria-label="切换到第2张"></button>
+          <button data-slide="2" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors" aria-label="切换到第3张"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const track = document.getElementById('carousel-track');
+    const dots = document.querySelectorAll('#carousel-dots button');
+    if (!track || !dots.length) return;
+
+    let current = 0;
+    const total = dots.length;
+    let interval;
+
+    function goTo(index) {
+      if (index < 0 || index >= total) return;
+      current = index;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((dot, i) => {
+        if (i === current) {
+          dot.className = 'w-3 h-3 rounded-full bg-primary/80 hover:bg-primary transition-colors';
+        } else {
+          dot.className = 'w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors';
+        }
+      });
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      interval = setInterval(() => {
+        goTo((current + 1) % total);
+      }, 5000);
+    }
+
+    function stopAutoPlay() {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-slide') || '0', 10);
+        goTo(idx);
+        startAutoPlay();
+      });
+    });
+
+    const carousel = document.getElementById('hero-carousel');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', stopAutoPlay);
+      carousel.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    startAutoPlay();
+  })();
+</script>
