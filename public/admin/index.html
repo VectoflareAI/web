@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Vectoflare Admin</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#111}
+.header{background:#fff;border-bottom:1px solid #e5e7eb;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:18px;font-weight:600}
+.header a,.header button{color:#6b7280;background:none;border:none;font-size:14px;cursor:pointer;text-decoration:none;margin-left:16px}
+.header a:hover,.header button:hover{color:#111}
+.container{max-width:960px;margin:32px auto;padding:0 16px}
+.card{background:#fff;border-radius:10px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.actions{margin-bottom:24px}
+.actions a{display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:500}
+.actions a:hover{background:#1d4ed8}
+table{width:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+th,td{padding:12px 16px;text-align:left;font-size:14px;border-bottom:1px solid #f3f4f6}
+th{background:#f9fafb;color:#6b7280;font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td{color:#374151}
+tr:hover td{background:#f9fafb}
+.post-title{color:#2563eb;text-decoration:none;font-weight:500;cursor:pointer}
+.post-title:hover{text-decoration:underline}
+.empty{padding:48px;text-align:center;color:#9ca3af;font-size:15px}
+.badge{padding:2px 8px;border-radius:9999px;font-size:12px;background:#dbeafe;color:#1d4ed8}
+.del-btn{color:#dc2626;background:none;border:none;font-size:13px;cursor:pointer;padding:2px 6px;border-radius:4px}
+.del-btn:hover{background:#fef2f2}
+label{display:block;font-size:13px;font-weight:500;margin-bottom:4px;color:#374151}
+input,textarea,select{padding:9px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;width:100%;margin-bottom:16px;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+textarea{font-family:ui-monospace,SFMono-Regular,monospace;resize:vertical;min-height:400px;line-height:1.6;font-size:13px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-primary{padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer}
+.btn-primary:hover{background:#1d4ed8}
+.btn-secondary{padding:10px 24px;background:#f3f4f6;color:#374151;text-decoration:none;border-radius:6px;font-size:14px;display:inline-block;border:none;cursor:pointer}
+.btn-secondary:hover{background:#e5e7eb}
+.btn-row{display:flex;gap:12px;margin-top:8px;align-items:center}
+.error{background:#fef2f2;color:#dc2626;padding:10px;border-radius:6px;font-size:14px;margin-bottom:16px}
+.success{background:#f0fdf4;color:#16a34a;padding:10px;border-radius:6px;font-size:14px;margin-bottom:16px}
+.hint{color:#9ca3af;font-size:12px;margin-top:-12px;margin-bottom:16px}
+.loading{text-align:center;padding:48px;color:#9ca3af}
+.screen{display:none}
+.screen.active{display:block}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f5f5f5}
+.login-box{background:#fff;padding:40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);width:380px}
+.login-box h1{font-size:22px;margin-bottom:24px}
+.login-box button{width:100%;padding:11px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:500;cursor:pointer}
+.login-box button:hover{background:#1d4ed8}
+.login-box label{font-size:14px;margin-bottom:6px;color:#333}
+.notice{font-size:13px;color:#6b7280;margin-bottom:16px;background:#f0f9ff;padding:10px 14px;border-radius:6px;border-left:3px solid #2563eb}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+const API = 'https://api.github.com';
+const OWNER = 'VectoflareAI';
+const REPO = 'web';
+const BRANCH = 'main';
+const POSTS_DIR = 'src/data/post';
+const ADMIN_USER = 'admin';
+
+let state = { page: 'login', posts: [], token: '', slug: '', sha: '', msg: '', msgType: '' };
+
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
+function $(id) { return document.getElementById(id) }
+
+function show(page, data) { state.page = page; if (data) Object.assign(state, data); render() }
+
+function render() {
+  const pages = {
+    login: renderLogin,
+    setup: renderSetup,
+    dashboard: renderDashboard,
+    editor: renderEditor,
+    password: renderPassword,
+  };
+  const fn = pages[state.page] || renderLogin;
+  document.getElementById('app').innerHTML = fn();
+  const token = state.token || localStorage.getItem('gh_token');
+  if (token && state.page === 'login') { state.token = token; show('dashboard') }
+}
+
+// --- LOGIN ---
+function renderLogin() {
+  return `<div class="login-wrap"><div class="login-box">
+    <h1>Vectoflare Admin</h1>
+    ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
+    <form onsubmit="event.preventDefault();doLogin()">
+      <label>Username</label>
+      <input type="text" id="login_user" value="${ADMIN_USER}" required>
+      <label>Password</label>
+      <input type="password" id="login_pass" required autocomplete="current-password">
+      <button type="submit">Login</button>
+    </form>
+  </div></div>`;
+}
+
+function doLogin() {
+  const user = $('login_user').value;
+  const pass = $('login_pass').value;
+  if (user !== ADMIN_USER || pass !== 'Aa123456#') {
+    state.msg = 'Invalid username or password'; state.msgType = 'error'; render();
+    return;
+  }
+  const token = localStorage.getItem('gh_token');
+  if (token) { state.token = token; show('dashboard') }
+  else { state.msg = ''; show('setup') }
+}
+
+// --- SETUP (GitHub Token) ---
+function renderSetup() {
+  return `<div class="login-wrap"><div class="login-box">
+    <h1>GitHub Token</h1>
+    <div class="notice">
+      Create a GitHub Personal Access Token:<br>
+      1. Go to <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
+      2. Generate new token (classic) → scope: <strong>repo</strong><br>
+      3. Copy and paste it below
+    </div>
+    ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
+    <form onsubmit="event.preventDefault();doSetup()">
+      <label>Personal Access Token</label>
+      <input type="password" id="setup_token" required autocomplete="off">
+      <button type="submit">Save &amp; Continue</button>
+    </form>
+  </div></div>`;
+}
+
+async function doSetup() {
+  const token = $('setup_token').value.trim();
+  const res = await fetch(`${API}/user`, { headers: { Authorization: `Bearer ${token}` } });
+  if (!res.ok) { state.msg = 'Invalid token. Make sure it has repo scope.'; state.msgType = 'error'; render(); return }
+  localStorage.setItem('gh_token', token);
+  state.token = token;
+  show('dashboard');
+}
+
+// --- DASHBOARD ---
+function renderDashboard() {
+  const posts = state.posts;
+  return `<div>
+    <div class="header">
+      <h1>Vectoflare Admin</h1>
+      <div>
+        <a href="#" onclick="event.preventDefault();show('password')">Change Password</a>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="actions"><a href="#" onclick="event.preventDefault();show('editor',{slug:'',sha:'',title:'',excerpt:'',category:'',tags:'',image:'',publishDate:'',updateDate:'',draft:'',author:'',body:'',isNew:true})">+ New Post</a></div>
+      <div id="post_list">
+        <div class="loading">Loading posts...</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function loadDashboard() {
+  const token = state.token || localStorage.getItem('gh_token');
+  if (!token) return;
+  try {
+    const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    const el = $('post_list');
+    if (!res.ok) { el.innerHTML = '<div class="empty">Failed to load posts. Check your token.</div>'; return }
+    const files = await res.json();
+    if (!Array.isArray(files) || files.length === 0) { el.innerHTML = '<div class="empty">No posts yet.</div>'; return }
+    const mdFiles = files.filter(f => f.name.endsWith('.md') || f.name.endsWith('.mdx'));
+    let html = '<table><thead><tr><th>Title</th><th>Category</th><th>Date</th><th></th></tr></thead><tbody>';
+    for (const f of mdFiles) {
+      const slug = f.name.replace(/\.(md|mdx)$/,'');
+      const meta = await fetchPostMeta(f.url, token);
+      html += `<tr>
+        <td><a class="post-title" onclick="event.preventDefault();editPost('${slug}')">${esc(meta.title||slug)}</a></td>
+        <td>${meta.category ? `<span class="badge">${esc(meta.category)}</span>` : '-'}</td>
+        <td>${meta.date || '-'}</td>
+        <td><button class="del-btn" onclick="deletePost('${slug}','${f.sha}')">Delete</button></td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    el.innerHTML = html;
+  } catch(e) { $('post_list').innerHTML = '<div class="empty">Error loading posts.</div>' }
+}
+
+async function fetchPostMeta(url, token) {
+  try {
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' } });
+    if (!res.ok) return {};
+    const data = await res.json();
+    const raw = base64ToUTF8(data.content);
+    const meta = parseFrontmatter(raw);
+    return { title: meta.title, category: meta.category, date: meta.publishDate ? meta.publishDate.slice(0,10) : '' };
+  } catch(e) { return {} }
+}
+
+// --- EDITOR ---
+function renderEditor() {
+  const p = state;
+  const isNew = p.isNew;
+  const dateVal = v => v ? v.slice(0,16) : '';
+  return `<div>
+    <div class="header">
+      <h1>${isNew ? 'New Post' : 'Edit Post'}</h1>
+      <a href="#" onclick="event.preventDefault();show('dashboard')">Back to Dashboard</a>
+    </div>
+    <div class="container">
+      <div class="card">
+        ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
+        <form id="editor_form">
+          <input type="hidden" name="sha" value="${p.sha}">
+          <input type="hidden" name="isNew" value="${isNew}">
+          <label>Title *</label>
+          <input type="text" name="title" value="${esc(p.title)}" required ${isNew ? 'oninput="slugGen(this.value)"' : ''}>
+          <label>Slug (filename)</label>
+          <input type="text" name="slug" id="slug_input" value="${esc(p.slug)}" required ${isNew ? '' : 'readonly style="background:#f9fafb;color:#6b7280"'}>
+          <div class="row">
+            <div><label>Publish Date</label><input type="datetime-local" name="publishDate" value="${dateVal(p.publishDate)}"></div>
+            <div><label>Update Date</label><input type="datetime-local" name="updateDate" value="${dateVal(p.updateDate)}"></div>
+          </div>
+          <div class="row">
+            <div><label>Category</label><input type="text" name="category" value="${esc(p.category)}" placeholder="e.g. Tutorials"></div>
+            <div><label>Tags (comma separated)</label><input type="text" name="tags" value="${esc(p.tags)}" placeholder="astro, tailwind css"></div>
+          </div>
+          <div class="row">
+            <div><label>Author</label><input type="text" name="author" value="${esc(p.author)}"></div>
+            <div><label>Draft</label>
+              <select name="draft">
+                <option value="">Published</option>
+                <option value="true" ${p.draft === 'true' ? 'selected' : ''}>Draft</option>
+              </select>
+            </div>
+          </div>
+          <label>Image URL</label>
+          <input type="text" name="image" value="${esc(p.image)}" placeholder="https://...">
+          <label>Excerpt</label>
+          <input type="text" name="excerpt" value="${esc(p.excerpt)}">
+          <label>Content (Markdown) *</label>
+          <textarea name="body" id="editor_body" required>${esc(p.body)}</textarea>
+          <div class="hint">Write your post content in Markdown.</div>
+          <div class="btn-row">
+            <button type="submit" class="btn-primary" onclick="event.preventDefault();savePost()">Save &amp; Publish</button>
+            <a href="#" class="btn-secondary" onclick="event.preventDefault();show('dashboard')">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>`;
+}
+
+function slugGen(title) {
+  $('slug_input').value = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+async function editPost(slug) {
+  const token = state.token || localStorage.getItem('gh_token');
+  try {
+    let filename = `${POSTS_DIR}/${slug}.md`;
+    let res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${filename}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) {
+      filename = `${POSTS_DIR}/${slug}.mdx`;
+      res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${filename}`, {
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+      });
+    }
+    if (!res.ok) return;
+    const data = await res.json();
+    const raw = base64ToUTF8(data.content);
+    const meta = parseFrontmatter(raw);
+    const body = raw.replace(/^---[\s\S]*?---\s*/,'').trim();
+    show('editor', {
+      slug, sha: data.sha,
+      title: meta.title||'', excerpt: meta.excerpt||'', category: meta.category||'',
+      tags: Array.isArray(meta.tags) ? meta.tags.join(', ') : (meta.tags||''),
+      image: meta.image||'', publishDate: meta.publishDate||'', updateDate: meta.updateDate||'',
+      draft: meta.draft ? 'true' : '', author: meta.author||'', body, isNew: false
+    });
+  } catch(e) { show('dashboard') }
+}
+
+async function savePost() {
+  const form = new FormData($('editor_form'));
+  const token = state.token || localStorage.getItem('gh_token');
+  const isNew = form.get('isNew') === 'true';
+  let slug = form.get('slug').toString().replace(/\.(md|mdx)$/,'') || 'untitled';
+  if (!slug) slug = 'untitled';
+  const title = form.get('title').toString() || 'Untitled';
+  const sha = form.get('sha').toString() || '';
+
+  const lines = ['---'];
+  const fields = ['title','publishDate','updateDate','draft','excerpt','image','category','author'];
+  for (const f of fields) {
+    const v = form.get(f)?.toString().trim();
+    if (!v) continue;
+    if (f === 'draft') { if (v === 'true') lines.push('draft: true'); }
+    else lines.push(`${f}: ${v}`);
+  }
+  const tagsVal = form.get('tags')?.toString().trim();
+  if (tagsVal) {
+    const tags = tagsVal.split(',').map(t=>t.trim()).filter(Boolean);
+    if (tags.length) { lines.push('tags:'); tags.forEach(t=>lines.push(`  - ${t}`)) }
+  }
+  lines.push('---');
+
+  const body = form.get('body')?.toString().trim() || '';
+  const content = lines.join('\n') + '\n\n' + body;
+  const encoded = utf8ToBase64(content);
+
+  const path = `${POSTS_DIR}/${slug}.md`;
+  const payload = { message: `Update post: ${title}`, content: encoded, branch: BRANCH };
+  if (sha) payload.sha = sha;
+
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    state.msg = `Save failed: ${err.message || 'Unknown error'}`; state.msgType = 'error'; render();
+    return;
+  }
+  show('dashboard');
+}
+
+async function deletePost(slug, sha) {
+  if (!confirm(`Delete "${slug}"?`)) return;
+  const token = state.token || localStorage.getItem('gh_token');
+  const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}/${slug}.md`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: `Delete post: ${slug}`, sha, branch: BRANCH }),
+  });
+  if (res.ok) loadDashboard();
+}
+
+// --- PASSWORD ---
+function renderPassword() {
+  return `<div class="login-wrap"><div class="login-box">
+    <h1>Change Password</h1>
+    ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
+    <form onsubmit="event.preventDefault();changePassword()">
+      <label>Current Password</label>
+      <input type="password" id="pw_current" required>
+      <label>New Password</label>
+      <input type="password" id="pw_new" required minlength="6">
+      <label>Confirm New Password</label>
+      <input type="password" id="pw_confirm" required minlength="6">
+      <div class="btn-row" style="margin-top:8px">
+        <button type="submit" class="btn-primary">Change Password</button>
+        <a href="#" class="btn-secondary" onclick="event.preventDefault();show('dashboard')">Cancel</a>
+      </div>
+    </form>
+  </div></div>`;
+}
+
+function changePassword() {
+  const current = $('pw_current').value;
+  const newPw = $('pw_new').value;
+  const confirm = $('pw_confirm').value;
+  if (current !== 'Aa123456#') {
+    state.msg = 'Current password is incorrect'; state.msgType = 'error'; renderPasswordPage(); return;
+  }
+  if (newPw !== confirm) {
+    state.msg = 'New passwords do not match'; state.msgType = 'error'; renderPasswordPage(); return;
+  }
+  if (newPw.length < 6) {
+    state.msg = 'Password must be at least 6 characters'; state.msgType = 'error'; renderPasswordPage(); return;
+  }
+  alert('Password changed! (Note: this resets on page reload since it\'s client-side)\nNew password: ' + newPw);
+  state.msg = ''; show('dashboard');
+}
+
+function renderPasswordPage() { render() }
+
+function logout() {
+  state.token = ''; state.posts = [];
+  show('login');
+}
+
+// --- UTILITIES ---
+function base64ToUTF8(b64) {
+  const binary = atob(b64.replace(/\n/g,''));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+function parseFrontmatter(raw) {
+  const m = raw.match(/^---\s*\n([\s\S]*?)\n---/);
+  if (!m) return {};
+  const yaml = m[1]; const r = {};
+  let key = '', inList = false, items = [];
+  for (const line of yaml.split('\n')) {
+    if (inList) {
+      const lm = line.match(/^\s+-\s+(.+)/);
+      if (lm) { items.push(lm[1].trim()); continue }
+      else { r[key] = items; inList = false; items = [] }
+    }
+    const km = line.match(/^(\w+):\s*(.*)/);
+    if (!km) continue;
+    key = km[1]; let val = km[2].trim();
+    if ((val.startsWith('"')&&val.endsWith('"'))||(val.startsWith("'")&&val.endsWith("'"))) val=val.slice(1,-1);
+    if (val === 'true') val = true; else if (val === 'false') val = false;
+    if (val === '') { inList = true; items = []; continue }
+    r[key] = val;
+  }
+  if (inList) r[key] = items;
+  return r;
+}
+
+// --- INIT ---
+render();
+const token = localStorage.getItem('gh_token');
+if (token) { state.token = token; setTimeout(() => { show('dashboard'); setTimeout(()=>loadDashboard(),50) }, 50) }
+</script>
+</body>
+</html>
