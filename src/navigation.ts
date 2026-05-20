@@ -132,8 +132,8 @@ export const headerData = {
       ],
     },
     {
-      text: 'Widgets',
-      href: '#',
+      text: '社交媒体',
+      href: getPermalink('/social-media'),
     },
   ],
   actions: [{ text: 'Download', href: 'https://github.com/VectoflareAI/web', target: '_blank' }],
