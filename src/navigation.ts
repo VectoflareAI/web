@@ -20,7 +20,7 @@ export const headerData = {
         },
         {
           text: '品牌推广',
-          href: getPermalink('/homes/personal'),
+          href: getPermalink('/brand-service'),
         },
       ],
     },

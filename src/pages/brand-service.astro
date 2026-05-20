@@ -1,0 +1,439 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: '品牌推广 | 威拓星耀 — 全球品牌出海专家',
+  description:
+    '威拓星耀提供一站式品牌出海推广服务，包括国际商标注册、品牌代持、海外代理、多语言品牌建设等定制化解决方案。',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  <Fragment slot="header">
+    <Header
+      links={[
+        { text: '服务概览', href: '#overview' },
+        { text: '服务流程', href: '#process' },
+        { text: '商标注册', href: '#trademark' },
+        { text: '服务优势', href: '#advantages' },
+        { text: '成功案例', href: '#cases' },
+      ]}
+      actions={[
+        {
+          text: '立即咨询',
+          href: getPermalink('/contact'),
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
+
+  <!-- Hero 区块 ******************* -->
+
+  <Hero
+    id="hero"
+    title="威拓星耀品牌推广"
+    tagline="全球品牌出海专家"
+    actions={[{ variant: 'primary', text: '免费咨询', href: getPermalink('/contact#form') }]}
+  >
+    <Fragment slot="subtitle">
+      从品牌策略到海外落地，威拓星耀为外贸企业提供全链条品牌推广服务。<br />
+      涵盖国际商标注册、海外代理、品牌代持、多语言内容建设等定制化解决方案，助您的品牌闪耀全球。
+    </Fragment>
+  </Hero>
+
+  <!-- 服务概览 Content Widget **************** -->
+
+  <Content
+    id="overview"
+    columns={3}
+    items={[
+      {
+        icon: 'tabler:brand-dribbble',
+        callToAction: {
+          target: '_blank',
+          text: '了解更多',
+          href: getPermalink('/GEO-service'),
+        },
+      },
+      {
+        icon: 'tabler:language',
+        callToAction: {
+          target: '_blank',
+          text: '了解更多',
+          href: getPermalink('/website-service'),
+        },
+      },
+      {
+        icon: 'tabler:building-store',
+        callToAction: {
+          target: '_blank',
+          text: '了解更多',
+          href: getPermalink('/contact'),
+        },
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80',
+      alt: '全球品牌推广',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">品牌推广服务概览</h2>
+      <p>
+        威拓星耀的品牌推广服务以结果为导向，为每一家外贸企业量身打造品牌出海方案。我们深知，全球化不是简单的翻译和复制，而是深刻的本地化策略与文化融合。
+      </p>
+      <br />
+      <p>我们的服务涵盖三大核心板块：</p>
+      <ul class="list-disc pl-5 space-y-1 mt-2">
+        <li><strong>品牌视觉与内容建设</strong> — 多语言独立站设计、品牌VI体系、产品目录制作</li>
+        <li><strong>国际商标与法律保护</strong> — 美国/欧盟/日本商标注册、品牌代持、知识产权保护</li>
+        <li><strong>海外渠道与代理拓展</strong> — 本地代理商招募、海外仓配对接、本土化营销执行</li>
+      </ul>
+      <br />
+      <p>无论您是初次出海还是希望升级品牌，威拓星耀都能为您提供精准、高效的定制化服务。</p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- 服务流程 Steps Widget ****************** -->
+
+  <Steps
+    id="process"
+    title="品牌推广服务流程"
+    items={[
+      {
+        title:
+          '品牌诊断与战略定位 <br /> <span class="font-normal">深度调研目标市场</span> <br /> <span class="text-sm font-normal">第1-2周</span>',
+        description: `分析目标市场规模、竞争格局与消费者画像。 <br /> 明确品牌差异化定位与核心价值主张。 <br /> 制定本地化品牌命名与视觉策略。 <br /> 输出《品牌出海策略白皮书》。`,
+        icon: 'tabler:search',
+      },
+      {
+        title:
+          '视觉体系与内容建设 <br /> <span class="font-normal">多语言品牌物料制作</span> <br /> <span class="text-sm font-normal">第3-6周</span>',
+        description: `设计品牌LOGO、色彩体系与VI规范。 <br /> 搭建多语言品牌独立站。 <br /> 制作本地化产品目录与营销素材。 <br /> 完成目标语言的关键词研究与内容规划。`,
+        icon: 'tabler:brush',
+      },
+      {
+        title:
+          '商标注册与法律保护 <br /> <span class="font-normal">国际知识产权布局</span> <br /> <span class="text-sm font-normal">第4-12周</span>',
+        description: `美国专利商标局（USPTO）商标申请。 <br /> 欧盟知识产权局（EUIPO）商标注册。 <br /> 日本、韩国等其他重点市场商标布局。 <br /> 品牌域名保护与社交媒体账号注册。`,
+        icon: 'tabler:shield-check',
+      },
+      {
+        title:
+          '海外代理与渠道拓展 <br /> <span class="font-normal">本地化销售网络建设</span> <br /> <span class="text-sm font-normal">第6-16周</span>',
+        description: `筛选并对接目标国家本地代理商/分销商。 <br /> 制定代理合作模式与激励机制。 <br /> 提供品牌代持及法人代理服务。 <br /> 协助搭建海外仓配物流体系。`,
+        icon: 'tabler:world',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- 商标注册流程 Steps Widget ****************** -->
+
+  <Steps
+    id="trademark"
+    title="国际商标注册服务"
+    items={[
+      {
+        title: `美国商标注册（USPTO） <br /> <span class="font-normal">全流程代办，成功率95%+</span> <br /> <span class="text-sm font-normal">周期：8-12个月</span>`,
+        description: `商标可查询与注册方案建议。 <br /> 商标申请书编制与提交。 <br /> 审查意见（Office Action）专业答复。 <br /> 商标注册证书领取与后续维护。`,
+        icon: 'tabler:flag',
+      },
+      {
+        title: `欧盟商标注册（EUIPO） <br /> <span class="font-normal">一标覆盖27国，性价比最高</span> <br /> <span class="text-sm font-normal">周期：4-6个月</span>`,
+        description: `欧盟商标系统检索与风险评估。 <br /> 欧盟商标申请提交与进度跟踪。 <br /> 异议程序应对与权利维护。 <br /> 商标续展与变更代理服务。`,
+        icon: 'tabler:building-community',
+      },
+      {
+        title: `品牌代持服务 <br /> <span class="font-normal">安全合规的本地化法人代理</span> <br /> <span class="text-sm font-normal">长期服务</span>`,
+        description: `美国公司注册与银行账户开设。 <br /> 欧盟本地法人代表与地址服务。 <br /> 品牌资产代持与合规管理。 <br /> 跨境电商平台品牌备案支持。`,
+        icon: 'tabler:users',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- 服务优势 Features3 Widget ************** -->
+
+  <Features3
+    id="advantages"
+    title="为什么选择威拓星耀"
+    subtitle="九大核心优势，为您的品牌出海保驾护航。"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: '中美欧本地团队',
+        description: '在中国、美国和欧盟均有本地化团队，无时差高效协作。',
+      },
+      {
+        title: '10年+出海经验',
+        description: '累计服务超过200家外贸企业，涵盖机械、电子、化工、消费品等行业。',
+      },
+      {
+        title: '商标注册高通过率',
+        description: '美国商标注册成功率超过95%，欧盟商标注册成功率超过98%。',
+      },
+      {
+        title: '全链条一站式服务',
+        description: '从品牌策划到商标注册，从网站建设到渠道拓展，无缝衔接。',
+      },
+      {
+        title: '定制化解决方案',
+        description: '根据企业规模、行业特点和目标市场，量身打造专属品牌方案。',
+      },
+      {
+        title: '多语言内容能力',
+        description: '支持英语、德语、法语、日语、西班牙语等15+语种的专业内容创作。',
+      },
+      {
+        title: '合规与风险管理',
+        description: '熟悉各国商标法规与品牌保护机制，有效规避侵权风险。',
+      },
+      {
+        title: '品牌代持安全可靠',
+        description: '通过正规法律框架提供品牌代持服务，保障客户资产安全。',
+      },
+      {
+        title: '数据驱动决策',
+        description: '基于市场数据分析制定品牌策略，每个决策都有数据支撑。',
+      },
+    ]}
+  />
+
+  <!-- 成功案例1 Content Widget **************** -->
+
+  <Content
+    id="cases"
+    title="品牌推广成功案例"
+    subtitle="以下是威拓星耀部分品牌推广案例，展示我们如何帮助客户实现全球化品牌升级。"
+    isReversed
+    items={[
+      {
+        title: '项目背景：',
+        description:
+          '某山东机械设备企业，产品品质优异但海外品牌认知度几乎为零。客户希望进入美国市场，建立专业、可信赖的品牌形象。',
+      },
+      {
+        title: '威拓星耀方案：',
+        description:
+          '从品牌命名策略入手，重新设计英文品牌名与LOGO。同步申请美国商标注册，搭建英文品牌独立站，制作产品技术白皮书，并在LinkedIn和Google上进行精准B2B投放。',
+      },
+      {
+        title: '成果：',
+        description: '6个月内获得12个高质量询盘，品牌独立站月活用户突破3000，美国商标注册顺利获批。',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1658248165252-71e116af1b34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80',
+      alt: '机械设备品牌出海案例',
+    }}
+    callToAction={{
+      target: '_blank',
+      text: '获取同款方案',
+      icon: 'tabler:chevron-right',
+      href: getPermalink('/contact'),
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        案例一：<br /><span class="text-2xl">机械设备品牌进入美国市场</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- 成功案例2 Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent={true}
+    items={[
+      {
+        title: '项目背景：',
+        description: '一家深圳消费电子企业计划同时拓展欧盟和日本市场，需要在多个国家注册商标并建立本地化品牌形象。',
+      },
+      {
+        title: '威拓星耀方案：',
+        description: `同时提交欧盟商标（EUIPO）和日本特许厅（JPO）商标注册申请。为每个市场分别设计本地化品牌视觉方案（配色、字体、文化符号调整）。搭建英语/德语/日语三语独立站，并协助对接德国和日本本地代理商。`,
+      },
+      {
+        title: '成果：',
+        description: `欧盟商标6个月获批，日本商标9个月获批。三语独立站上线3个月即获得来自德国和日本的主动询盘。成功签约德国代理商，首年订单额50万欧元。`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: '消费电子多国商标注册案例',
+    }}
+    callToAction={{
+      target: '_blank',
+      text: '获取同款方案',
+      icon: 'tabler:chevron-right',
+      href: getPermalink('/contact'),
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        案例二：<br /><span class="text-2xl">消费电子多国商标注册与本地化</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- 成功案例3 Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent={true}
+    items={[
+      {
+        title: '项目背景：',
+        description:
+          '某化工原料出口企业希望以自有品牌进入美国市场，但担心知识产权风险和法律合规问题，需要品牌代持服务。',
+      },
+      {
+        title: '威拓星耀方案：',
+        description: `通过威拓星耀的美国合作律所，为客户设立美国壳公司并完成品牌代持架构。以美国公司名义申请USPTO商标注册。搭建符合美国化工行业规范的品牌官网，制作EPA/FDA合规认证内容。在Google上投放精准行业关键词广告。`,
+      },
+      {
+        title: '成果：',
+        description:
+          '美国商标12个月顺利获批。品牌代持架构安全稳定，客户无后顾之忧。网站上线后月均获取20+潜在客户联系方式，年化ROI超过400%。',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1664455340023-214c33a9d0bd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      alt: '化工品牌代持案例',
+    }}
+    callToAction={{
+      target: '_blank',
+      text: '获取同款方案',
+      icon: 'tabler:chevron-right',
+      href: getPermalink('/contact'),
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        案例三：<br /><span class="text-2xl">化工企业品牌代持与美标注册</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- 客户评价 Testimonials Widget *********** -->
+
+  <Testimonials
+    title="客户评价"
+    subtitle="来自品牌推广客户的真实反馈。"
+    testimonials={[
+      {
+        testimonial: `威拓星耀帮我们从零开始建立了美国品牌。特别是商标注册服务，从可查询到最终获批，全程专业高效，让我们能够专心做产品，不用担心品牌被抢注的问题。`,
+        name: '张伟',
+        job: '总经理，山东某机械设备企业',
+        image: {
+          src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: '张伟',
+        },
+      },
+      {
+        testimonial: `同时做欧盟和日本两个市场的品牌注册，我们原本以为会很复杂。威拓星耀的专业团队帮我们理清了每个环节，从商标注册到本地化网站建设，再到代理商对接，一站式全搞定。`,
+        name: '李明',
+        job: 'CEO，深圳消费电子企业',
+        image: {
+          src: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80',
+          alt: '李明',
+        },
+      },
+      {
+        testimonial: `品牌代持这个需求比较特殊，我们咨询了几家公司都不太放心。威拓星耀通过正规法律架构帮我们完美解决了问题，美国公司设立、商标注册、银行开户全部代办，非常省心。`,
+        name: '王芳',
+        job: '品牌总监，某化工集团',
+        image: {
+          src: 'https://images.unsplash.com/photo-1554727242-741c14fa561c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: '王芳',
+        },
+      },
+      {
+        testimonial: `我们的产品在欧洲市场很有竞争力，但一直缺少品牌影响力。威拓星耀的多语言品牌网站和GEO优化让我们在德国和法国的自然搜索流量提升了200%以上。`,
+        name: '刘强',
+        job: '海外市场负责人，杭州某科技公司',
+        image: {
+          src: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: '刘强',
+        },
+      },
+      {
+        testimonial: `从品牌策略到落地执行，威拓星耀展现出了极高的专业水准。他们对美国市场的深刻理解帮助我们在竞争激烈的行业中快速建立了品牌认知度。`,
+        name: '陈静',
+        job: '市场总监，上海某医疗器械企业',
+        image: {
+          src: 'https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=778&q=80',
+          alt: '陈静',
+        },
+      },
+      {
+        testimonial: `威拓星耀的团队不仅专业，而且非常注重细节。我们的日本商标注册过程中遇到了一些审查意见，他们帮我们逐一专业答复，最终顺利获批。强烈推荐！`,
+        name: '赵磊',
+        job: '海外事业部总经理，宁波某家电企业',
+        image: {
+          src: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: '赵磊',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="立即开启品牌出海之旅"
+    subtitle="让威拓星耀的专业团队为您的品牌量身打造全球化推广方案。"
+    actions={[
+      {
+        variant: 'primary',
+        text: '免费咨询',
+        href: getPermalink('/contact'),
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="news"
+    title="品牌推广最新资讯"
+    information="了解更多关于品牌出海、国际商标注册和海外市场拓展的实战经验和行业洞察。"
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
