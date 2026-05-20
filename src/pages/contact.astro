@@ -1,78 +1,170 @@
+<!-- ============================================================
+  contact.astro — 联系我们页面
+  ============================================================
+  说明：
+  - 表单使用 mailto: 方式提交（打开客户端发送邮件）
+  - 如需服务端表单转发，可改用 FormSubmit / Web3Forms 等服务
+  - 微信二维码图片请替换为实际二维码文件
+  - 百度地图地址请替换为实际公司地址
+  ============================================================ -->
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: '联系我们 — 威拓星耀',
+  description: '联系威拓星耀：扫码关注微信公众号、发送邮件至 info@vectoflare.com、致电 1339531653 或通过下方表单留言。',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
+  <HeroText tagline="联系我们" title="威拓星耀 · 期待与您合作" />
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <!-- ============================================================
+    联系表单 + 二维码区域
+    ============================================================ -->
+  <section class="relative not-prose scroll-mt-[72px]">
+    <div class="absolute inset-0 pointer-events-none -z-[1]" aria-hidden="true">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </div>
+    <div class="relative mx-auto px-4 max-w-7xl lg:py-20 md:px-6 md:py-16 py-12">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <!-- 左侧：联系表单 -->
+        <div>
+          <h2 class="text-2xl font-bold mb-4">发送消息</h2>
+          <form action="mailto:info@vectoflare.com" method="post" enctype="text/plain" class="space-y-5">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-1">姓名</label>
+              <input type="text" name="姓名" id="name" required
+                class="py-3 px-4 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-1">邮箱</label>
+              <input type="email" name="邮箱" id="email" required
+                class="py-3 px-4 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900" />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium mb-1">电话（选填）</label>
+              <input type="tel" name="电话" id="phone"
+                class="py-3 px-4 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900" />
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium mb-1">留言内容</label>
+              <textarea name="留言内容" id="message" rows="5" required
+                class="py-3 px-4 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full btn-primary font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary rounded-full py-3.5 px-6">
+              发送邮件
+            </button>
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
+              点击发送后将调起您的默认邮件客户端，直接发送至 info@vectoflare.com
+            </p>
+          </form>
+        </div>
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+        <!-- 右侧：微信二维码 + 联系信息 -->
+        <div class="space-y-8">
+          <!-- 微信二维码 -->
+          <div class="text-center p-6 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <h3 class="text-lg font-bold mb-3">扫码关注微信公众号</h3>
+            <!-- TODO: 替换为威拓星耀公众号实际二维码图片 -->
+            <div class="w-48 h-48 mx-auto bg-gray-100 dark:bg-slate-700 rounded-xl flex items-center justify-center text-gray-400 text-sm">
+              <div>
+                <svg class="w-12 h-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                </svg>
+                请替换为<br />威拓星耀<br />二维码
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-3">微信搜索 "威拓星耀" 关注我们</p>
+          </div>
+
+          <!-- 快速联系 -->
+          <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <h3 class="text-lg font-bold mb-4">快速联系</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>info@vectoflare.com</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>1339531653</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>上海市浦东新区（请替换为实际地址）</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+    百度地图
+    ============================================================ -->
+  <!-- TODO: 替换 src 中的地址为威拓星耀实际地址 -->
+  <section class="relative not-prose">
+    <div class="w-full h-[400px]">
+      <iframe
+        src="https://api.map.baidu.com/staticimage/v2?ak=YOUR_API_KEY&center=上海市浦东新区&width=1200&height=400&zoom=15"
+        width="100%"
+        height="400"
+        frameborder="0"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        title="威拓星耀地址"
+      ></iframe>
+    </div>
+    <!-- 百度地图备选方案：如 API Key 未配置，显示地址文字提示 -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="bg-white/90 dark:bg-slate-900/90 px-6 py-3 rounded-lg shadow-sm pointer-events-auto text-center">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          <!-- TODO: 替换为实际地址 -->
+          上海市浦东新区 · 威拓星耀<br />
+          （请替换百度地图 API Key 及坐标）
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Features2 Widget ************** -->
-
   <Features2
-    title="We are here to help!"
+    title="联系方式"
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
+        title: '邮箱',
+        description: 'info@vectoflare.com',
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        title: '电话',
+        description: '1339531653',
+        icon: 'tabler:headset',
+      },
+      {
+        title: '地址',
+        description: '上海市浦东新区（请替换为实际地址）',
         icon: 'tabler:map-pin',
+      },
+      {
+        title: '微信公众号',
+        description: '威拓星耀',
+        icon: 'tabler:brand-wechat',
       },
     ]}
   />
