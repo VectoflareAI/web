@@ -1,8 +1,4 @@
 ---
-/**
- * 全站搜索对话框
- * 点击搜索图标后弹出白色对话框，支持按页面标题和描述模糊搜索
- */
 export interface Props {
   iconClass?: string;
 }
@@ -21,16 +17,14 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
   </svg>
 </button>
 
-<!-- 搜索遮罩层 -->
 <div
   id="search-overlay"
-  class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm"
+  class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+  style="display:none"
 >
-  <!-- 搜索对话框（白底） -->
   <div
     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-2xl max-h-[80vh] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col"
   >
-    <!-- 搜索输入框 -->
     <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200 dark:border-gray-700">
       <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
@@ -43,15 +37,24 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
         autofocus
         autocomplete="off"
       />
+      <button
+        id="search-submit"
+        type="button"
+        class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+        aria-label="执行搜索"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+        </svg>
+      </button>
       <kbd class="hidden sm:inline-flex items-center px-2 py-1 text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 dark:text-gray-300 rounded">ESC</kbd>
     </div>
 
-    <!-- 搜索结果 -->
     <div
       id="search-results"
       class="overflow-y-auto p-2 flex-1 min-h-0"
     >
-      <div id="search-empty" class="hidden text-center py-12 text-gray-400 dark:text-gray-500">
+      <div id="search-empty" class="text-center py-12 text-gray-400 dark:text-gray-500" style="display:none">
         <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
@@ -69,7 +72,6 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
 
 <script>
   (function () {
-    /* 全站搜索数据 */
     var pages = [
       { url: '/', title: '首页', desc: '威拓星耀 — 全球市场开发方案集成商' },
       { url: '/about', title: '关于我们', desc: '了解威拓星耀' },
@@ -98,32 +100,33 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
     var results = document.getElementById('search-results');
     var empty = document.getElementById('search-empty');
     var hint = document.getElementById('search-hint');
+    var submitBtn = document.getElementById('search-submit');
 
-    if (!toggle || !overlay || !input || !results || !empty || !hint) return;
+    if (!toggle || !overlay || !input || !results || !empty || !hint || !submitBtn) return;
 
     function open() {
-      overlay.classList.remove('hidden');
+      overlay.style.display = '';
       document.body.style.overflow = 'hidden';
       setTimeout(function () { input.focus(); }, 100);
     }
 
     function close() {
-      overlay.classList.add('hidden');
+      overlay.style.display = 'none';
       document.body.style.overflow = '';
       input.value = '';
-      hint.classList.remove('hidden');
-      empty.classList.add('hidden');
+      hint.style.display = '';
+      empty.style.display = 'none';
       results.querySelectorAll('.search-result-item').forEach(function (el) { el.remove(); });
     }
 
-    function search(query) {
+    function doSearch(query) {
       var q = query.toLowerCase().trim();
       results.querySelectorAll('.search-result-item').forEach(function (el) { el.remove(); });
-      hint.classList.add('hidden');
-      empty.classList.add('hidden');
+      hint.style.display = 'none';
+      empty.style.display = 'none';
 
       if (!q) {
-        hint.classList.remove('hidden');
+        hint.style.display = '';
         return;
       }
 
@@ -132,7 +135,7 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       });
 
       if (matches.length === 0) {
-        empty.classList.remove('hidden');
+        empty.style.display = '';
         return;
       }
 
@@ -145,6 +148,15 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
           '<div class="flex-1 min-w-0"><div class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">' + p.title + '</div><div class="text-xs text-gray-500 dark:text-gray-400 truncate">' + p.desc + '</div></div>';
         results.appendChild(a);
       });
+
+      return matches;
+    }
+
+    function executeSearch() {
+      var matches = doSearch(input.value);
+      if (matches && matches.length > 0) {
+        window.location.href = matches[0].url;
+      }
     }
 
     toggle.addEventListener('click', open);
@@ -158,14 +170,17 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); open(); }
     });
 
-    var debounceTimer;
     input.addEventListener('input', function () {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(function () { search(input.value); }, 150);
+      doSearch(input.value);
     });
 
     input.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') { close(); }
+      if (e.key === 'Enter') { e.preventDefault(); executeSearch(); }
+    });
+
+    submitBtn.addEventListener('click', function () {
+      executeSearch();
     });
   })();
 </script>
