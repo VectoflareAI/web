@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: VectoflareAI/web
+  branch: main
+  auth_type: pkce
+
+media_folder: 'public/images'
+public_folder: '/images'
+
+collections:
+  - name: 'post'
+    label: 'Post'
+    folder: 'src/data/post'
+    create: true
+    delete: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'string', required: false }
+      - { label: 'Category', name: 'category', widget: 'string', required: false }
+      - { label: 'Tags', name: 'tags', widget: 'list', allow_add: true, allow_delete: true, default: [] }
+      - { label: 'Image', name: 'image', widget: 'string', required: false }
+      - { label: 'Publish Date', name: 'publishDate', widget: 'datetime', required: false }
+      - { label: 'Update Date', name: 'updateDate', widget: 'datetime', required: false }
+      - { label: 'Draft', name: 'draft', widget: 'boolean', required: false, default: false }
+      - { label: 'Author', name: 'author', widget: 'string', required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
