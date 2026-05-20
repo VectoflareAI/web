@@ -22,15 +22,8 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-2xl max-h-[80vh] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col"
   >
     <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-200 dark:border-gray-700">
-      <svg
-        class="w-5 h-5 text-gray-400 shrink-0"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-        ></path>
+      <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
       </svg>
       <input
         id="search-input"
@@ -47,42 +40,21 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
         aria-label="执行搜索"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-          ></path>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
         </svg>
       </button>
-      <kbd
-        class="hidden sm:inline-flex items-center px-2 py-1 text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 dark:text-gray-300 rounded"
-        >ESC</kbd
-      >
+      <kbd class="hidden sm:inline-flex items-center px-2 py-1 text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 dark:text-gray-300 rounded">ESC</kbd>
     </div>
-
     <div id="search-results" class="overflow-y-auto p-2 flex-1 min-h-0">
       <div id="search-empty" class="text-center py-12 text-gray-400 dark:text-gray-500" style="display:none">
-        <svg
-          class="w-12 h-12 mx-auto mb-3 opacity-50"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="1"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <p class="text-sm">未找到匹配页面</p>
       </div>
       <div id="search-hint" class="text-center py-12 text-gray-400 dark:text-gray-500">
-        <svg
-          class="w-12 h-12 mx-auto mb-3 opacity-50"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="1"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-          ></path>
+        <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
         </svg>
         <p class="text-sm">输入关键词搜索页面</p>
       </div>
@@ -92,7 +64,7 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
 
 <script is:inline>
   (function () {
-    const pages = [
+    var pages = [
       { url: '/', title: '首页', desc: '威拓星耀 — 全球市场开发方案集成商' },
       { url: '/about', title: '关于我们', desc: '了解威拓星耀' },
       { url: '/brand-service', title: '品牌推广', desc: '品牌出海推广与商标注册服务' },
@@ -109,17 +81,16 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       { url: '/news', title: '新闻', desc: '最新新闻与资讯' },
     ];
 
-    const toggle = document.getElementById('search-toggle');
-    const overlay = document.getElementById('search-overlay');
-    const input = document.getElementById('search-input');
-    const results = document.getElementById('search-results');
-    const empty = document.getElementById('search-empty');
-    const hint = document.getElementById('search-hint');
-    const submitBtn = document.getElementById('search-submit');
+    var LISTENERS_ATTACHED = false;
 
-    if (!toggle || !overlay || !input || !results || !empty || !hint || !submitBtn) return;
+    function get(id) {
+      return document.getElementById(id);
+    }
 
-    function open() {
+    function openOverlay() {
+      var overlay = get('search-overlay');
+      var input = get('search-input');
+      if (!overlay || !input) return;
       overlay.style.display = '';
       document.body.style.overflow = 'hidden';
       setTimeout(function () {
@@ -127,20 +98,32 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       }, 100);
     }
 
-    function close() {
+    function closeOverlay() {
+      var overlay = get('search-overlay');
+      var input = get('search-input');
+      var hint = get('search-hint');
+      var empty = get('search-empty');
+      var results = get('search-results');
+      if (!overlay || !input) return;
       overlay.style.display = 'none';
       document.body.style.overflow = '';
       input.value = '';
-      hint.style.display = '';
-      empty.style.display = 'none';
-      results.querySelectorAll('.search-result-item').forEach(function (el) {
-        el.remove();
-      });
+      if (hint) hint.style.display = '';
+      if (empty) empty.style.display = 'none';
+      if (results) {
+        results.querySelectorAll('.search-result-item').forEach(function (el) {
+          el.remove();
+        });
+      }
     }
 
-    /** @param {string} query */
     function doSearch(query) {
-      const q = query.toLowerCase().trim();
+      var results = get('search-results');
+      var hint = get('search-hint');
+      var empty = get('search-empty');
+      if (!results || !hint || !empty) return;
+
+      var q = query.toLowerCase().trim();
       results.querySelectorAll('.search-result-item').forEach(function (el) {
         el.remove();
       });
@@ -152,7 +135,7 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
         return;
       }
 
-      const matches = pages.filter(function (p) {
+      var matches = pages.filter(function (p) {
         return p.title.toLowerCase().indexOf(q) !== -1 || p.desc.toLowerCase().indexOf(q) !== -1;
       });
 
@@ -162,10 +145,9 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       }
 
       matches.forEach(function (p) {
-        const a = document.createElement('a');
+        var a = document.createElement('a');
         a.href = p.url;
-        a.className =
-          'search-result-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors';
+        a.className = 'search-result-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors';
         a.innerHTML =
           '<svg class="w-4 h-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>' +
           '<div class="flex-1 min-w-0"><div class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">' +
@@ -176,54 +158,72 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
         results.appendChild(a);
       });
 
-      const viewAll = document.createElement('a');
+      var viewAll = document.createElement('a');
       viewAll.href = '/search?q=' + encodeURIComponent(query);
-      viewAll.className =
-        'search-result-item flex items-center justify-center gap-2 px-4 py-3 mt-1 rounded-xl text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors font-medium';
-      viewAll.innerHTML =
-        '查看全部 ' +
-        matches.length +
-        ' 个结果 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>';
+      viewAll.className = 'search-result-item flex items-center justify-center gap-2 px-4 py-3 mt-1 rounded-xl text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors font-medium';
+      viewAll.innerHTML = '查看全部 ' + matches.length + ' 个结果 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>';
       results.appendChild(viewAll);
     }
 
     function executeSearch() {
-      const q = input.value.trim();
+      var input = get('search-input');
+      if (!input) return;
+      var q = input.value.trim();
       if (q) {
         window.location.href = '/search?q=' + encodeURIComponent(q);
       }
     }
 
-    toggle.addEventListener('click', open);
+    function attachListeners() {
+      if (LISTENERS_ATTACHED) return;
+      LISTENERS_ATTACHED = true;
 
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) close();
-    });
+      document.addEventListener('click', function (e) {
+        var toggle = get('search-toggle');
+        var overlay = get('search-overlay');
+        var submitBtn = get('search-submit');
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        open();
-      }
-    });
+        if (toggle && toggle.contains(e.target)) {
+          openOverlay();
+          return;
+        }
+        if (overlay && e.target === overlay) {
+          closeOverlay();
+          return;
+        }
+        if (submitBtn && submitBtn.contains(e.target)) {
+          executeSearch();
+          return;
+        }
+      });
 
-    input.addEventListener('input', function () {
-      doSearch(input.value);
-    });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeOverlay();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          openOverlay();
+        }
+      });
 
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        close();
-      }
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        executeSearch();
-      }
-    });
+      document.addEventListener('input', function (e) {
+        var input = get('search-input');
+        if (input && e.target === input) {
+          doSearch(input.value);
+        }
+      });
 
-    submitBtn.addEventListener('click', function () {
-      executeSearch();
-    });
+      document.addEventListener('keydown', function (e) {
+        var input = get('search-input');
+        if (input && e.target === input && e.key === 'Enter') {
+          e.preventDefault();
+          executeSearch();
+        }
+      });
+    }
+
+    attachListeners();
+    document.addEventListener('astro:page-load', attachListeners);
   })();
 </script>

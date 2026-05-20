@@ -1,112 +1,126 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-const q = Astro.url.searchParams.get('q') || '';
-
-const pages = [
-  { url: '/', title: '首页', desc: '威拓星耀 — 全球市场开发方案集成商' },
-  { url: '/about', title: '关于我们', desc: '了解威拓星耀' },
-  { url: '/brand-service', title: '品牌推广', desc: '品牌出海推广与商标注册服务' },
-  { url: '/services', title: '服务', desc: '产品与服务' },
-  { url: '/r-d-center', title: '研发中心', desc: '持续创新，驱动未来' },
-  { url: '/service-center', title: '技术支持', desc: '技术赋能，服务全球' },
-  { url: '/products', title: '全部产品', desc: '浏览全部产品分类' },
-  { url: '/workflow', title: '工作流定制', desc: '工作流程自动化方案' },
-  { url: '/tools', title: '专业工具定制', desc: '专业工具定制服务' },
-  { url: '/pricing', title: '定价', desc: '产品与服务定价' },
-  { url: '/terms', title: '服务条款', desc: '服务条款与条件' },
-  { url: '/privacy', title: '隐私政策', desc: '隐私保护政策' },
-  { url: '/contact', title: '联系我们', desc: '联系威拓星耀' },
-  { url: '/news', title: '新闻', desc: '最新新闻与资讯' },
-];
-
-const qLower = q.toLowerCase().trim();
-const results = qLower
-  ? pages.filter((p) => p.title.toLowerCase().includes(qLower) || p.desc.toLowerCase().includes(qLower))
-  : [];
-
 const metadata = {
-  title: q ? `搜索: ${q}` : '搜索',
+  title: '搜索',
+  ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-    <h1 class="text-3xl font-bold mb-8 dark:text-white">
-      <svg
-        class="w-8 h-8 inline-block mr-2 text-gray-400"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-        ></path>
+    <h1 class="text-3xl font-bold mb-8 dark:text-white flex items-center gap-2">
+      <svg class="w-8 h-8 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
       </svg>
-      搜索结果{q ? `: "${q}"` : ''}
+      <span id="search-title">搜索</span>
     </h1>
 
-    {
-      !q ? (
-        <p class="text-gray-500 dark:text-gray-400 text-lg">请输入关键词搜索网站内容。</p>
-      ) : results.length === 0 ? (
-        <div class="text-center py-16">
-          <svg
-            class="w-20 h-20 mx-auto mb-4 text-gray-300 dark:text-gray-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <p class="text-xl text-gray-500 dark:text-gray-400">未找到匹配 " {q} " 的页面</p>
-          <p class="text-sm text-gray-400 dark:text-gray-500 mt-2">请尝试其他关键词</p>
-        </div>
-      ) : (
-        <div>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">找到 {results.length} 个匹配结果</p>
-          <div class="space-y-3">
-            {results.map((p) => (
-              <a
-                href={p.url}
-                class="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-              >
-                <svg
-                  class="w-5 h-5 shrink-0 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                  />
-                </svg>
-                <div class="flex-1 min-w-0">
-                  <div class="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{p.title}</div>
-                  <div class="text-sm text-gray-500 dark:text-gray-400 truncate">{p.desc}</div>
-                </div>
-                <svg
-                  class="w-4 h-4 shrink-0 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            ))}
-          </div>
-        </div>
-      )
-    }
+    <div id="search-loading" class="text-center py-16 text-gray-400">
+      <svg class="w-12 h-12 mx-auto mb-4 animate-spin" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+      </svg>
+      <p>正在搜索...</p>
+    </div>
+
+    <div id="search-empty" class="text-center py-16" style="display:none">
+      <svg class="w-20 h-20 mx-auto mb-4 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="text-xl text-gray-500 dark:text-gray-400" id="search-empty-text">未找到匹配的页面</p>
+      <p class="text-sm text-gray-400 dark:text-gray-500 mt-2">请尝试其他关键词</p>
+    </div>
+
+    <div id="search-input-prompt" class="text-center py-16" style="display:none">
+      <svg class="w-20 h-20 mx-auto mb-4 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+      </svg>
+      <p class="text-xl text-gray-500 dark:text-gray-400">请输入关键词搜索网站内容。</p>
+    </div>
+
+    <div id="search-results-page" style="display:none">
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-6" id="search-count"></p>
+      <div class="space-y-3" id="search-results-list"></div>
+    </div>
   </div>
 </Layout>
+
+<script is:inline>
+  (function () {
+    var pages = [
+      { url: '/', title: '首页', desc: '威拓星耀 — 全球市场开发方案集成商' },
+      { url: '/about', title: '关于我们', desc: '了解威拓星耀' },
+      { url: '/brand-service', title: '品牌推广', desc: '品牌出海推广与商标注册服务' },
+      { url: '/services', title: '服务', desc: '产品与服务' },
+      { url: '/r-d-center', title: '研发中心', desc: '持续创新，驱动未来' },
+      { url: '/service-center', title: '技术支持', desc: '技术赋能，服务全球' },
+      { url: '/products', title: '全部产品', desc: '浏览全部产品分类' },
+      { url: '/workflow', title: '工作流定制', desc: '工作流程自动化方案' },
+      { url: '/tools', title: '专业工具定制', desc: '专业工具定制服务' },
+      { url: '/pricing', title: '定价', desc: '产品与服务定价' },
+      { url: '/terms', title: '服务条款', desc: '服务条款与条件' },
+      { url: '/privacy', title: '隐私政策', desc: '隐私保护政策' },
+      { url: '/contact', title: '联系我们', desc: '联系威拓星耀' },
+      { url: '/news', title: '新闻', desc: '最新新闻与资讯' },
+    ];
+
+    function run() {
+      var params = new URLSearchParams(window.location.search);
+      var q = (params.get('q') || '').trim();
+
+      var titleEl = document.getElementById('search-title');
+      var loadingEl = document.getElementById('search-loading');
+      var emptyEl = document.getElementById('search-empty');
+      var emptyTextEl = document.getElementById('search-empty-text');
+      var promptEl = document.getElementById('search-input-prompt');
+      var resultsPageEl = document.getElementById('search-results-page');
+      var countEl = document.getElementById('search-count');
+      var listEl = document.getElementById('search-results-list');
+
+      if (!titleEl || !loadingEl || !emptyEl || !emptyTextEl || !promptEl || !resultsPageEl || !countEl || !listEl) return;
+
+      loadingEl.style.display = 'none';
+
+      if (!q) {
+        promptEl.style.display = '';
+        return;
+      }
+
+      titleEl.textContent = '搜索结果: "' + q + '"';
+
+      var qLower = q.toLowerCase();
+      var matches = pages.filter(function (p) {
+        return p.title.toLowerCase().indexOf(qLower) !== -1 || p.desc.toLowerCase().indexOf(qLower) !== -1;
+      });
+
+      if (matches.length === 0) {
+        emptyTextEl.textContent = '未找到匹配 "' + q + '" 的页面';
+        emptyEl.style.display = '';
+        return;
+      }
+
+      resultsPageEl.style.display = '';
+      countEl.textContent = '找到 ' + matches.length + ' 个匹配结果';
+
+      matches.forEach(function (p) {
+        var a = document.createElement('a');
+        a.href = p.url;
+        a.className =
+          'flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors';
+        a.innerHTML =
+          '<svg class="w-5 h-5 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>' +
+          '<div class="flex-1 min-w-0"><div class="text-base font-medium text-gray-900 dark:text-gray-100 truncate">' +
+          p.title +
+          '</div><div class="text-sm text-gray-500 dark:text-gray-400 truncate">' +
+          p.desc +
+          '</div></div>' +
+          '<svg class="w-4 h-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>';
+        listEl.appendChild(a);
+      });
+    }
+
+    run();
+    document.addEventListener('astro:page-load', run);
+  })();
+</script>
