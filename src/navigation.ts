@@ -33,14 +33,6 @@ export const headerData = {
       href: getPermalink('/products'),
       links: [
         {
-          text: '石墨模具',
-          href: getPermalink('/products/graphite-molds'),
-        },
-        {
-          text: '石墨制品',
-          href: getPermalink('/products/graphite-products'),
-        },
-        {
           text: '工作流定制',
           href: getPermalink('/workflow'),
         },
@@ -85,8 +77,6 @@ export const footerData = {
     {
       title: '产品服务',
       links: [
-        { text: '石墨模具', href: getPermalink('/products/graphite-molds') },
-        { text: '石墨制品', href: getPermalink('/products/graphite-products') },
         { text: '工作流定制', href: getPermalink('/workflow') },
         { text: '智能体应用', href: getPermalink('/AIagentt') },
         { text: '专业工具定制', href: getPermalink('/tools') },
