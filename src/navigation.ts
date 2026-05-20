@@ -27,16 +27,6 @@ export const headerData = {
     {
       text: '研发中心',
       href: getPermalink('/r-d-center'),
-      links: [
-        {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
-        },
-        {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
-        },
-      ],
     },
     {
       text: '产品中心',
@@ -65,42 +55,9 @@ export const headerData = {
       ],
     },
     {
-      text: '服务案例',
-      links: [
-        {
-          text: 'Lead Generation',
-          href: getPermalink('/landing/lead-generation'),
-        },
-        {
-          text: 'Long-form Sales',
-          href: getPermalink('/landing/sales'),
-        },
-        {
-          text: 'Click-Through',
-          href: getPermalink('/landing/click-through'),
-        },
-        {
-          text: 'Product Details (or Services)',
-          href: getPermalink('/landing/product'),
-        },
-        {
-          text: 'Coming Soon or Pre-Launch',
-          href: getPermalink('/landing/pre-launch'),
-        },
-        {
-          text: 'Subscription',
-          href: getPermalink('/landing/subscription'),
-        },
-      ],
-    },
-    {
       text: '技术支持',
       href: getPermalink('/service-center'),
       links: [
-        {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
         {
           text: '关于我们',
           href: getPermalink('/about'),
@@ -113,22 +70,6 @@ export const headerData = {
           text: '新闻',
           href: getBlogPermalink(),
         },
-        {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
       ],
     },
     {
@@ -136,67 +77,43 @@ export const headerData = {
       href: getPermalink('/social-media'),
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/VectoflareAI/web', target: '_blank' }],
+  actions: [{ text: '获取报价', href: getPermalink('/contact'), target: '_blank' }],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: '产品服务',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: '石墨模具', href: getPermalink('/products/graphite-molds') },
+        { text: '石墨制品', href: getPermalink('/products/graphite-products') },
+        { text: '工作流定制', href: getPermalink('/workflow') },
+        { text: '智能体应用', href: getPermalink('/AIagentt') },
+        { text: '专业工具定制', href: getPermalink('/tools') },
       ],
     },
     {
-      title: 'Platform',
+      title: '关于',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
-        { text: 'Terms', href: getPermalink('/terms') },
-        { text: 'Privacy Policy', href: getPermalink('/privacy') },
+        { text: '关于我们', href: getPermalink('/about') },
+        { text: '研发中心', href: getPermalink('/r-d-center') },
+        { text: '新闻', href: getBlogPermalink() },
       ],
     },
     {
-      title: 'Support',
+      title: '支持',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: '联系我们', href: getPermalink('/contact') },
+        { text: '服务条款', href: getPermalink('/terms') },
+        { text: '隐私政策', href: getPermalink('/privacy') },
       ],
     },
   ],
   secondaryLinks: [],
   socialLinks: [
-    { ariaLabel: 'Linkedin', icon: 'tabler:brand-linkedin', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Youtube', icon: 'tabler:brand-youtube', href: '#' },
-    { ariaLabel: 'Whatsapp', icon: 'tabler:brand-whatsapp', href: '#' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
+    { ariaLabel: '微信视频号', icon: 'tabler:brand-wechat', href: 'https://weixin.qq.com/cgi-bin/readtemplate?action=gotohome&t=weixin&lang=zh_CN' },
+    { ariaLabel: '抖音', icon: 'tabler:brand-tiktok', href: 'https://www.douyin.com/user/' },
+    { ariaLabel: '小红书', icon: 'tabler:brand-reddit', href: 'https://www.xiaohongshu.com/user/' },
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/VectoflareAI/web' },
   ],
   footNote: `
