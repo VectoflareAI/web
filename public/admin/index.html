@@ -1,131 +1,482 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Vectoflare Admin</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#111}
-.header{background:#fff;border-bottom:1px solid #e5e7eb;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
-.header h1{font-size:18px;font-weight:600}
-.header a,.header button{color:#6b7280;background:none;border:none;font-size:14px;cursor:pointer;text-decoration:none;margin-left:16px}
-.header a:hover,.header button:hover{color:#111}
-.tabs{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 32px;display:flex;gap:0}
-.tab{padding:12px 20px;font-size:14px;font-weight:500;color:#6b7280;cursor:pointer;border-bottom:2px solid transparent;background:none}
-.tab:hover{color:#374151}
-.tab.active{color:#2563eb;border-bottom-color:#2563eb}
-.container{max-width:960px;margin:32px auto;padding:0 16px}
-.card{background:#fff;border-radius:10px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.actions{margin-bottom:24px}
-.actions a{display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:500}
-.actions a:hover{background:#1d4ed8}
-table{width:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-th,td{padding:12px 16px;text-align:left;font-size:14px;border-bottom:1px solid #f3f4f6}
-th{background:#f9fafb;color:#6b7280;font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
-td{color:#374151}
-tr:hover td{background:#f9fafb}
-.item-title{color:#2563eb;text-decoration:none;font-weight:500;cursor:pointer}
-.item-title:hover{text-decoration:underline}
-.empty{padding:48px;text-align:center;color:#9ca3af;font-size:15px}
-.badge{padding:2px 8px;border-radius:9999px;font-size:12px;background:#dbeafe;color:#1d4ed8}
-.del-btn{color:#dc2626;background:none;border:none;font-size:13px;cursor:pointer;padding:2px 6px;border-radius:4px}
-.del-btn:hover{background:#fef2f2}
-label{display:block;font-size:13px;font-weight:500;margin-bottom:4px;color:#374151}
-input,textarea,select{padding:9px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;width:100%;margin-bottom:16px;font-family:inherit}
-input:focus,textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-textarea{font-family:ui-monospace,SFMono-Regular,monospace;resize:vertical;min-height:400px;line-height:1.6;font-size:13px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.btn-primary{padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer}
-.btn-primary:hover{background:#1d4ed8}
-.btn-secondary{padding:10px 24px;background:#f3f4f6;color:#374151;text-decoration:none;border-radius:6px;font-size:14px;display:inline-block;border:none;cursor:pointer}
-.btn-secondary:hover{background:#e5e7eb}
-.btn-danger{padding:10px 24px;background:#dc2626;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer}
-.btn-danger:hover{background:#b91c1c}
-.btn-row{display:flex;gap:12px;margin-top:8px;align-items:center;flex-wrap:wrap}
-.error{background:#fef2f2;color:#dc2626;padding:10px;border-radius:6px;font-size:14px;margin-bottom:16px}
-.success{background:#f0fdf4;color:#16a34a;padding:10px;border-radius:6px;font-size:14px;margin-bottom:16px}
-.hint{color:#9ca3af;font-size:12px;margin-top:-12px;margin-bottom:16px}
-.loading{text-align:center;padding:48px;color:#9ca3af}
-.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f5f5f5}
-.login-box{background:#fff;padding:40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);width:380px}
-.login-box h1{font-size:22px;margin-bottom:24px}
-.login-box button{width:100%;padding:11px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:500;cursor:pointer}
-.login-box button:hover{background:#1d4ed8}
-.login-box label{font-size:14px;margin-bottom:6px;color:#333}
-.notice{font-size:13px;color:#6b7280;margin-bottom:16px;background:#f0f9ff;padding:10px 14px;border-radius:6px;border-left:3px solid #2563eb}
-.spec-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.spec-row input{flex:1;margin-bottom:0}
-.spec-row .btn-secondary{white-space:nowrap}
-.add-spec{font-size:13px;color:#2563eb;cursor:pointer;margin-bottom:16px;display:inline-block}
-.add-spec:hover{text-decoration:underline}
-.img-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.img-row input{flex:1;margin-bottom:0}
-.feat-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.feat-row input{flex:1;margin-bottom:0}
-</style>
-</head>
-<body>
-<div id="app"></div>
-<script>
-const API='https://api.github.com', OWNER='VectoflareAI', REPO='web', BRANCH='main';
-const POSTS_DIR='src/data/post', PRODS_DIR='src/data/product', ADMIN_USER='admin';
-let state={page:'login',activeTab:'posts'};
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Vectoflare Admin</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f5f5f5;
+        color: #111;
+      }
+      .header {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .header h1 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .header a,
+      .header button {
+        color: #6b7280;
+        background: none;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 16px;
+      }
+      .header a:hover,
+      .header button:hover {
+        color: #111;
+      }
+      .tabs {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 0 32px;
+        display: flex;
+        gap: 0;
+      }
+      .tab {
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6b7280;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        background: none;
+      }
+      .tab:hover {
+        color: #374151;
+      }
+      .tab.active {
+        color: #2563eb;
+        border-bottom-color: #2563eb;
+      }
+      .container {
+        max-width: 960px;
+        margin: 32px auto;
+        padding: 0 16px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 32px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      .actions {
+        margin-bottom: 24px;
+      }
+      .actions a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #2563eb;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .actions a:hover {
+        background: #1d4ed8;
+      }
+      table {
+        width: 100%;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      th,
+      td {
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      th {
+        background: #f9fafb;
+        color: #6b7280;
+        font-weight: 500;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      td {
+        color: #374151;
+      }
+      tr:hover td {
+        background: #f9fafb;
+      }
+      .item-title {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .item-title:hover {
+        text-decoration: underline;
+      }
+      .empty {
+        padding: 48px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 15px;
+      }
+      .badge {
+        padding: 2px 8px;
+        border-radius: 9999px;
+        font-size: 12px;
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .del-btn {
+        color: #dc2626;
+        background: none;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .del-btn:hover {
+        background: #fef2f2;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: #374151;
+      }
+      input,
+      textarea,
+      select {
+        padding: 9px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 100%;
+        margin-bottom: 16px;
+        font-family: inherit;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+      textarea {
+        font-family: ui-monospace, SFMono-Regular, monospace;
+        resize: vertical;
+        min-height: 400px;
+        line-height: 1.6;
+        font-size: 13px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .row3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+      .btn-primary {
+        padding: 10px 24px;
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        background: #1d4ed8;
+      }
+      .btn-secondary {
+        padding: 10px 24px;
+        background: #f3f4f6;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        display: inline-block;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-secondary:hover {
+        background: #e5e7eb;
+      }
+      .btn-danger {
+        padding: 10px 24px;
+        background: #dc2626;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .btn-danger:hover {
+        background: #b91c1c;
+      }
+      .btn-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .error {
+        background: #fef2f2;
+        color: #dc2626;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .success {
+        background: #f0fdf4;
+        color: #16a34a;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .hint {
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: -12px;
+        margin-bottom: 16px;
+      }
+      .loading {
+        text-align: center;
+        padding: 48px;
+        color: #9ca3af;
+      }
+      .login-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f5f5f5;
+      }
+      .login-box {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        width: 380px;
+      }
+      .login-box h1 {
+        font-size: 22px;
+        margin-bottom: 24px;
+      }
+      .login-box button {
+        width: 100%;
+        padding: 11px;
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .login-box button:hover {
+        background: #1d4ed8;
+      }
+      .login-box label {
+        font-size: 14px;
+        margin-bottom: 6px;
+        color: #333;
+      }
+      .notice {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 16px;
+        background: #f0f9ff;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border-left: 3px solid #2563eb;
+      }
+      .spec-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .spec-row input {
+        flex: 1;
+        margin-bottom: 0;
+      }
+      .spec-row .btn-secondary {
+        white-space: nowrap;
+      }
+      .add-spec {
+        font-size: 13px;
+        color: #2563eb;
+        cursor: pointer;
+        margin-bottom: 16px;
+        display: inline-block;
+      }
+      .add-spec:hover {
+        text-decoration: underline;
+      }
+      .img-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .img-row input {
+        flex: 1;
+        margin-bottom: 0;
+      }
+      .feat-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .feat-row input {
+        flex: 1;
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const API = 'https://api.github.com',
+        OWNER = 'VectoflareAI',
+        REPO = 'web',
+        BRANCH = 'main';
+      const POSTS_DIR = 'src/data/post',
+        PRODS_DIR = 'src/data/product',
+        ADMIN_USER = 'admin';
+      let state = { page: 'login', activeTab: 'posts' };
 
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function $(id){return document.getElementById(id)}
-function show(page,data){state.page=page;if(data)Object.assign(state,data);render()}
-function val(f){let v=f?.toString().trim();return v||''}
-function arrVal(f){let v=f?.toString().trim();return v?v.split(',').map(t=>t.trim()).filter(Boolean):[]}
+      function esc(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function $(id) {
+        return document.getElementById(id);
+      }
+      function show(page, data) {
+        state.page = page;
+        if (data) Object.assign(state, data);
+        render();
+      }
+      function val(f) {
+        let v = f?.toString().trim();
+        return v || '';
+      }
+      function arrVal(f) {
+        let v = f?.toString().trim();
+        return v
+          ? v
+              .split(',')
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : [];
+      }
 
-function render(){
-  const pages={login:renderLogin,setup:renderSetup,dashboard:renderDashboard,editor:renderEditor,
-    productDashboard:renderProductDashboard,productEditor:renderProductEditor,password:renderPassword};
-  const fn=pages[state.page]||renderLogin;
-  document.getElementById('app').innerHTML=fn();
-  const token=state.token||localStorage.getItem('gh_token');
-  if(token&&state.page==='login'){state.token=token;show('dashboard')}
-}
+      function render() {
+        const pages = {
+          login: renderLogin,
+          setup: renderSetup,
+          dashboard: renderDashboard,
+          editor: renderEditor,
+          productDashboard: renderProductDashboard,
+          productEditor: renderProductEditor,
+          password: renderPassword,
+        };
+        const fn = pages[state.page] || renderLogin;
+        document.getElementById('app').innerHTML = fn();
+        const token = state.token || localStorage.getItem('gh_token');
+        if (token && state.page === 'login') {
+          state.token = token;
+          show('dashboard');
+        }
+      }
 
-// --- LOGIN ---
-function renderLogin(){return `<div class="login-wrap"><div class="login-box">
+      // --- LOGIN ---
+      function renderLogin() {
+        return `<div class="login-wrap"><div class="login-box">
   <h1>Vectoflare Admin</h1>
-  ${state.msg?`<div class="${state.msgType}">${esc(state.msg)}</div>`:''}
+  ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
   <form onsubmit="event.preventDefault();doLogin()">
     <label>Username</label><input type="text" id="login_user" value="${ADMIN_USER}" required>
     <label>Password</label><input type="password" id="login_pass" required autocomplete="current-password">
     <button type="submit">Login</button>
   </form>
-</div></div>`}
+</div></div>`;
+      }
 
-function doLogin(){
-  const u=$('login_user').value,p=$('login_pass').value;
-  if(u!==ADMIN_USER||p!=='Aa123456#'){state.msg='Invalid username or password';state.msgType='error';render();return}
-  const t=localStorage.getItem('gh_token');
-  if(t){state.token=t;show('dashboard')}else{state.msg='';show('setup')}
-}
+      function doLogin() {
+        const u = $('login_user').value,
+          p = $('login_pass').value;
+        if (u !== ADMIN_USER || p !== 'Aa123456#') {
+          state.msg = 'Invalid username or password';
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        const t = localStorage.getItem('gh_token');
+        if (t) {
+          state.token = t;
+          show('dashboard');
+        } else {
+          state.msg = '';
+          show('setup');
+        }
+      }
 
-// --- SETUP ---
-function renderSetup(){return `<div class="login-wrap"><div class="login-box">
+      // --- SETUP ---
+      function renderSetup() {
+        return `<div class="login-wrap"><div class="login-box">
   <h1>GitHub Token</h1>
   <div class="notice">Create a GitHub PAT:<br>1. <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>2. New classic token → scope: <strong>repo</strong><br>3. Paste below</div>
-  ${state.msg?`<div class="${state.msgType}">${esc(state.msg)}</div>`:''}
+  ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
   <form onsubmit="event.preventDefault();doSetup()">
     <label>Personal Access Token</label><input type="password" id="setup_token" required autocomplete="off">
     <button type="submit">Save &amp; Continue</button>
   </form>
-</div></div>`}
-async function doSetup(){
-  const t=$('setup_token').value.trim();
-  const r=await fetch(`${API}/user`,{headers:{Authorization:`Bearer ${t}`}});
-  if(!r.ok){state.msg='Invalid token';state.msgType='error';render();return}
-  localStorage.setItem('gh_token',t);state.token=t;show('dashboard')
-}
+</div></div>`;
+      }
+      async function doSetup() {
+        const t = $('setup_token').value.trim();
+        const r = await fetch(`${API}/user`, { headers: { Authorization: `Bearer ${t}` } });
+        if (!r.ok) {
+          state.msg = 'Invalid token';
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        localStorage.setItem('gh_token', t);
+        state.token = t;
+        show('dashboard');
+      }
 
-// --- DASHBOARD (Posts) ---
-function renderDashboard(){return `<div>
+      // --- DASHBOARD (Posts) ---
+      function renderDashboard() {
+        return `<div>
   <div class="header"><h1>Vectoflare Admin</h1><div>
     <a href="#" onclick="event.preventDefault();show('password')">Change Password</a>
     <button onclick="logout()">Logout</button>
@@ -138,67 +489,98 @@ function renderDashboard(){return `<div>
     <div class="actions"><a href="#" onclick="event.preventDefault();show('editor',{slug:'',sha:'',title:'',excerpt:'',category:'',tags:'',image:'',publishDate:'',updateDate:'',draft:'',author:'',body:'',isNew:true})">+ New Post</a></div>
     <div id="post_list"><div class="loading">Loading posts...</div></div>
   </div>
-</div>`}
+</div>`;
+      }
 
-function switchTab(tab){
-  if(tab==='products'){show('productDashboard')}
-  else{show('dashboard')}
-}
+      function switchTab(tab) {
+        if (tab === 'products') {
+          show('productDashboard');
+        } else {
+          show('dashboard');
+        }
+      }
 
-async function loadDashboard(){
-  const token=state.token||localStorage.getItem('gh_token');if(!token)return;
-  try{
-    const res=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    const el=$('post_list');if(!res.ok){el.innerHTML='<div class="empty">Failed to load posts.</div>';return}
-    const files=await res.json();
-    if(!Array.isArray(files)||files.length===0){el.innerHTML='<div class="empty">No posts yet.</div>';return}
-    const md=files.filter(f=>f.name.endsWith('.md')||f.name.endsWith('.mdx'));
-    let h='<table><thead><tr><th>Title</th><th>Category</th><th>Date</th><th></th></tr></thead><tbody>';
-    for(const f of md){
-      const slug=f.name.replace(/\.(md|mdx)$/,'');
-      const meta=await fetchMeta(f.url,token,POSTS_DIR);
-      h+=`<tr><td><a class="item-title" onclick="event.preventDefault();editPost('${slug}')">${esc(meta.title||slug)}</a></td>
-        <td>${meta.category?`<span class="badge">${esc(meta.category)}</span>`:'-'}</td>
-        <td>${meta.date||'-'}</td>
+      async function loadDashboard() {
+        const token = state.token || localStorage.getItem('gh_token');
+        if (!token) return;
+        try {
+          const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+          });
+          const el = $('post_list');
+          if (!res.ok) {
+            el.innerHTML = '<div class="empty">Failed to load posts.</div>';
+            return;
+          }
+          const files = await res.json();
+          if (!Array.isArray(files) || files.length === 0) {
+            el.innerHTML = '<div class="empty">No posts yet.</div>';
+            return;
+          }
+          const md = files.filter((f) => f.name.endsWith('.md') || f.name.endsWith('.mdx'));
+          let h = '<table><thead><tr><th>Title</th><th>Category</th><th>Date</th><th></th></tr></thead><tbody>';
+          for (const f of md) {
+            const slug = f.name.replace(/\.(md|mdx)$/, '');
+            const meta = await fetchMeta(f.url, token, POSTS_DIR);
+            h += `<tr><td><a class="item-title" onclick="event.preventDefault();editPost('${slug}')">${esc(meta.title || slug)}</a></td>
+        <td>${meta.category ? `<span class="badge">${esc(meta.category)}</span>` : '-'}</td>
+        <td>${meta.date || '-'}</td>
         <td><button class="del-btn" onclick="deletePost('${slug}','${f.sha}')">Delete</button></td></tr>`;
-    }
-    h+='</tbody></table>';el.innerHTML=h;
-  }catch(e){if($('post_list'))$('post_list').innerHTML='<div class="empty">Error loading posts.</div>'}
-}
+          }
+          h += '</tbody></table>';
+          el.innerHTML = h;
+        } catch (e) {
+          if ($('post_list')) $('post_list').innerHTML = '<div class="empty">Error loading posts.</div>';
+        }
+      }
 
-async function fetchMeta(url,token,dir){
-  try{
-    const r=await fetch(url,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    if(!r.ok)return{};
-    const d=await r.json();const raw=base64ToUTF8(d.content);const m=parseFrontmatter(raw);
-    return{title:m.title,category:m.category,date:m.publishDate?m.publishDate.slice(0,10):''};
-  }catch(e){return{}}
-}
+      async function fetchMeta(url, token, dir) {
+        try {
+          const r = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+          });
+          if (!r.ok) return {};
+          const d = await r.json();
+          const raw = base64ToUTF8(d.content);
+          const m = parseFrontmatter(raw);
+          return { title: m.title, category: m.category, date: m.publishDate ? m.publishDate.slice(0, 10) : '' };
+        } catch (e) {
+          return {};
+        }
+      }
 
-async function fetchItemMeta(url,token){
-  try{
-    const r=await fetch(url,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    if(!r.ok)return{};
-    const d=await r.json();const raw=base64ToUTF8(d.content);const m=parseFrontmatter(raw);
-    return{title:m.title,category:m.category,date:''};
-  }catch(e){return{}}
-}
+      async function fetchItemMeta(url, token) {
+        try {
+          const r = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+          });
+          if (!r.ok) return {};
+          const d = await r.json();
+          const raw = base64ToUTF8(d.content);
+          const m = parseFrontmatter(raw);
+          return { title: m.title, category: m.category, date: '' };
+        } catch (e) {
+          return {};
+        }
+      }
 
-// --- POST EDITOR ---
-function renderEditor(){
-  const p=state,isNew=p.isNew,dateVal=v=>v?v.slice(0,16):'';
-  return `<div>
-    <div class="header"><h1>${isNew?'New Post':'Edit Post'}</h1>
+      // --- POST EDITOR ---
+      function renderEditor() {
+        const p = state,
+          isNew = p.isNew,
+          dateVal = (v) => (v ? v.slice(0, 16) : '');
+        return `<div>
+    <div class="header"><h1>${isNew ? 'New Post' : 'Edit Post'}</h1>
       <a href="#" onclick="event.preventDefault();show('dashboard')">Back</a>
     </div>
     <div class="container"><div class="card">
-      ${state.msg?`<div class="${state.msgType}">${esc(state.msg)}</div>`:''}
+      ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
       <form id="editor_form">
         <input type="hidden" name="sha" value="${p.sha}"><input type="hidden" name="isNew" value="${isNew}">
         <label>Title *</label>
-        <input type="text" name="title" value="${esc(p.title)}" required ${isNew?'oninput="slugGen(this.value)"':''}>
+        <input type="text" name="title" value="${esc(p.title)}" required ${isNew ? 'oninput="slugGen(this.value)"' : ''}>
         <label>Slug</label>
-        <input type="text" name="slug" id="slug_input" value="${esc(p.slug)}" required ${isNew?'':'readonly style="background:#f9fafb;color:#6b7280"'}>
+        <input type="text" name="slug" id="slug_input" value="${esc(p.slug)}" required ${isNew ? '' : 'readonly style="background:#f9fafb;color:#6b7280"'}>
         <div class="row">
           <div><label>Publish Date</label><input type="datetime-local" name="publishDate" value="${dateVal(p.publishDate)}"></div>
           <div><label>Update Date</label><input type="datetime-local" name="updateDate" value="${dateVal(p.updateDate)}"></div>
@@ -209,7 +591,7 @@ function renderEditor(){
         </div>
         <div class="row">
           <div><label>Author</label><input type="text" name="author" value="${esc(p.author)}"></div>
-          <div><label>Draft</label><select name="draft"><option value="">Published</option><option value="true" ${p.draft==='true'?'selected':''}>Draft</option></select></div>
+          <div><label>Draft</label><select name="draft"><option value="">Published</option><option value="true" ${p.draft === 'true' ? 'selected' : ''}>Draft</option></select></div>
         </div>
         <label>Image URL</label><input type="text" name="image" value="${esc(p.image)}" placeholder="https://...">
         <label>Excerpt</label><input type="text" name="excerpt" value="${esc(p.excerpt)}">
@@ -221,51 +603,124 @@ function renderEditor(){
         </div>
       </form>
     </div></div>
-  </div>`
-}
+  </div>`;
+      }
 
-function slugGen(t){$('slug_input').value=t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+      function slugGen(t) {
+        $('slug_input').value = t
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
 
-async function editPost(slug){
-  const token=state.token||localStorage.getItem('gh_token');
-  try{
-    let fn=`${POSTS_DIR}/${slug}.md`,r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    if(r.status===404){fn=`${POSTS_DIR}/${slug}.mdx`;r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}})}
-    if(!r.ok)return;
-    const d=await r.json(),raw=base64ToUTF8(d.content),meta=parseFrontmatter(raw),body=raw.replace(/^---[\s\S]*?---\s*/,'').trim();
-    show('editor',{slug,sha:d.sha,title:meta.title||'',excerpt:meta.excerpt||'',category:meta.category||'',
-      tags:Array.isArray(meta.tags)?meta.tags.join(', '):(meta.tags||''),image:meta.image||'',
-      publishDate:meta.publishDate||'',updateDate:meta.updateDate||'',draft:meta.draft?'true':'',author:meta.author||'',body,isNew:false});
-  }catch(e){show('dashboard')}
-}
+      async function editPost(slug) {
+        const token = state.token || localStorage.getItem('gh_token');
+        try {
+          let fn = `${POSTS_DIR}/${slug}.md`,
+            r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`, {
+              headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+            });
+          if (r.status === 404) {
+            fn = `${POSTS_DIR}/${slug}.mdx`;
+            r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`, {
+              headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+            });
+          }
+          if (!r.ok) return;
+          const d = await r.json(),
+            raw = base64ToUTF8(d.content),
+            meta = parseFrontmatter(raw),
+            body = raw.replace(/^---[\s\S]*?---\s*/, '').trim();
+          show('editor', {
+            slug,
+            sha: d.sha,
+            title: meta.title || '',
+            excerpt: meta.excerpt || '',
+            category: meta.category || '',
+            tags: Array.isArray(meta.tags) ? meta.tags.join(', ') : meta.tags || '',
+            image: meta.image || '',
+            publishDate: meta.publishDate || '',
+            updateDate: meta.updateDate || '',
+            draft: meta.draft ? 'true' : '',
+            author: meta.author || '',
+            body,
+            isNew: false,
+          });
+        } catch (e) {
+          show('dashboard');
+        }
+      }
 
-async function savePost(){
-  const f=new FormData($('editor_form')),token=state.token||localStorage.getItem('gh_token');
-  const isNew=f.get('isNew')==='true',slug=(f.get('slug')?.toString()||'untitled').replace(/\.(md|mdx)$/,'')||'untitled';
-  const title=f.get('title')?.toString()||'Untitled',sha=f.get('sha')?.toString()||'';
-  const lines=['---'];
-  for(const k of['title','publishDate','updateDate','excerpt','image','category','author']){
-    const v=f.get(k)?.toString().trim();if(!v)continue;lines.push(`${k}: ${v}`)}
-  const dv=f.get('draft')?.toString();if(dv==='true')lines.push('draft: true');
-  const tv=f.get('tags')?.toString().trim();if(tv){const ta=tv.split(',').map(t=>t.trim()).filter(Boolean);if(ta.length){lines.push('tags:');ta.forEach(t=>lines.push(`  - ${t}`))}}
-  lines.push('---');
-  const body=f.get('body')?.toString().trim()||'',content=lines.join('\n')+'\n\n'+body;
-  const encoded=utf8ToBase64(content),path=`${POSTS_DIR}/${slug}.md`;
-  const payload={message:`Update post: ${title}`,content:encoded,branch:BRANCH};if(sha)payload.sha=sha;
-  const r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`,{method:'PUT',headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(payload)});
-  if(!r.ok){const e=await r.json();state.msg=`Save failed: ${e.message||'Error'}`;state.msgType='error';render();return}
-  show('dashboard')
-}
+      async function savePost() {
+        const f = new FormData($('editor_form')),
+          token = state.token || localStorage.getItem('gh_token');
+        const isNew = f.get('isNew') === 'true',
+          slug = (f.get('slug')?.toString() || 'untitled').replace(/\.(md|mdx)$/, '') || 'untitled';
+        const title = f.get('title')?.toString() || 'Untitled',
+          sha = f.get('sha')?.toString() || '';
+        const lines = ['---'];
+        for (const k of ['title', 'publishDate', 'updateDate', 'excerpt', 'image', 'category', 'author']) {
+          const v = f.get(k)?.toString().trim();
+          if (!v) continue;
+          lines.push(`${k}: ${v}`);
+        }
+        const dv = f.get('draft')?.toString();
+        if (dv === 'true') lines.push('draft: true');
+        const tv = f.get('tags')?.toString().trim();
+        if (tv) {
+          const ta = tv
+            .split(',')
+            .map((t) => t.trim())
+            .filter(Boolean);
+          if (ta.length) {
+            lines.push('tags:');
+            ta.forEach((t) => lines.push(`  - ${t}`));
+          }
+        }
+        lines.push('---');
+        const body = f.get('body')?.toString().trim() || '',
+          content = lines.join('\n') + '\n\n' + body;
+        const encoded = utf8ToBase64(content),
+          path = `${POSTS_DIR}/${slug}.md`;
+        const payload = { message: `Update post: ${title}`, content: encoded, branch: BRANCH };
+        if (sha) payload.sha = sha;
+        const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) {
+          const e = await r.json();
+          state.msg = `Save failed: ${e.message || 'Error'}`;
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        show('dashboard');
+      }
 
-async function deletePost(slug,sha){
-  if(!confirm(`Delete "${slug}"?`))return;
-  const token=state.token||localStorage.getItem('gh_token');
-  const r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}/${slug}.md`,{method:'DELETE',headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:`Delete post: ${slug}`,sha,branch:BRANCH})});
-  if(r.ok)loadDashboard()
-}
+      async function deletePost(slug, sha) {
+        if (!confirm(`Delete "${slug}"?`)) return;
+        const token = state.token || localStorage.getItem('gh_token');
+        const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${POSTS_DIR}/${slug}.md`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: `Delete post: ${slug}`, sha, branch: BRANCH }),
+        });
+        if (r.ok) loadDashboard();
+      }
 
-// --- PRODUCT DASHBOARD ---
-function renderProductDashboard(){return `<div>
+      // --- PRODUCT DASHBOARD ---
+      function renderProductDashboard() {
+        return `<div>
   <div class="header"><h1>Vectoflare Admin</h1><div>
     <a href="#" onclick="event.preventDefault();show('password')">Change Password</a>
     <button onclick="logout()">Logout</button>
@@ -278,76 +733,91 @@ function renderProductDashboard(){return `<div>
     <div class="actions"><a href="#" onclick="event.preventDefault();show('productEditor',{slug:'',sha:'',title:'',category:'',description:'',images:[],specs:[],applications:'',features:[],draft:'',isNew:true})">+ New Product</a></div>
     <div id="product_list"><div class="loading">Loading products...</div></div>
   </div>
-</div>`}
+</div>`;
+      }
 
-async function loadProductDashboard(){
-  const token=state.token||localStorage.getItem('gh_token');if(!token)return;
-  try{
-    const res=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${PRODS_DIR}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    const el=$('product_list');if(!res.ok){el.innerHTML='<div class="empty">Failed to load products.</div>';return}
-    const files=await res.json();
-    if(!Array.isArray(files)||files.length===0){el.innerHTML='<div class="empty">No products yet.</div>';return}
-    const md=files.filter(f=>f.name.endsWith('.md')||f.name.endsWith('.mdx'));
-    let h='<table><thead><tr><th>Title</th><th>Category</th><th></th></tr></thead><tbody>';
-    for(const f of md){
-      const slug=f.name.replace(/\.(md|mdx)$/,'');
-      const meta=await fetchItemMeta(f.url,token);
-      h+=`<tr><td><a class="item-title" onclick="event.preventDefault();editProduct('${slug}')">${esc(meta.title||slug)}</a></td>
-        <td>${meta.category?`<span class="badge">${esc(meta.category)}</span>`:'-'}</td>
+      async function loadProductDashboard() {
+        const token = state.token || localStorage.getItem('gh_token');
+        if (!token) return;
+        try {
+          const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${PRODS_DIR}`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+          });
+          const el = $('product_list');
+          if (!res.ok) {
+            el.innerHTML = '<div class="empty">Failed to load products.</div>';
+            return;
+          }
+          const files = await res.json();
+          if (!Array.isArray(files) || files.length === 0) {
+            el.innerHTML = '<div class="empty">No products yet.</div>';
+            return;
+          }
+          const md = files.filter((f) => f.name.endsWith('.md') || f.name.endsWith('.mdx'));
+          let h = '<table><thead><tr><th>Title</th><th>Category</th><th></th></tr></thead><tbody>';
+          for (const f of md) {
+            const slug = f.name.replace(/\.(md|mdx)$/, '');
+            const meta = await fetchItemMeta(f.url, token);
+            h += `<tr><td><a class="item-title" onclick="event.preventDefault();editProduct('${slug}')">${esc(meta.title || slug)}</a></td>
+        <td>${meta.category ? `<span class="badge">${esc(meta.category)}</span>` : '-'}</td>
         <td><button class="del-btn" onclick="deleteProduct('${slug}','${f.sha}')">Delete</button></td></tr>`;
-    }
-    h+='</tbody></table>';el.innerHTML=h;
-  }catch(e){if($('product_list'))$('product_list').innerHTML='<div class="empty">Error loading products.</div>'}
-}
+          }
+          h += '</tbody></table>';
+          el.innerHTML = h;
+        } catch (e) {
+          if ($('product_list')) $('product_list').innerHTML = '<div class="empty">Error loading products.</div>';
+        }
+      }
 
-// --- PRODUCT EDITOR ---
-function renderProductEditor(){
-  const p=state,isNew=p.isNew;
-  const imgs=Array.isArray(p.images)?p.images:[''];
-  const specs=Array.isArray(p.specs)&&p.specs.length?p.specs:[{label:'',value:''}];
-  const feats=Array.isArray(p.features)&&p.features.length?p.features:[''];
-  return `<div>
-    <div class="header"><h1>${isNew?'New Product':'Edit Product'}</h1>
+      // --- PRODUCT EDITOR ---
+      function renderProductEditor() {
+        const p = state,
+          isNew = p.isNew;
+        const imgs = Array.isArray(p.images) ? p.images : [''];
+        const specs = Array.isArray(p.specs) && p.specs.length ? p.specs : [{ label: '', value: '' }];
+        const feats = Array.isArray(p.features) && p.features.length ? p.features : [''];
+        return `<div>
+    <div class="header"><h1>${isNew ? 'New Product' : 'Edit Product'}</h1>
       <a href="#" onclick="event.preventDefault();show('productDashboard')">Back</a>
     </div>
     <div class="container"><div class="card">
-      ${state.msg?`<div class="${state.msgType}">${esc(state.msg)}</div>`:''}
+      ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
       <form id="product_form">
         <input type="hidden" name="sha" value="${p.sha}"><input type="hidden" name="isNew" value="${isNew}">
         <label>Title *</label>
-        <input type="text" name="title" value="${esc(p.title)}" required ${isNew?'oninput="pSlugGen(this.value)"':''}>
+        <input type="text" name="title" value="${esc(p.title)}" required ${isNew ? 'oninput="pSlugGen(this.value)"' : ''}>
         <label>Slug</label>
-        <input type="text" name="slug" id="p_slug_input" value="${esc(p.slug)}" required ${isNew?'':'readonly style="background:#f9fafb;color:#6b7280"'}>
+        <input type="text" name="slug" id="p_slug_input" value="${esc(p.slug)}" required ${isNew ? '' : 'readonly style="background:#f9fafb;color:#6b7280"'}>
         <div class="row">
           <div><label>Category *</label><input type="text" name="category" value="${esc(p.category)}" required placeholder="e.g. Graphite Molds"></div>
-          <div><label>Draft</label><select name="draft"><option value="">Published</option><option value="true" ${p.draft==='true'?'selected':''}>Draft</option></select></div>
+          <div><label>Draft</label><select name="draft"><option value="">Published</option><option value="true" ${p.draft === 'true' ? 'selected' : ''}>Draft</option></select></div>
         </div>
         <label>Description</label>
-        <textarea name="description" rows="4" style="min-height:80px">${esc(p.description||'')}</textarea>
+        <textarea name="description" rows="4" style="min-height:80px">${esc(p.description || '')}</textarea>
 
         <label style="margin-top:8px">Images (URLs)</label>
         <div id="img_list">
-          ${imgs.map((img,i)=>`<div class="img-row"><input type="text" name="img_${i}" value="${esc(img)}" placeholder="https://..."><button type="button" class="btn-secondary" onclick="removeImg(this)">×</button></div>`).join('')}
+          ${imgs.map((img, i) => `<div class="img-row"><input type="text" name="img_${i}" value="${esc(img)}" placeholder="https://..."><button type="button" class="btn-secondary" onclick="removeImg(this)">×</button></div>`).join('')}
         </div>
         <span class="add-spec" onclick="addImg()">+ Add Image</span>
 
         <label style="margin-top:12px">Specifications</label>
         <div id="spec_list">
-          ${specs.map((s,i)=>`<div class="spec-row"><input type="text" name="spec_label_${i}" value="${esc(s.label)}" placeholder="Label"><input type="text" name="spec_value_${i}" value="${esc(s.value)}" placeholder="Value"><button type="button" class="btn-secondary" onclick="removeSpec(this)">×</button></div>`).join('')}
+          ${specs.map((s, i) => `<div class="spec-row"><input type="text" name="spec_label_${i}" value="${esc(s.label)}" placeholder="Label"><input type="text" name="spec_value_${i}" value="${esc(s.value)}" placeholder="Value"><button type="button" class="btn-secondary" onclick="removeSpec(this)">×</button></div>`).join('')}
         </div>
         <span class="add-spec" onclick="addSpec()">+ Add Specification</span>
 
         <label style="margin-top:12px">Features</label>
         <div id="feat_list">
-          ${feats.map((f,i)=>`<div class="feat-row"><input type="text" name="feat_${i}" value="${esc(f)}" placeholder="Feature"><button type="button" class="btn-secondary" onclick="removeFeat(this)">×</button></div>`).join('')}
+          ${feats.map((f, i) => `<div class="feat-row"><input type="text" name="feat_${i}" value="${esc(f)}" placeholder="Feature"><button type="button" class="btn-secondary" onclick="removeFeat(this)">×</button></div>`).join('')}
         </div>
         <span class="add-spec" onclick="addFeat()">+ Add Feature</span>
 
         <label style="margin-top:12px">Applications</label>
-        <textarea name="applications" rows="4" style="min-height:80px">${esc(p.applications||'')}</textarea>
+        <textarea name="applications" rows="4" style="min-height:80px">${esc(p.applications || '')}</textarea>
 
         <label>Content (Markdown body)</label>
-        <textarea name="body" style="min-height:200px">${esc(p.body||'')}</textarea>
+        <textarea name="body" style="min-height:200px">${esc(p.body || '')}</textarea>
         <div class="hint">Additional detailed description in Markdown.</div>
 
         <div class="btn-row">
@@ -356,97 +826,199 @@ function renderProductEditor(){
         </div>
       </form>
     </div></div>
-  </div>`
-}
+  </div>`;
+      }
 
-function pSlugGen(t){$('p_slug_input').value=t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+      function pSlugGen(t) {
+        $('p_slug_input').value = t
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
 
-function addSpec(){
-  const el=$('spec_list');
-  const i=el.children.length;
-  el.insertAdjacentHTML('beforeend',`<div class="spec-row"><input type="text" name="spec_label_${i}" placeholder="Label"><input type="text" name="spec_value_${i}" placeholder="Value"><button type="button" class="btn-secondary" onclick="removeSpec(this)">×</button></div>`)
-}
-function removeSpec(btn){btn.parentElement.remove()}
+      function addSpec() {
+        const el = $('spec_list');
+        const i = el.children.length;
+        el.insertAdjacentHTML(
+          'beforeend',
+          `<div class="spec-row"><input type="text" name="spec_label_${i}" placeholder="Label"><input type="text" name="spec_value_${i}" placeholder="Value"><button type="button" class="btn-secondary" onclick="removeSpec(this)">×</button></div>`
+        );
+      }
+      function removeSpec(btn) {
+        btn.parentElement.remove();
+      }
 
-function addImg(){
-  const el=$('img_list');
-  const i=el.children.length;
-  el.insertAdjacentHTML('beforeend',`<div class="img-row"><input type="text" name="img_${i}" placeholder="https://..."><button type="button" class="btn-secondary" onclick="removeImg(this)">×</button></div>`)
-}
-function removeImg(btn){btn.parentElement.remove()}
+      function addImg() {
+        const el = $('img_list');
+        const i = el.children.length;
+        el.insertAdjacentHTML(
+          'beforeend',
+          `<div class="img-row"><input type="text" name="img_${i}" placeholder="https://..."><button type="button" class="btn-secondary" onclick="removeImg(this)">×</button></div>`
+        );
+      }
+      function removeImg(btn) {
+        btn.parentElement.remove();
+      }
 
-function addFeat(){
-  const el=$('feat_list');
-  const i=el.children.length;
-  el.insertAdjacentHTML('beforeend',`<div class="feat-row"><input type="text" name="feat_${i}" placeholder="Feature"><button type="button" class="btn-secondary" onclick="removeFeat(this)">×</button></div>`)
-}
-function removeFeat(btn){btn.parentElement.remove()}
+      function addFeat() {
+        const el = $('feat_list');
+        const i = el.children.length;
+        el.insertAdjacentHTML(
+          'beforeend',
+          `<div class="feat-row"><input type="text" name="feat_${i}" placeholder="Feature"><button type="button" class="btn-secondary" onclick="removeFeat(this)">×</button></div>`
+        );
+      }
+      function removeFeat(btn) {
+        btn.parentElement.remove();
+      }
 
-async function editProduct(slug){
-  const token=state.token||localStorage.getItem('gh_token');
-  try{
-    let fn=`${PRODS_DIR}/${slug}.md`,r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}});
-    if(r.status===404){fn=`${PRODS_DIR}/${slug}.mdx`;r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`,{headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json'}})}
-    if(!r.ok)return;
-    const d=await r.json(),raw=base64ToUTF8(d.content),meta=parseFrontmatter(raw),body=raw.replace(/^---[\s\S]*?---\s*/,'').trim();
-    const imgs=Array.isArray(meta.images)?meta.images:[];
-    const specs=Array.isArray(meta.specifications)?meta.specifications:[];
-    const feats=Array.isArray(meta.features)?meta.features:[];
-    show('productEditor',{slug,sha:d.sha,title:meta.title||'',category:meta.category||'',description:meta.description||'',
-      images:imgs,specs,applications:meta.applications||'',features:feats,draft:meta.draft?'true':'',body,isNew:false});
-  }catch(e){show('productDashboard')}
-}
+      async function editProduct(slug) {
+        const token = state.token || localStorage.getItem('gh_token');
+        try {
+          let fn = `${PRODS_DIR}/${slug}.md`,
+            r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`, {
+              headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+            });
+          if (r.status === 404) {
+            fn = `${PRODS_DIR}/${slug}.mdx`;
+            r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${fn}`, {
+              headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' },
+            });
+          }
+          if (!r.ok) return;
+          const d = await r.json(),
+            raw = base64ToUTF8(d.content),
+            meta = parseFrontmatter(raw),
+            body = raw.replace(/^---[\s\S]*?---\s*/, '').trim();
+          const imgs = Array.isArray(meta.images) ? meta.images : [];
+          const specs = Array.isArray(meta.specifications) ? meta.specifications : [];
+          const feats = Array.isArray(meta.features) ? meta.features : [];
+          show('productEditor', {
+            slug,
+            sha: d.sha,
+            title: meta.title || '',
+            category: meta.category || '',
+            description: meta.description || '',
+            images: imgs,
+            specs,
+            applications: meta.applications || '',
+            features: feats,
+            draft: meta.draft ? 'true' : '',
+            body,
+            isNew: false,
+          });
+        } catch (e) {
+          show('productDashboard');
+        }
+      }
 
-async function saveProduct(){
-  const f=new FormData($('product_form')),token=state.token||localStorage.getItem('gh_token');
-  const isNew=f.get('isNew')==='true',slug=(f.get('slug')?.toString()||'untitled').replace(/\.(md|mdx)$/,'')||'untitled';
-  const title=f.get('title')?.toString()||'Untitled',sha=f.get('sha')?.toString()||'';
-  const category=f.get('category')?.toString()||'',description=f.get('description')?.toString()||'';
-  const draft=f.get('draft')?.toString()||'',applications=f.get('applications')?.toString()||'';
-  const body=f.get('body')?.toString().trim()||'';
+      async function saveProduct() {
+        const f = new FormData($('product_form')),
+          token = state.token || localStorage.getItem('gh_token');
+        const isNew = f.get('isNew') === 'true',
+          slug = (f.get('slug')?.toString() || 'untitled').replace(/\.(md|mdx)$/, '') || 'untitled';
+        const title = f.get('title')?.toString() || 'Untitled',
+          sha = f.get('sha')?.toString() || '';
+        const category = f.get('category')?.toString() || '',
+          description = f.get('description')?.toString() || '';
+        const draft = f.get('draft')?.toString() || '',
+          applications = f.get('applications')?.toString() || '';
+        const body = f.get('body')?.toString().trim() || '';
 
-  const lines=['---'];
-  lines.push(`title: ${title}`);
-  lines.push(`category: ${category}`);
-  if(description)lines.push(`description: ${description}`);
-  if(draft==='true')lines.push('draft: true');
+        const lines = ['---'];
+        lines.push(`title: ${title}`);
+        lines.push(`category: ${category}`);
+        if (description) lines.push(`description: ${description}`);
+        if (draft === 'true') lines.push('draft: true');
 
-  const imgs=[];let ii=0;
-  while(f.has(`img_${ii}`)){const v=f.get(`img_${ii}`)?.toString().trim();if(v)imgs.push(v);ii++}
-  if(imgs.length){lines.push('images:');imgs.forEach(img=>lines.push(`  - ${img}`))}
+        const imgs = [];
+        let ii = 0;
+        while (f.has(`img_${ii}`)) {
+          const v = f.get(`img_${ii}`)?.toString().trim();
+          if (v) imgs.push(v);
+          ii++;
+        }
+        if (imgs.length) {
+          lines.push('images:');
+          imgs.forEach((img) => lines.push(`  - ${img}`));
+        }
 
-  const specs=[];let si=0;
-  while(f.has(`spec_label_${si}`)){
-    const l=f.get(`spec_label_${si}`)?.toString().trim(),v=f.get(`spec_value_${si}`)?.toString().trim();
-    if(l||v){specs.push({label:l||'',value:v||''})}si++
-  }
-  if(specs.length){lines.push('specifications:');specs.forEach(s=>{lines.push(`  - label: ${s.label}`);lines.push(`    value: ${s.value}`)})}
+        const specs = [];
+        let si = 0;
+        while (f.has(`spec_label_${si}`)) {
+          const l = f.get(`spec_label_${si}`)?.toString().trim(),
+            v = f.get(`spec_value_${si}`)?.toString().trim();
+          if (l || v) {
+            specs.push({ label: l || '', value: v || '' });
+          }
+          si++;
+        }
+        if (specs.length) {
+          lines.push('specifications:');
+          specs.forEach((s) => {
+            lines.push(`  - label: ${s.label}`);
+            lines.push(`    value: ${s.value}`);
+          });
+        }
 
-  const feats=[];let fi=0;
-  while(f.has(`feat_${fi}`)){const v=f.get(`feat_${fi}`)?.toString().trim();if(v)feats.push(v);fi++}
-  if(feats.length){lines.push('features:');feats.forEach(feat=>lines.push(`  - ${feat}`))}
+        const feats = [];
+        let fi = 0;
+        while (f.has(`feat_${fi}`)) {
+          const v = f.get(`feat_${fi}`)?.toString().trim();
+          if (v) feats.push(v);
+          fi++;
+        }
+        if (feats.length) {
+          lines.push('features:');
+          feats.forEach((feat) => lines.push(`  - ${feat}`));
+        }
 
-  if(applications)lines.push(`applications: |\n    ${applications.replace(/\n/g,'\n    ')}`);
-  lines.push('---');
-  const content=lines.join('\n')+'\n\n'+(body||'');
-  const encoded=utf8ToBase64(content),path=`${PRODS_DIR}/${slug}.md`;
-  const payload={message:`Update product: ${title}`,content:encoded,branch:BRANCH};if(sha)payload.sha=sha;
-  const r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`,{method:'PUT',headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(payload)});
-  if(!r.ok){const e=await r.json();state.msg=`Save failed: ${e.message||'Error'}`;state.msgType='error';render();return}
-  show('productDashboard')
-}
+        if (applications) lines.push(`applications: |\n    ${applications.replace(/\n/g, '\n    ')}`);
+        lines.push('---');
+        const content = lines.join('\n') + '\n\n' + (body || '');
+        const encoded = utf8ToBase64(content),
+          path = `${PRODS_DIR}/${slug}.md`;
+        const payload = { message: `Update product: ${title}`, content: encoded, branch: BRANCH };
+        if (sha) payload.sha = sha;
+        const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) {
+          const e = await r.json();
+          state.msg = `Save failed: ${e.message || 'Error'}`;
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        show('productDashboard');
+      }
 
-async function deleteProduct(slug,sha){
-  if(!confirm(`Delete product "${slug}"?`))return;
-  const token=state.token||localStorage.getItem('gh_token');
-  const r=await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${PRODS_DIR}/${slug}.md`,{method:'DELETE',headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:`Delete product: ${slug}`,sha,branch:BRANCH})});
-  if(r.ok)loadProductDashboard()
-}
+      async function deleteProduct(slug, sha) {
+        if (!confirm(`Delete product "${slug}"?`)) return;
+        const token = state.token || localStorage.getItem('gh_token');
+        const r = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${PRODS_DIR}/${slug}.md`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: `Delete product: ${slug}`, sha, branch: BRANCH }),
+        });
+        if (r.ok) loadProductDashboard();
+      }
 
-// --- PASSWORD ---
-function renderPassword(){return `<div class="login-wrap"><div class="login-box">
+      // --- PASSWORD ---
+      function renderPassword() {
+        return `<div class="login-wrap"><div class="login-box">
   <h1>Change Password</h1>
-  ${state.msg?`<div class="${state.msgType}">${esc(state.msg)}</div>`:''}
+  ${state.msg ? `<div class="${state.msgType}">${esc(state.msg)}</div>` : ''}
   <form onsubmit="event.preventDefault();changePassword()">
     <label>Current Password</label><input type="password" id="pw_current" required>
     <label>New Password</label><input type="password" id="pw_new" required minlength="6">
@@ -456,55 +1028,121 @@ function renderPassword(){return `<div class="login-wrap"><div class="login-box"
       <a href="#" class="btn-secondary" onclick="event.preventDefault();show('dashboard')">Cancel</a>
     </div>
   </form>
-</div></div>`}
-function changePassword(){
-  const c=$('pw_current').value,n=$('pw_new').value,cf=$('pw_confirm').value;
-  if(c!=='Aa123456#'){state.msg='Current password is incorrect';state.msgType='error';render();return}
-  if(n!==cf){state.msg='Passwords do not match';state.msgType='error';render();return}
-  if(n.length<6){state.msg='Password must be at least 6 chars';state.msgType='error';render();return}
-  alert('Password changed! (client-side only, resets on reload)\nNew password: '+n);
-  state.msg='';show('dashboard')
-}
+</div></div>`;
+      }
+      function changePassword() {
+        const c = $('pw_current').value,
+          n = $('pw_new').value,
+          cf = $('pw_confirm').value;
+        if (c !== 'Aa123456#') {
+          state.msg = 'Current password is incorrect';
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        if (n !== cf) {
+          state.msg = 'Passwords do not match';
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        if (n.length < 6) {
+          state.msg = 'Password must be at least 6 chars';
+          state.msgType = 'error';
+          render();
+          return;
+        }
+        alert('Password changed! (client-side only, resets on reload)\nNew password: ' + n);
+        state.msg = '';
+        show('dashboard');
+      }
 
-function logout(){state.token='';show('login')}
+      function logout() {
+        state.token = '';
+        show('login');
+      }
 
-// --- UTILITIES ---
-function base64ToUTF8(b64){const b=atob(b64.replace(/\n/g,''));const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return new TextDecoder().decode(u)}
-function utf8ToBase64(s){const b=new TextEncoder().encode(s);let r='';for(let i=0;i<b.length;i++)r+=String.fromCharCode(b[i]);return btoa(r)}
+      // --- UTILITIES ---
+      function base64ToUTF8(b64) {
+        const b = atob(b64.replace(/\n/g, ''));
+        const u = new Uint8Array(b.length);
+        for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i);
+        return new TextDecoder().decode(u);
+      }
+      function utf8ToBase64(s) {
+        const b = new TextEncoder().encode(s);
+        let r = '';
+        for (let i = 0; i < b.length; i++) r += String.fromCharCode(b[i]);
+        return btoa(r);
+      }
 
-function parseFrontmatter(raw){
-  const m=raw.match(/^---\s*\n([\s\S]*?)\n---/);if(!m)return{};
-  const y=m[1];const r={};let key='',inList=false,items=[];
-  for(const l of y.split('\n')){
-    if(inList){
-      const lm=l.match(/^\s+-\s+(.+)/);
-      if(lm&&!lm[1].includes(': ')){items.push(lm[1].trim());continue}
-      else if(lm&&lm[1].includes(': ')){items.push(lm[1].trim());continue}
-      else{r[key]=items;inList=false;items=[]}
-    }
-    const km=l.match(/^(\w[\w]*):\s*(.*)/);if(!km)continue;
-    if(inList){r[key]=items;inList=false;items=[]}
-    key=km[1];let val=km[2].trim();
-    if((val.startsWith('"')&&val.endsWith('"'))||(val.startsWith("'")&&val.endsWith("'")))val=val.slice(1,-1);
-    if(val==='true')val=true;else if(val==='false')val=false;
-    if(val===''){inList=true;items=[];continue}
-    r[key]=val;
-  }
-  if(inList)r[key]=items;
+      function parseFrontmatter(raw) {
+        const m = raw.match(/^---\s*\n([\s\S]*?)\n---/);
+        if (!m) return {};
+        const y = m[1];
+        const r = {};
+        let key = '',
+          inList = false,
+          items = [];
+        for (const l of y.split('\n')) {
+          if (inList) {
+            const lm = l.match(/^\s+-\s+(.+)/);
+            if (lm && !lm[1].includes(': ')) {
+              items.push(lm[1].trim());
+              continue;
+            } else if (lm && lm[1].includes(': ')) {
+              items.push(lm[1].trim());
+              continue;
+            } else {
+              r[key] = items;
+              inList = false;
+              items = [];
+            }
+          }
+          const km = l.match(/^(\w[\w]*):\s*(.*)/);
+          if (!km) continue;
+          if (inList) {
+            r[key] = items;
+            inList = false;
+            items = [];
+          }
+          key = km[1];
+          let val = km[2].trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'")))
+            val = val.slice(1, -1);
+          if (val === 'true') val = true;
+          else if (val === 'false') val = false;
+          if (val === '') {
+            inList = true;
+            items = [];
+            continue;
+          }
+          r[key] = val;
+        }
+        if (inList) r[key] = items;
 
-  if(r.specifications&&Array.isArray(r.specifications)){
-    r.specifications=r.specifications.map(s=>{
-      if(typeof s==='string'){const p=s.split(/:\s*/);return{label:p[0]||'',value:p.slice(1).join(': ')}}
-      return s
-    })
-  }
-  return r
-}
+        if (r.specifications && Array.isArray(r.specifications)) {
+          r.specifications = r.specifications.map((s) => {
+            if (typeof s === 'string') {
+              const p = s.split(/:\s*/);
+              return { label: p[0] || '', value: p.slice(1).join(': ') };
+            }
+            return s;
+          });
+        }
+        return r;
+      }
 
-// --- INIT ---
-render()
-const token=localStorage.getItem('gh_token');
-if(token){state.token=token;setTimeout(()=>{show('dashboard');setTimeout(()=>loadDashboard(),50)},50)}
-</script>
-</body>
+      // --- INIT ---
+      render();
+      const token = localStorage.getItem('gh_token');
+      if (token) {
+        state.token = token;
+        setTimeout(() => {
+          show('dashboard');
+          setTimeout(() => loadDashboard(), 50);
+        }, 50);
+      }
+    </script>
+  </body>
 </html>

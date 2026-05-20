@@ -13,7 +13,7 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const { product } = Astro.props as Awaited<ReturnType<typeof fetchProducts>>[number];
+const product: Awaited<ReturnType<typeof fetchProducts>>[number] = Astro.props.product;
 const metadata = { title: product.title, description: product.description };
 ---
 
@@ -27,82 +27,94 @@ const metadata = { title: product.title, description: product.description };
     </a>
 
     <div class="grid gap-8 lg:grid-cols-5">
-      {product.images && product.images.length > 0 && (
-        <div class="lg:col-span-2">
-          <div class="sticky top-24">
-            {product.images.slice(0, 1).map((img) => (
-              <div class="aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-slate-700 shadow-sm border border-gray-100 dark:border-slate-700">
-                <img src={img} alt={product.title} class="w-full h-full object-cover" />
-              </div>
-            ))}
-            {product.images.length > 1 && (
-              <div class="flex gap-2 mt-3 overflow-x-auto pb-2">
-                {product.images.slice(1).map((img) => (
-                  <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-slate-700 border border-gray-100 dark:border-slate-700">
-                    <img src={img} alt={product.title} class="w-full h-full object-cover" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-            )}
+      {
+        product.images && product.images.length > 0 && (
+          <div class="lg:col-span-2">
+            <div class="sticky top-24">
+              {product.images.slice(0, 1).map((img) => (
+                <div class="aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-slate-700 shadow-sm border border-gray-100 dark:border-slate-700">
+                  <img src={img} alt={product.title} class="w-full h-full object-cover" />
+                </div>
+              ))}
+              {product.images.length > 1 && (
+                <div class="flex gap-2 mt-3 overflow-x-auto pb-2">
+                  {product.images.slice(1).map((img) => (
+                    <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-slate-700 border border-gray-100 dark:border-slate-700">
+                      <img src={img} alt={product.title} class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <div class={product.images && product.images.length > 0 ? 'lg:col-span-3' : 'lg:col-span-5 max-w-3xl mx-auto'}>
         <h1 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter font-heading">{product.title}</h1>
 
-        {product.description && (
-          <div class="mt-6 text-gray-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-            {product.description}
-          </div>
-        )}
-
-        {product.features && product.features.length > 0 && (
-          <div class="mt-8">
-            <h2 class="text-xl font-bold font-heading mb-4">Features</h2>
-            <ul class="space-y-2">
-              {product.features.map((f) => (
-                <li class="flex items-start gap-2 text-gray-600 dark:text-slate-300">
-                  <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {product.specifications && product.specifications.length > 0 && (
-          <div class="mt-8">
-            <h2 class="text-xl font-bold font-heading mb-4">Specifications</h2>
-            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700">
-              <table class="w-full text-sm">
-                <tbody>
-                  {product.specifications.map((s, i) => (
-                    <tr class={i % 2 === 0 ? 'bg-gray-50 dark:bg-slate-800/50' : 'bg-white dark:bg-slate-800'}>
-                      <td class="px-4 py-3 font-medium text-gray-700 dark:text-slate-300 w-1/2">{s.label}</td>
-                      <td class="px-4 py-3 text-gray-600 dark:text-slate-400">{s.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        {
+          product.description && (
+            <div class="mt-6 text-gray-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+              {product.description}
             </div>
-          </div>
-        )}
+          )
+        }
 
-        {product.applications && (
-          <div class="mt-8">
-            <h2 class="text-xl font-bold font-heading mb-4">Applications</h2>
-            <div class="text-gray-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-              {product.applications}
+        {
+          product.features && product.features.length > 0 && (
+            <div class="mt-8">
+              <h2 class="text-xl font-bold font-heading mb-4">Features</h2>
+              <ul class="space-y-2">
+                {product.features.map((f) => (
+                  <li class="flex items-start gap-2 text-gray-600 dark:text-slate-300">
+                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        )}
+          )
+        }
 
-        {product.Content && (
-          <div class="mt-8 prose prose-lg dark:prose-invert max-w-none">
-            <product.Content />
-          </div>
-        )}
+        {
+          product.specifications && product.specifications.length > 0 && (
+            <div class="mt-8">
+              <h2 class="text-xl font-bold font-heading mb-4">Specifications</h2>
+              <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700">
+                <table class="w-full text-sm">
+                  <tbody>
+                    {product.specifications.map((s, i) => (
+                      <tr class={i % 2 === 0 ? 'bg-gray-50 dark:bg-slate-800/50' : 'bg-white dark:bg-slate-800'}>
+                        <td class="px-4 py-3 font-medium text-gray-700 dark:text-slate-300 w-1/2">{s.label}</td>
+                        <td class="px-4 py-3 text-gray-600 dark:text-slate-400">{s.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )
+        }
+
+        {
+          product.applications && (
+            <div class="mt-8">
+              <h2 class="text-xl font-bold font-heading mb-4">Applications</h2>
+              <div class="text-gray-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                {product.applications}
+              </div>
+            </div>
+          )
+        }
+
+        {
+          product.Content && (
+            <div class="mt-8 prose prose-lg dark:prose-invert max-w-none">
+              <product.Content />
+            </div>
+          )
+        }
       </div>
     </div>
   </section>

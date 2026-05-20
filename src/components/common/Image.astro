@@ -124,6 +124,19 @@ const layoutStyle = declarations
   .join(';');
 const finalStyle = layoutStyle + (rest.style ? `;${rest.style}` : '');
 
+const astroImageProps = resolved
+  ? ({
+      ...rest,
+      src: resolved,
+      width: w,
+      height: h,
+      alt,
+      widths,
+      format,
+      style: finalStyle,
+    } as unknown as Parameters<typeof AstroImage>[0])
+  : undefined;
+
 // --- CDN-side srcset -------------------------------------------------------
 const buildCdnUrl = (variantWidth?: number, variantHeight?: number): string | undefined =>
   transformUrl({
@@ -174,19 +187,6 @@ const cdnSrcSet =
   ) : (
     /* The native <Image /> typing is overly strict for our forwarding wrapper;
        we cast through `unknown` once so each call site keeps clean types. */
-    resolved && (
-      <AstroImage
-        {...({
-          ...rest,
-          src: resolved,
-          width: w,
-          height: h,
-          alt,
-          widths,
-          format,
-          style: finalStyle,
-        } as unknown as Parameters<typeof AstroImage>[0])}
-      />
-    )
+    astroImageProps && <AstroImage {...astroImageProps} />
   )
 }

@@ -32,4 +32,5 @@ applications: |
   - Precious metals forming
   - Glass molding
 ---
+
 Our graphite molds are manufactured using high-purity graphite materials, ensuring consistent quality and long service life. Each mold is precision-machined to meet exact specifications, providing excellent surface finish and dimensional accuracy for your casting needs.

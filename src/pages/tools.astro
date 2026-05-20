@@ -46,7 +46,7 @@ const ldJson = {
 ---
 
 <Layout metadata={metadata}>
-  <script type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
 
   <Hero
     tagline="外贸专属技术工具箱"
@@ -82,7 +82,8 @@ const ldJson = {
       },
       {
         title: 'Email (防封) 群发系统',
-        description: '独家定制企业级邮件流转防护机制，科学配置多域名、多IP动态轮转与智能语义替换，完美绕过海外反垃圾邮件风控。',
+        description:
+          '独家定制企业级邮件流转防护机制，科学配置多域名、多IP动态轮转与智能语义替换，完美绕过海外反垃圾邮件风控。',
         icon: 'tabler:send',
       },
       {
@@ -100,7 +101,8 @@ const ldJson = {
     items={[
       {
         title: '复杂反爬虫突破定制',
-        description: '针对有严密防护的海外B2B黄页或行业展会网站，利用现代高级反自动化突破技术，确保数据安全合规、完整无损地导出。',
+        description:
+          '针对有严密防护的海外B2B黄页或行业展会网站，利用现代高级反自动化突破技术，确保数据安全合规、完整无损地导出。',
         icon: 'tabler:shield-lock',
       },
       {

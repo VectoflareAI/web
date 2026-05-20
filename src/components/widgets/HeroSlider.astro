@@ -11,8 +11,6 @@ import type { Hero as Props } from '~/types';
 const {
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
-  tagline,
-  content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
   images = [],
   id,
@@ -35,10 +33,7 @@ const {
         id="hero-carousel"
       >
         <div class="overflow-hidden rounded-md">
-          <div
-            id="carousel-track"
-            class="flex transition-transform duration-700 ease-in-out"
-          >
+          <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out">
             <!-- 轮播图 第1张：品牌形象照片，文字叠加在图片上方 -->
             <div class="min-w-full relative">
               {
@@ -62,21 +57,25 @@ const {
               <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
                 {
                   title && (
-                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                    <h1
+                      class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg"
+                      set:html={title}
+                    />
                   )
                 }
                 {
                   subtitle && (
-                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                    <p
+                      class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow"
+                      set:html={subtitle}
+                    />
                   )
                 }
                 {
                   actions && (
                     <div class="flex flex-wrap justify-center gap-3">
                       {Array.isArray(actions) ? (
-                        actions.map((action) => (
-                          <Button {...(action || {})} class="!shadow-lg" />
-                        ))
+                        actions.map((action) => <Button {...(action || {})} class="!shadow-lg" />)
                       ) : (
                         <Fragment set:html={actions} />
                       )}
@@ -106,21 +105,25 @@ const {
               <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
                 {
                   title && (
-                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                    <h1
+                      class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg"
+                      set:html={title}
+                    />
                   )
                 }
                 {
                   subtitle && (
-                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                    <p
+                      class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow"
+                      set:html={subtitle}
+                    />
                   )
                 }
                 {
                   actions && (
                     <div class="flex flex-wrap justify-center gap-3">
                       {Array.isArray(actions) ? (
-                        actions.map((action) => (
-                          <Button {...(action || {})} class="!shadow-lg" />
-                        ))
+                        actions.map((action) => <Button {...(action || {})} class="!shadow-lg" />)
                       ) : (
                         <Fragment set:html={actions} />
                       )}
@@ -150,21 +153,25 @@ const {
               <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-center">
                 {
                   title && (
-                    <h1 class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg" set:html={title} />
+                    <h1
+                      class="text-white text-3xl md:text-4xl font-bold leading-tight mb-3 drop-shadow-lg"
+                      set:html={title}
+                    />
                   )
                 }
                 {
                   subtitle && (
-                    <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow" set:html={subtitle} />
+                    <p
+                      class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-4 drop-shadow"
+                      set:html={subtitle}
+                    />
                   )
                 }
                 {
                   actions && (
                     <div class="flex flex-wrap justify-center gap-3">
                       {Array.isArray(actions) ? (
-                        actions.map((action) => (
-                          <Button {...(action || {})} class="!shadow-lg" />
-                        ))
+                        actions.map((action) => <Button {...(action || {})} class="!shadow-lg" />)
                       ) : (
                         <Fragment set:html={actions} />
                       )}
@@ -178,30 +185,39 @@ const {
 
         <!-- 轮播导航圆点 -->
         <div class="flex justify-center gap-3 mt-6" id="carousel-dots">
-          <button data-slide="0" class="w-3 h-3 rounded-full bg-primary/80 hover:bg-primary transition-colors" aria-label="切换到第1张"></button>
-          <button data-slide="1" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors" aria-label="切换到第2张"></button>
-          <button data-slide="2" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors" aria-label="切换到第3张"></button>
+          <button
+            data-slide="0"
+            class="w-3 h-3 rounded-full bg-primary/80 hover:bg-primary transition-colors"
+            aria-label="切换到第1张"></button>
+          <button
+            data-slide="1"
+            class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors"
+            aria-label="切换到第2张"></button>
+          <button
+            data-slide="2"
+            class="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary/60 transition-colors"
+            aria-label="切换到第3张"></button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
+<script is:inline>
   (function () {
-    const track = document.getElementById('carousel-track');
+    const track = /** @type {HTMLElement} */ (document.getElementById('carousel-track'));
     const dots = document.querySelectorAll('#carousel-dots button');
-    if (!track || !dots.length) return;
+    if (!dots.length) return;
 
     let current = 0;
     const total = dots.length;
-    let interval;
+    let interval = null;
 
     function goTo(index) {
       if (index < 0 || index >= total) return;
       current = index;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((dot, i) => {
+      track.style.transform = 'translateX(-' + current * 100 + '%)';
+      dots.forEach(function (dot, i) {
         if (i === current) {
           dot.className = 'w-3 h-3 rounded-full bg-primary/80 hover:bg-primary transition-colors';
         } else {
@@ -212,20 +228,20 @@ const {
 
     function startAutoPlay() {
       stopAutoPlay();
-      interval = setInterval(() => {
+      interval = setInterval(function () {
         goTo((current + 1) % total);
       }, 5000);
     }
 
     function stopAutoPlay() {
-      if (interval) {
+      if (interval !== null) {
         clearInterval(interval);
         interval = null;
       }
     }
 
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
         const idx = parseInt(dot.getAttribute('data-slide') || '0', 10);
         goTo(idx);
         startAutoPlay();

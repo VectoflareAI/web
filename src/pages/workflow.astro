@@ -11,7 +11,8 @@ import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: '外贸自动化工作流定制 (Workflow Automation) — Vectoflare',
-  description: '为 B2B 外贸出海企业深度定制智能工作流，打通 Facebook/Google Maps 客户数据自动采集、AI 询盘秒级响应及 Email 防封群发系统。',
+  description:
+    '为 B2B 外贸出海企业深度定制智能工作流，打通 Facebook/Google Maps 客户数据自动采集、AI 询盘秒级响应及 Email 防封群发系统。',
   canonical: 'https://vectoflare.com/workflow',
   openGraph: {
     title: '智能化外贸工作流定制服务 — VectoflareAI',
@@ -47,7 +48,7 @@ const ldJson = {
 ---
 
 <Layout metadata={metadata}>
-  <script type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
 
   <Hero
     tagline="专业外贸解决方案"
@@ -63,7 +64,8 @@ const ldJson = {
     items={[
       {
         title: 'B2B 潜在客户自动采集',
-        description: '支持自动化采集海外社交媒体（如 Facebook、LinkedIn）及 Google Maps 上的目标客户信息与联系方式，告别手动搜寻。',
+        description:
+          '支持自动化采集海外社交媒体（如 Facebook、LinkedIn）及 Google Maps 上的目标客户信息与联系方式，告别手动搜寻。',
         icon: 'tabler:search',
       },
       {
@@ -84,7 +86,8 @@ const ldJson = {
     items={[
       {
         title: '步骤 1: 业务场景诊断',
-        description: '资深市场开发经理与您一对一沟通，梳理您现有的平台配置（如 365 邮箱、独立站、社媒矩阵）及业务痛点。',
+        description:
+          '资深市场开发经理与您一对一沟通，梳理您现有的平台配置（如 365 邮箱、独立站、社媒矩阵）及业务痛点。',
         icon: 'tabler:device-analytics',
       },
       {

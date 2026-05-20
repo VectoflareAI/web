@@ -11,17 +11,17 @@ specifications:
   - label: Bulk Density
     value: 0.25-0.28 g/cm³
   - label: Carbon Content
-    value: "≥99%"
+    value: '≥99%'
   - label: Thermal Conductivity (1150°C)
     value: 0.20-0.30 W/m·K
   - label: Flexural Strength
     value: 1.5-3.0 MPa
   - label: Ash Content
-    value: "≤200 PPM"
+    value: '≤200 PPM'
   - label: Max Processing Temperature
     value: 2500°C
   - label: Max in Vacuum
-    value: "≥2200°C"
+    value: '≥2200°C'
 features:
   - High purity with ≥99% carbon content
   - Excellent thermal insulation performance
@@ -35,4 +35,5 @@ applications: |
   - Solar photovoltaic (polysilicon, monocrystalline silicon casting furnace)
   - Vacuum industrial furnace equipment
 ---
+
 Hifounder Hard composite (PAN) Graphite felt is made by polymerizing graphite foil, polyacrylonitrile-based (PAN) graphite felt, and polyacrylonitrile-based carbon cloth into a special process, then curing and shaping, followed by secondary high-temperature purification treatment.

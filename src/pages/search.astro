@@ -14,20 +14,28 @@ const pages = [
   { url: '/products/graphite-products', title: '石墨制品', desc: '石墨制品产品系列' },
   { url: '/products/graphite-molds/graphite-mold', title: '石墨模具 — 石墨模具', desc: '高纯石墨模具产品详情' },
   { url: '/products/graphite-molds/graphite-crucible', title: '石墨模具 — 石墨坩埚', desc: '石墨坩埚产品详情' },
-  { url: '/products/graphite-products/hard-composite-graphite-felt', title: '石墨制品 — 硬质复合石墨毡', desc: '硬质复合石墨毡产品详情' },
-  { url: '/products/graphite-products/graphite-felt-rayon', title: '石墨制品 — 石墨毡（粘胶基）', desc: '石墨毡粘胶基产品详情' },
+  {
+    url: '/products/graphite-products/hard-composite-graphite-felt',
+    title: '石墨制品 — 硬质复合石墨毡',
+    desc: '硬质复合石墨毡产品详情',
+  },
+  {
+    url: '/products/graphite-products/graphite-felt-rayon',
+    title: '石墨制品 — 石墨毡（粘胶基）',
+    desc: '石墨毡粘胶基产品详情',
+  },
   { url: '/workflow', title: '工作流定制', desc: '工作流程自动化方案' },
   { url: '/tools', title: '专业工具定制', desc: '专业工具定制服务' },
   { url: '/pricing', title: '定价', desc: '产品与服务定价' },
   { url: '/terms', title: '服务条款', desc: '服务条款与条件' },
   { url: '/privacy', title: '隐私政策', desc: '隐私保护政策' },
   { url: '/contact', title: '联系我们', desc: '联系威拓星耀' },
-  { url: '/blog', title: '博客', desc: '最新文章与资讯' },
+  { url: '/news', title: '新闻', desc: '最新新闻与资讯' },
 ];
 
 const qLower = q.toLowerCase().trim();
 const results = qLower
-  ? pages.filter(p => p.title.toLowerCase().includes(qLower) || p.desc.toLowerCase().includes(qLower))
+  ? pages.filter((p) => p.title.toLowerCase().includes(qLower) || p.desc.toLowerCase().includes(qLower))
   : [];
 
 const metadata = {
@@ -38,10 +46,17 @@ const metadata = {
 <Layout metadata={metadata}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
     <h1 class="text-3xl font-bold mb-8 dark:text-white">
-      <svg class="w-8 h-8 inline-block mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+      <svg
+        class="w-8 h-8 inline-block mr-2 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+        ></path>
       </svg>
-      搜索结果{ q ? `: "${q}"` : '' }
+      搜索结果{q ? `: "${q}"` : ''}
     </h1>
 
     {
@@ -49,8 +64,18 @@ const metadata = {
         <p class="text-gray-500 dark:text-gray-400 text-lg">请输入关键词搜索网站内容。</p>
       ) : results.length === 0 ? (
         <div class="text-center py-16">
-          <svg class="w-20 h-20 mx-auto mb-4 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            class="w-20 h-20 mx-auto mb-4 text-gray-300 dark:text-gray-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
           <p class="text-xl text-gray-500 dark:text-gray-400">未找到匹配 " {q} " 的页面</p>
           <p class="text-sm text-gray-400 dark:text-gray-500 mt-2">请尝试其他关键词</p>
@@ -59,19 +84,35 @@ const metadata = {
         <div>
           <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">找到 {results.length} 个匹配结果</p>
           <div class="space-y-3">
-            {results.map(p => (
+            {results.map((p) => (
               <a
                 href={p.url}
                 class="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <svg class="w-5 h-5 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                <svg
+                  class="w-5 h-5 shrink-0 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
                 </svg>
                 <div class="flex-1 min-w-0">
                   <div class="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{p.title}</div>
                   <div class="text-sm text-gray-500 dark:text-gray-400 truncate">{p.desc}</div>
                 </div>
-                <svg class="w-4 h-4 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="w-4 h-4 shrink-0 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </a>

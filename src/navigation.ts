@@ -1,4 +1,4 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getBlogPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -34,11 +34,11 @@ export const headerData = {
       links: [
         {
           text: '石墨模具',
-          href: getPermalink('/products/graphite-molds'), 
+          href: getPermalink('/products/graphite-molds'),
         },
         {
           text: '石墨制品',
-          href: getPermalink('/products/graphite-products'), 
+          href: getPermalink('/products/graphite-products'),
         },
         {
           text: '工作流定制',
@@ -111,7 +111,11 @@ export const footerData = {
   ],
   secondaryLinks: [],
   socialLinks: [
-    { ariaLabel: '微信视频号', icon: 'tabler:brand-wechat', href: 'https://weixin.qq.com/cgi-bin/readtemplate?action=gotohome&t=weixin&lang=zh_CN' },
+    {
+      ariaLabel: '微信视频号',
+      icon: 'tabler:brand-wechat',
+      href: 'https://weixin.qq.com/cgi-bin/readtemplate?action=gotohome&t=weixin&lang=zh_CN',
+    },
     { ariaLabel: '抖音', icon: 'tabler:brand-tiktok', href: 'https://www.douyin.com/user/' },
     { ariaLabel: '小红书', icon: 'tabler:brand-reddit', href: 'https://www.xiaohongshu.com/user/' },
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/VectoflareAI/web' },

@@ -16,17 +16,19 @@ const metadata = { title: 'Products' };
     </header>
 
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {categories.map((cat) => (
-        <a
-          href={`/products/${cat.slug}`}
-          class="group block p-8 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md transition-shadow"
-        >
-          <h2 class="text-xl font-bold font-heading group-hover:text-primary dark:text-slate-200 transition-colors">
-            {cat.title}
-          </h2>
-          <p class="mt-2 text-gray-500 dark:text-slate-400 text-sm">View products →</p>
-        </a>
-      ))}
+      {
+        categories.map((cat) => (
+          <a
+            href={`/products/${cat.slug}`}
+            class="group block p-8 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+          >
+            <h2 class="text-xl font-bold font-heading group-hover:text-primary dark:text-slate-200 transition-colors">
+              {cat.title}
+            </h2>
+            <p class="mt-2 text-gray-500 dark:text-slate-400 text-sm">View products →</p>
+          </a>
+        ))
+      }
     </div>
   </section>
 </Layout>

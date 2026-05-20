@@ -28,4 +28,5 @@ applications: |
   - Laboratory and research applications
   - Vacuum induction melting
 ---
+
 Manufactured from high-density isostatic graphite, our crucibles deliver consistent performance in demanding melting applications.

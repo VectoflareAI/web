@@ -48,7 +48,9 @@ export const fetchProducts = async (): Promise<Product[]> => {
 export const getProductCategories = async (): Promise<{ slug: string; title: string }[]> => {
   const products = await fetchProducts();
   const map: Record<string, string> = {};
-  products.forEach((p) => { map[p.category.slug] = p.category.title; });
+  products.forEach((p) => {
+    map[p.category.slug] = p.category.title;
+  });
   return Object.entries(map).map(([slug, title]) => ({ slug, title }));
 };
 

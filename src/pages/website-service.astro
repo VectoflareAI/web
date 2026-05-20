@@ -1,20 +1,19 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Header from '~/components/widgets/Header.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features from '~/components/widgets/Features.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 
-import { headerData } from '~/navigation';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 
 const metadata = {
   title: '网站建设服务 — 威拓星耀',
-  description: '威拓星耀提供专业企业建站服务，三种灵活套餐：简单建站500元、SEO优化套餐3000元/年、GEO+SEO全效套餐5000元/年。按需定制，助力外贸企业快速上线。',
+  description:
+    '威拓星耀提供专业企业建站服务，三种灵活套餐：简单建站500元、SEO优化套餐3000元/年、GEO+SEO全效套餐5000元/年。按需定制，助力外贸企业快速上线。',
 };
 ---
 
@@ -37,9 +36,7 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        威拓星耀为企业提供从零到一的全流程网站建设服务。</span
-      >
+      <span class="hidden sm:inline"> 威拓星耀为企业提供从零到一的全流程网站建设服务。</span>
       无论您需要简单的品牌展示站，还是具备 SEO 优化和 GEO 本地化推广的营销型网站，我们都能按需定制，快速交付。
     </Fragment>
   </Hero2>
@@ -110,9 +107,7 @@ const metadata = {
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        透明定价 · 按需升级
-      </h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">透明定价 · 按需升级</h3>
     </Fragment>
 
     <Fragment slot="bg">
