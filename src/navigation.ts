@@ -37,10 +37,6 @@ export const headerData = {
           href: getPermalink('/workflow'),
         },
         {
-          text: '智能体应用',
-          href: getPermalink('/AIagentt'),
-        },
-        {
           text: '专业工具定制',
           href: getPermalink('/tools'),
         },
@@ -78,7 +74,6 @@ export const footerData = {
       title: '产品服务',
       links: [
         { text: '工作流定制', href: getPermalink('/workflow') },
-        { text: '智能体应用', href: getPermalink('/AIagentt') },
         { text: '专业工具定制', href: getPermalink('/tools') },
       ],
     },

@@ -7,7 +7,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services',
+  title: '服务项目',
 };
 ---
 
@@ -15,74 +15,58 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
+    tagline="服务项目"
+    title="全链条品牌出海解决方案"
+    subtitle="从品牌独立站建设到GEO搜索引擎优化，从客户数据采集到自动化获客工具，威拓星耀为外贸企业提供一站式全球市场开发服务。"
+    actions={[{ variant: 'primary', target: '_blank', text: '免费咨询', href: '/contact' }]}
     image={{
       src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
+      alt: '威拓星耀服务',
     }}
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
+    title="核心服务体系"
+    subtitle="六大服务模块，覆盖品牌出海全链路"
     columns={3}
     items={[
       {
-        title: 'Educational',
+        title: '品牌独立站建设',
         description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
+          '基于 Astro + Tailwind CSS 技术栈，打造高速、安全、多语言的品牌官网，Google PageSpeed 评分90+，完美适配PC/平板/手机。',
         icon: 'tabler:school',
       },
       {
-        title: 'Interior Design',
+        title: 'GEO搜索引擎优化',
         description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
+          '面向ChatGPT、Perplexity等AI搜索引擎的品牌优化策略，让您的品牌信息在AI搜索结果中被优先引用，抢占流量新入口。',
         icon: 'tabler:home-star',
       },
       {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
+        title: '客户数据库搭建',
+        description:
+          '自建智能爬虫系统，精准采集全球B2B客户信息，包含公司名、地址、联系人、邮箱、电话、社媒账号等全维度数据。',
         icon: 'tabler:photo',
       },
       {
-        title: 'E-commerce',
+        title: '自动化工具定制',
         description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
+          '从数据采集到邮件营销，从社媒自动开发到CRM集成，为企业量身打造自动化获客工具链，提升客户开发效率300%。',
         icon: 'tabler:shopping-cart',
       },
       {
-        title: 'Blog',
+        title: '品牌推广与商标注册',
         description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
+          '提供USPTO（美国）和EUIPO（欧盟）国际商标注册、品牌代持、多语言品牌视觉体系设计等一站式品牌出海服务。',
         icon: 'tabler:article',
       },
       {
-        title: 'Business',
+        title: '工作流自动化',
         description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
+          '打通从询盘自动响应、客户分层管理到定时跟进的全链路自动化流程，构建24小时不间断的智能获客引擎。',
         icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
       },
     ]}
   />
@@ -93,37 +77,37 @@ const metadata = {
     isReversed
     items={[
       {
-        title: 'High-Quality Designs',
+        title: '技术驱动',
         description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
+          '采用最新的Web技术和AI算法，确保您的品牌在技术和营销层面都保持行业领先。',
         icon: 'tabler:wand',
       },
       {
-        title: 'Customization Tools',
+        title: '数据导向',
         description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
+          '所有策略和决策均基于真实市场数据，确保营销投入的精准高效。',
         icon: 'tabler:settings',
       },
       {
-        title: 'Pre-Designed Elements',
+        title: '本地化执行',
         description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
+          '中美欧三地团队协同，确保每个目标市场的品牌策略都能精准落地。',
         icon: 'tabler:presentation',
       },
       {
-        title: 'Preview and Mockup Views',
+        title: '长期陪伴',
         description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
+          '不只是项目交付，更提供持续的运维支持和策略优化，伴随企业全球化成长。',
         icon: 'tabler:carousel-horizontal',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
+      alt: '服务优势',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">为什么选择威拓星耀？</h3>
     </Fragment>
   </Content>
 
@@ -133,77 +117,77 @@ const metadata = {
     isAfterContent
     items={[
       {
-        title: 'Time Savings',
+        title: '10年+行业经验',
         description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
+          '深耕外贸服务领域多年，深刻理解B2B出海各环节痛点与解决方案。',
         icon: 'tabler:clock',
       },
       {
-        title: 'Professional Appearance',
+        title: '200+成功案例',
         description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
+          '累计服务超过200家外贸企业，覆盖机械、电子、化工、消费品等多个行业。',
         icon: 'tabler:school',
       },
       {
-        title: 'Cost-Efficiency',
+        title: '全链条服务',
         description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
+          '从品牌策划到获客转化，提供完整的业务增长闭环，客户无需对接多个服务商。',
         icon: 'tabler:coin',
       },
       {
-        title: 'Instant Download',
+        title: '结果导向',
         description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
+          '以实际效果为衡量标准，定期提供数据报告，确保每一分投入都有回报。',
         icon: 'tabler:file-download',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      alt: '为什么选择我们',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">我们的优势</h3>
     </Fragment>
   </Content>
 
   <!-- Testimonials Widget *********** -->
 
   <Testimonials
-    title="Words from real customers"
+    title="客户评价"
     testimonials={[
       {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
+        testimonial: `威拓星耀帮助我们搭建了全新的英文品牌官网，GEO优化后公司在ChatGPT搜索中的提及率明显提升，已经接到了多个来自北美的新客户询盘。`,
+        name: '张先生',
+        job: '某机械设备出口企业 总经理',
         image: {
           src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
+          alt: '客户评价',
         },
       },
       {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
+        testimonial: `客户数据采集服务非常专业，数据质量很高。结合他们定制的邮件营销工具，我们的客户开发效率提升了至少3倍。`,
+        name: '李女士',
+        job: '某电子产品外贸公司 市场总监',
         image: {
           src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
+          alt: '客户评价',
         },
       },
       {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
+        testimonial: `从品牌策划到美国商标注册，再到网站建设和GEO优化，威拓星耀提供了完整的出海解决方案。他们的专业和负责让我们非常放心。`,
+        name: '王总',
+        job: '某化工企业 创始人',
         image: {
           src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
+          alt: '客户评价',
         },
       },
     ]}
     callToAction={{
       target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
+      text: '查看更多案例...',
+      href: '/contact',
       icon: 'tabler:chevron-right',
     }}
   />
@@ -214,11 +198,11 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
+        text: '免费咨询',
+        href: '/contact',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
+    title="开启您的全球市场之旅"
+    subtitle="立即联系威拓星耀，获取专属品牌出海方案。"
   />
 </Layout>

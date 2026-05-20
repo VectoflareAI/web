@@ -8,7 +8,7 @@ import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Pricing',
+  title: '服务套餐',
 };
 ---
 
@@ -16,95 +16,98 @@ const metadata = {
   <!-- HeroText Widget ******************* -->
 
   <HeroText
-    tagline="Pricing"
-    title="Stellar Pricing for Every Journey"
-    subtitle="Choose the perfect plan that aligns with your cosmic goals."
+    tagline="服务套餐"
+    title="选择适合您的品牌出海方案"
+    subtitle="从品牌独立站到GEO优化，从数据采集到自动化工具，灵活的套餐方案满足不同规模企业的出海需求。"
   />
 
   <!-- Pricing Widget ******************* -->
 
   <Prices
-    title="Our prices"
-    subtitle="Only pay for what you need"
+    title="服务方案"
+    subtitle="按需选择，灵活搭配"
     prices={[
       {
-        title: 'basic',
-        subtitle: 'Optimal choice for personal use',
-        price: 29,
-        period: 'per month',
+        title: '基础版',
+        subtitle: '适合初创外贸企业',
+        price: 9800,
+        period: '/年起',
         items: [
           {
-            description: 'Etiam in libero, et volutpat',
+            description: '外贸独立站建设（5页）',
           },
           {
-            description: 'Aenean ac nunc dolor tristique',
+            description: '基础SEO优化',
           },
           {
-            description: 'Cras scelerisque accumsan lib',
+            description: '1个目标市场定位',
           },
           {
-            description: 'In hac habitasse',
+            description: '1次免费需求诊断',
           },
         ],
         callToAction: {
           target: '_blank',
-          text: 'Get started',
-          href: '#',
+          text: '立即咨询',
+          href: '/contact',
         },
       },
       {
-        title: 'standard',
-        subtitle: 'Optimal choice for small teams',
-        price: 69,
-        period: 'Per Month',
+        title: '标准版',
+        subtitle: '适合成长型外贸企业',
+        price: 26800,
+        period: '/年起',
         items: [
           {
-            description: 'Proin vel laoreet',
+            description: '品牌独立站建设（10页）',
           },
           {
-            description: 'Ut efficitur habitasse egestas',
+            description: 'GEO搜索优化',
           },
           {
-            description: 'Volutpat hac curabitur',
+            description: '客户数据采集（1行业+1国）',
           },
           {
-            description: 'Pellentesque blandit ut nibh',
+            description: '5,000条精准客户数据',
           },
           {
-            description: 'Donec fringilla sem',
+            description: '3个目标市场策略',
           },
         ],
         callToAction: {
           target: '_blank',
-          text: 'Get started',
-          href: '#',
+          text: '立即咨询',
+          href: '/contact',
         },
         hasRibbon: true,
-        ribbonTitle: 'popular',
+        ribbonTitle: '推荐',
       },
       {
-        title: 'premium',
-        subtitle: 'Optimal choice for companies',
-        price: 199,
-        period: 'Per Month',
+        title: '尊享版',
+        subtitle: '适合规模化出海企业',
+        price: 58000,
+        period: '/年起',
         items: [
           {
-            description: 'Curabitur suscipit risus',
+            description: '品牌独立站建设（不限页）',
           },
           {
-            description: 'Aliquam habitasse malesuada',
+            description: 'GEO深度优化+AI搜索策略',
           },
           {
-            description: 'Suspendisse sit amet blandit',
+            description: '客户数据采集（3行业+3国）',
           },
           {
-            description: 'Suspendisse auctor blandit dui',
+            description: '20,000条精准客户数据',
+          },
+          {
+            description: '自动化工具定制',
           },
         ],
         callToAction: {
           target: '_blank',
-          text: 'Get started',
-          href: '#',
+          text: '立即咨询',
+          href: '/contact',
         },
       },
     ]}
@@ -113,38 +116,38 @@ const metadata = {
   <!-- Features3 Widget ************** -->
 
   <Features3
-    title="Price-related features"
-    subtitle="Discover the advantages of choosing our plans"
+    title="方案特色"
+    subtitle="每个套餐都包含以下核心价值"
     columns={2}
     items={[
       {
-        title: 'Tiered Pricing Plans',
-        description: 'Choose from a range of pricing plans designed to accommodate different budgets and requirements.',
+        title: '按需定制',
+        description: '所有方案均可根据企业实际需求灵活调整，拒绝千篇一律的模板化服务。',
         icon: 'tabler:stairs',
       },
       {
-        title: 'Transparent Pricing',
-        description: 'Clearly displayed pricing details for each plan, with no hidden costs or unexpected charges.',
+        title: '透明报价',
+        description: '服务内容和费用完全透明，无任何隐藏费用或额外收费。',
         icon: 'tabler:flip-vertical',
       },
       {
-        title: 'Secure Payment Methods',
-        description: 'Secure payment gateways to protect your financial information during transactions.',
+        title: '安全支付',
+        description: '支持企业公对公转账、支付宝对公账户等安全支付方式。',
         icon: 'tabler:shield-lock',
       },
       {
-        title: 'Instant Access',
-        description: `Immediate access to your chosen plan's features and templates upon subscription.`,
+        title: '快速交付',
+        description: '标准版网站建设2-4周交付，数据采集按周提供阶段性成果。',
         icon: 'tabler:accessible',
       },
       {
-        title: 'Upgrade Value',
-        description: 'Upgrade to higher-tier plans to unlock more features and benefits for an enhanced experience.',
+        title: '灵活升级',
+        description: '套餐可随时升级，已支付费用按比例抵扣，无需重复投入。',
         icon: 'tabler:chevrons-up',
       },
       {
-        title: '24H support',
-        description: 'Questions answered via live chat, email or phone, every calendar day.',
+        title: '专属客服',
+        description: '一对一专属客户经理全程跟进，确保服务质量和响应速度。',
         icon: 'tabler:headset',
       },
     ]}
@@ -154,76 +157,76 @@ const metadata = {
   <!-- Steps Widget ****************** -->
 
   <Steps
-    title="A guided journey from plans to creativity"
-    tagline="simplified process"
+    title="从咨询到交付，清晰的服务流程"
+    tagline="服务流程"
     isReversed={true}
     items={[
       {
-        title: 'Explore plans',
+        title: '需求沟通',
         icon: 'tabler:number-1',
       },
       {
-        title: 'Select a plan',
+        title: '方案定制',
         icon: 'tabler:number-2',
       },
       {
-        title: 'Sign Up / Log In',
+        title: '合同确认',
         icon: 'tabler:number-3',
       },
       {
-        title: 'Review order',
+        title: '执行启动',
         icon: 'tabler:number-4',
       },
       {
-        title: 'Enter payment details',
+        title: '项目交付',
         icon: 'tabler:number-5',
       },
       {
-        title: 'Confirmation',
+        title: '持续优化',
         icon: 'tabler:number-6',
       },
       {
-        title: 'Download and start using the template(s)',
+        title: '长期支持',
         icon: 'tabler:number-7',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
+      alt: '服务流程',
     }}
   />
 
   <!-- FAQs Widget ******************* -->
 
   <FAQs
-    title="Pricing FAQs"
-    subtitle="Choosing the right plan is important, and we're here to answer your questions. If you have queries about our pricing options, you're in the right place."
+    title="套餐常见问题"
+    subtitle="关于服务套餐的常见疑问，我们为您一一解答。"
     columns={1}
     items={[
       {
-        title: 'Do the plans come with customer support?',
+        title: '套餐包含网站维护吗？',
         description:
-          'Absolutely, all plans include access to our dedicated customer support to assist you with any queries or concerns.',
+          '基础套餐包含1年基础维护（服务器运维、安全更新）。内容和功能更新按需另行计费。标准版及以上套餐包含内容更新服务。',
       },
       {
-        title: 'Is there a trial period for the different plans?',
+        title: '能否先试用再决定？',
         description:
-          "Unfortunately, we don't offer trial periods for the plans. However, you can check out our demo section to preview the quality of our templates.",
+          '我们提供免费的需求诊断咨询，您可以先了解我们的服务质量和专业能力，再决定是否合作。',
       },
       {
-        title: 'Can I switch between plans?',
+        title: '是否可以切换套餐？',
         description:
-          'Certainly! You can easily upgrade or downgrade your plan, at any time, to find the one that best suits your evolving requirements.',
+          '当然可以。您可以随时升级套餐，已支付费用按比例抵扣。如需降级，可在服务周期结束后调整。',
       },
       {
-        title: 'What payment methods do you accept?',
+        title: '数据采集的数据来源是哪里？',
         description:
-          'We accept major credit cards and online payment methods to ensure a convenient and secure transaction process.',
+          '数据来自全球B2B平台、企业黄页、搜索引擎、社交媒体等多渠道公开数据，经过交叉验证和清洗去重，确保数据质量。',
       },
       {
-        title: 'Are there any hidden fees beyond the displayed cost?',
+        title: '服务周期结束后数据归谁所有？',
         description:
-          'No, the subscription cost covers all the features and templates listed under each plan. There are no hidden fees or extra charges.',
+          '所有客户数据均归您所有。服务结束后，我们会提供完整的数据导出，同时立即删除我方服务器的相关数据。',
       },
     ]}
   />
@@ -231,13 +234,13 @@ const metadata = {
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    title="Ready to boost your projects?"
-    subtitle="Join our community of satisfied customers who have transformed their work with our templates."
+    title="准备开启全球市场之旅？"
+    subtitle="立即联系威拓星耀，获取专属品牌出海方案。"
     actions={[
       {
         variant: 'primary',
-        text: 'Get started now',
-        href: '/',
+        text: '免费咨询',
+        href: '/contact',
       },
     ]}
   />
