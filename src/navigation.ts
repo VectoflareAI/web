@@ -4,32 +4,30 @@ export const headerData = {
   links: [
     {
       text: '首页',
+      href: getPermalink('/'),
       links: [
         {
-          text: 'SaaS',
+          text: '网站服务',
           href: getPermalink('/homes/saas'),
         },
         {
-          text: 'Startup',
+          text: '客户数据库搭建',
           href: getPermalink('/homes/startup'),
         },
         {
-          text: 'Mobile App',
+          text: 'GEO优化',
           href: getPermalink('/homes/mobile-app'),
         },
         {
-          text: 'Personal',
+          text: '品牌推广',
           href: getPermalink('/homes/personal'),
         },
       ],
     },
     {
       text: '研发中心',
+      href: getPermalink('/r-d-center'),
       links: [
-        {
-          text: '研发中心',
-          href: getPermalink('/r-d-center'),
-        },
         {
           text: 'Features (Anchor Link)',
           href: getPermalink('/#features'),
@@ -42,11 +40,8 @@ export const headerData = {
     },
     {
       text: '产品中心',
+      href: getPermalink('/products'),
       links: [
-        {
-          text: '全部产品',
-          href: getPermalink('/products'), 
-        },
         {
           text: '石墨模具',
           href: getPermalink('/products/graphite-molds'), 
@@ -100,11 +95,8 @@ export const headerData = {
     },
     {
       text: '技术支持',
+      href: getPermalink('/service-center'),
       links: [
-        {
-          text: '技术支持',
-          href: getPermalink('/service-center'),
-        },
         {
           text: 'Services',
           href: getPermalink('/services'),
