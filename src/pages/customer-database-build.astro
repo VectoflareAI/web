@@ -1,0 +1,320 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Brands from '~/components/widgets/Brands.astro';
+
+const metadata = {
+  title: '客户数据库搭建 — 威拓星耀',
+  description: '威拓星耀提供按国家/行业定制的客户数据采集服务，自建爬虫抓取公司名称、地址、联系人、邮箱、电话、社媒账号等全维度信息，数据严格保密，仅客户可见。',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="威拓星耀 · 客户数据库搭建"
+    actions={[
+      {
+        variant: 'primary',
+        target: '_blank',
+        text: '立即咨询',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+      { text: '查看套餐', href: '#pricing' },
+    ]}
+  >
+    <Fragment slot="title">
+      精准客户数据，<br />助力外贸 <span class="text-accent dark:text-white">精准获客</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="font-semibold">威拓星耀</span> 自建爬虫系统，按国家 / 行业 / 关键词 定向抓取目标客户数据，覆盖
+      Company Name、Address、Contact Person、Email、Phone、WhatsApp、Social Media 等全维度信息。
+      数据严格加密，仅您可见，决无泄露。
+    </Fragment>
+
+    <Fragment slot="image">
+      <img
+        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        alt="客户数据采集示意"
+        class="w-full rounded-lg shadow-lg"
+      />
+    </Fragment>
+  </Hero>
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="什么是客户数据库搭建？"
+    subtitle="我们针对外贸企业的目标市场和行业，自主开发爬虫程序，从搜索引擎、B2B 平台、企业黄页、社交媒体等多渠道采集潜在客户信息，清洗去重后形成结构化数据库，直接用于 Email 营销、电话开发、社媒添加等获客场景。"
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="服务覆盖能力"
+    subtitle="凭借多年数据采集经验，我们的爬虫覆盖全球主要市场与行业。"
+    stats={[
+      { title: '覆盖国家', amount: '100+' },
+      { title: '数据字段', amount: '15+' },
+      { title: '月更新量', amount: '500万+' },
+      { title: '客户续费率', amount: '92%' },
+    ]}
+  />
+
+  <!-- Brands Widget ****************** -->
+
+  <Brands
+    title="数据来源覆盖平台"
+    subtitle="从全球主要商业平台与搜索引擎采集公开数据"
+    icons={[]}
+    images={[
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_1280.png',
+        alt: 'Google Maps',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/48/visa-6850402_1280.png',
+        alt: 'Facebook',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/10/01/10/29/ebay-189064_1280.png',
+        alt: 'LinkedIn',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/13/17/45/icon-720944_1280.png',
+        alt: 'Youtube',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80658_1280.png',
+        alt: 'B2B Platforms',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png',
+        alt: 'Yellow Pages',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/10/31/12/54/google-1015751_1280.png',
+        alt: 'Google',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/45/meta-6850393_1280.png',
+        alt: 'Instagram',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/01/29/22/53/yahoo-76684_1280.png',
+        alt: 'Yahoo',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="数据字段覆盖"
+    subtitle="每条客户记录包含以下全维度信息，助您全方位了解潜在客户。"
+    items={[
+      {
+        title: '企业基本信息',
+        description:
+          'Company Name（公司名称）、Company Full Address（完整地址）、Country（国家）、Main Products & Services（主营产品与服务）',
+        icon: 'tabler:building',
+      },
+      {
+        title: '联系方式',
+        description:
+          'Contact Person（联系人）、TEL（座机电话）、Email（邮箱）、Cellphone（手机号）、WhatsApp 号码',
+        icon: 'tabler:phone',
+      },
+      {
+        title: '社交媒体账号',
+        description:
+          'Facebook、Twitter / X、Instagram、LinkedIn、TikTok、YouTube — 完整社媒主页链接，便于多通道触达',
+        icon: 'tabler:share',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    title="我们的核心优势"
+    subtitle="从数据采集到交付，每个环节都坚持高标准。"
+    columns={3}
+    items={[
+      {
+        title: '100% 数据保密',
+        description:
+          '采集的数据仅归您所有，我们不留存、不共享、不二次销售。数据文件加密传输，交付即永久删除服务器副本，从源头杜绝泄露风险。',
+        icon: 'tabler:lock',
+      },
+      {
+        title: '按需精准定制',
+        description: '不限国家、不限行业、不限关键词。您可以指定目标市场（如：美国 + 汽车零部件经销商），我们定向开发采集规则，确保数据相关度。',
+        icon: 'tabler:target',
+      },
+      {
+        title: '定期数据更新',
+        description:
+          '数据不是一次性的。我们可以为您建立月度 / 季度更新机制，定时重新采集并对比增量，确保您的客户数据库始终保持最新有效状态。',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: '高准确率清洗',
+        description: '采集后经过多重去重、格式标准化、无效数据过滤，保证交付数据的可用率。支持自定义校验规则（如：仅保留含邮箱的记录）。',
+        icon: 'tabler:filter',
+      },
+      {
+        title: '多格式交付',
+        description:
+          '支持 Excel / CSV / JSON 等多种格式导出，可直接导入 CRM、Email 营销工具或社媒开发软件，零门槛对接现有工作流。',
+        icon: 'tabler:file-spreadsheet',
+      },
+      {
+        title: '数据更新建议',
+        description:
+          '建议每 3-6 个月对核心客户库进行一次增量更新。企业联系人变动频繁（平均 20%/年），定期更新可显著提升触达成功率。我们也提供数据健康度检测报告，标记失效/变更条目。',
+        icon: 'tabler:chart-bar',
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="常见问题"
+    items={[
+      {
+        title: '数据的来源是什么？是否合法？',
+        description:
+          '我们仅采集企业公开发布在搜索引擎、B2B 平台、企业黄页、社交媒体等公开渠道的信息，严格遵守各国数据隐私法规（如 GDPR）。不涉及未经授权的私人数据抓取。如您需要 GDPR 合规版本（不含个人联系方式），我们也可提供企业级数据方案。',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '如何保证数据不外泄？',
+        description:
+          '我们采用三重保密机制：① 数据文件使用 AES-256 加密传输；② 交付后 48 小时内彻底删除服务器端数据；③ 签署 NDA 保密协议。我们的业务模式是 "为您采集"，而非 "销售数据"，从根本上杜绝泄露风险。',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '可以采集哪些国家/地区的数据？',
+        description:
+          '全球绝大部分国家和地区均可采集，包括但不限于：美国、加拿大、英国、德国、法国、意大利、西班牙、澳大利亚、日本、韩国、东南亚各国、中东、南美等。具体可采集范围和覆盖度，请联系我们评估。',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '数据交付后如何导入我的系统？',
+        description: `我们提供标准 Excel / CSV 格式，您可直接导入 CRM（如 Salesforce、HubSpot、Zoho）、Email 营销工具（如 Mailchimp、SendGrid）或社媒开发工具。如需特定格式映射，我们可以配合调整字段排列及命名规范。`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '采集一条数据大概多少钱？',
+        description: `价格根据数据难度、目标国家、字段数量等因素差异化定价。标准套餐从 ¥1,500 起。批量采集量越大，单条成本越低。详细报价请联系我们获取针对性方案书和报价单。`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '数据更新频率建议是怎样的？',
+        description:
+          '我们建议：① 核心目标客户库每季度更新一次；② 普通潜力客户库每半年更新一次；③ 大规模行业数据库每年更新一次。更新时可选择 "全量更新" 或 "增量更新（仅新增/变更记录）"。增量更新成本约为首次采集的 30%-50%。',
+        icon: 'tabler:chevrons-right',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="标准数据套餐"
+    subtitle="根据数据量和复杂度，提供以下灵活方案。如需完全定制，请联系我们。"
+    columns={4}
+    items={[
+      {
+        title: '入门套餐',
+        description: '1 个国家 + 1 个行业，约 1,000-3,000 条数据<br />基础字段：公司名、地址、电话、邮箱<br />Excel 格式交付',
+        icon: 'tabler:file',
+        callToAction: {
+          target: '_blank',
+          text: '¥1,500 起',
+          href: '/contact',
+          variant: 'link',
+        },
+      },
+      {
+        title: '标准套餐',
+        description: '1-3 个国家 + 2 个行业，约 5,000-15,000 条数据<br />全字段：含社媒账号、WhatsApp<br />CSV/Excel 交付',
+        icon: 'tabler:database',
+        callToAction: {
+          target: '_blank',
+          text: '¥3,800 起',
+          href: '/contact',
+          variant: 'link',
+        },
+      },
+      {
+        title: '专业套餐',
+        description: '3-5 个国家 + 多行业，约 20,000-50,000 条数据<br />全字段 + 数据清洗 + 健康度检测<br />含首次免费更新',
+        icon: 'tabler:layers-union',
+        callToAction: {
+          target: '_blank',
+          text: '¥8,000 起',
+          href: '/contact',
+          variant: 'link',
+        },
+      },
+      {
+        title: '企业定制',
+        description: '不限国家/行业，50,000+ 条起<br />全字段 + 季度更新 + 专属爬虫维护<br />定制字段映射 + API 对接',
+        icon: 'tabler:building',
+        callToAction: {
+          target: '_blank',
+          text: '联系我们报价',
+          href: '/contact',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        target: '_blank',
+        text: '免费评估需求',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title">开启精准获客之路</Fragment>
+
+    <Fragment slot="subtitle">
+      告诉我们您的目标市场和行业，我们为您免费评估数据量及报价。无需预付，满意再合作。
+    </Fragment>
+  </CallToAction>
+</Layout>

@@ -12,7 +12,7 @@ export const headerData = {
         },
         {
           text: '客户数据库搭建',
-          href: getPermalink('/homes/startup'),
+          href: getPermalink('/customer-database-build'),
         },
         {
           text: 'GEO优化',
