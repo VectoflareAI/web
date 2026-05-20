@@ -66,6 +66,29 @@ const postCollection = defineCollection({
   }),
 });
 
+const productCollection = defineCollection({
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/product' }),
+  schema: z.object({
+    title: z.string(),
+    category: z.string(),
+    description: z.string().optional(),
+    images: z.array(z.string()).optional(),
+    specifications: z
+      .array(
+        z.object({
+          label: z.string(),
+          value: z.string(),
+        })
+      )
+      .optional(),
+    applications: z.string().optional(),
+    features: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
+    metadata: metadataDefinition(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  product: productCollection,
 };

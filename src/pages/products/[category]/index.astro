@@ -1,0 +1,60 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { getProductCategories, getProductsByCategory, fetchProducts } from '~/utils/product';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  const categories = await getProductCategories();
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { category: cat },
+  }));
+}) satisfies GetStaticPaths;
+
+const { category } = Astro.props as { category: { slug: string; title: string } };
+const products = await getProductsByCategory(category.slug);
+const metadata = { title: category.title };
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-6xl">
+    <header class="mb-12 text-center max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading">{category.title}</h1>
+      <a href="/products" class="mt-4 inline-block text-sm text-primary hover:underline">← All Products</a>
+    </header>
+
+    {products.length === 0 ? (
+      <p class="text-center text-gray-400">No products in this category yet.</p>
+    ) : (
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {products.map((p) => (
+          <a
+            href={`/products/${category.slug}/${p.slug}`}
+            class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+          >
+            {p.images && p.images[0] && (
+              <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-slate-700">
+                <img
+                  src={p.images[0]}
+                  alt={p.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div class="p-5">
+              <h2 class="text-lg font-bold font-heading group-hover:text-primary dark:text-slate-200 transition-colors">
+                {p.title}
+              </h2>
+              {p.description && (
+                <p class="mt-2 text-sm text-gray-500 dark:text-slate-400 line-clamp-2">{p.description}</p>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</Layout>

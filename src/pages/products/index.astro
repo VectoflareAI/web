@@ -1,0 +1,32 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getProductCategories } from '~/utils/product';
+
+export const prerender = true;
+
+const categories = await getProductCategories();
+const metadata = { title: 'Products' };
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-6xl">
+    <header class="mb-12 text-center max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading">Products</h1>
+      <p class="mt-4 text-xl text-gray-500 dark:text-slate-400 font-medium">Browse our product categories</p>
+    </header>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {categories.map((cat) => (
+        <a
+          href={`/products/${cat.slug}`}
+          class="group block p-8 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md transition-shadow"
+        >
+          <h2 class="text-xl font-bold font-heading group-hover:text-primary dark:text-slate-200 transition-colors">
+            {cat.title}
+          </h2>
+          <p class="mt-2 text-gray-500 dark:text-slate-400 text-sm">View products →</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

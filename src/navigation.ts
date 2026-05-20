@@ -60,32 +60,32 @@ export const headerData = {
       text: '产品中心',
       links: [
         {
-          text: '产品中心总览',
+          text: '全部产品',
           href: getPermalink('/products'), 
         },
         {
+          text: '石墨模具',
+          href: getPermalink('/products/graphite-molds'), 
+        },
+        {
+          text: '石墨制品',
+          href: getPermalink('/products/graphite-products'), 
+        },
+        {
           text: '工作流定制',
-          href: getPermalink('/workflow'), // ✨ 修复：改用标准的 getPermalink 函数
+          href: getPermalink('/workflow'),
         },
         {
           text: '智能体应用',
-          href: getPermalink('/AIagentt'), // ✨ 修复：改用标准的 getPermalink 函数
+          href: getPermalink('/AIagentt'),
         },
         {
           text: '专业工具定制',
-          href: getPermalink('/tools'),     // ✨ 修复：改用标准的 getPermalink 函数
-        },
-        {
-          text: '功能特性锚点',
-          href: getPermalink('/#features'), 
+          href: getPermalink('/tools'),
         },
         {
           text: 'Services',
           href: getPermalink('/services'),
-        },
-        {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
         },
         {
           text: '关于我们',
