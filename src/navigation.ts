@@ -35,28 +35,8 @@ export const headerData = {
           href: getPermalink('/#features'),
         },
         {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
-        {
           text: 'Pricing',
           href: getPermalink('/pricing'),
-        },
-        {
-          text: '关于我们',
-          href: getPermalink('/about'),
-        },
-        {
-          text: '联系我们',
-          href: getPermalink('/contact'),
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
         },
       ],
     },
@@ -86,18 +66,6 @@ export const headerData = {
         {
           text: '专业工具定制',
           href: getPermalink('/tools'),
-        },
-        {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
-        {
-          text: '关于我们',
-          href: getPermalink('/about'),
-        },
-        {
-          text: '联系我们',
-          href: getPermalink('/contact'),
         },
       ],
     },
@@ -131,11 +99,23 @@ export const headerData = {
       ],
     },
     {
-      text: '技术中心',
+      text: '技术支持',
       links: [
         {
-          text: '技术中心',
+          text: '技术支持',
           href: getPermalink('/service-center'),
+        },
+        {
+          text: 'Services',
+          href: getPermalink('/services'),
+        },
+        {
+          text: '关于我们',
+          href: getPermalink('/about'),
+        },
+        {
+          text: '联系我们',
+          href: getPermalink('/contact'),
         },
         {
           text: '新闻',
@@ -189,6 +169,8 @@ export const footerData = {
         { text: 'Atom', href: '#' },
         { text: 'Electron', href: '#' },
         { text: 'AstroWind Desktop', href: '#' },
+        { text: 'Terms', href: getPermalink('/terms') },
+        { text: 'Privacy Policy', href: getPermalink('/privacy') },
       ],
     },
     {
@@ -214,10 +196,7 @@ export const footerData = {
       ],
     },
   ],
-  secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
-  ],
+  secondaryLinks: [],
   socialLinks: [
     { ariaLabel: 'Linkedin', icon: 'tabler:brand-linkedin', href: '#' },
     { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
