@@ -1,0 +1,335 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+
+const metadata = {
+  title: '网站建设服务 — 威拓星耀',
+  description: '威拓星耀提供专业企业建站服务，三种灵活套餐：简单建站500元、SEO优化套餐3000元/年、GEO+SEO全效套餐5000元/年。按需定制，助力外贸企业快速上线。',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="威拓星耀 · 企业建站服务"
+    actions={[
+      { variant: 'primary', target: '_blank', text: '立即咨询', href: '/contact' },
+      { text: '查看套餐', href: '#pricing' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
+      alt: '威拓星耀网站建设服务',
+    }}
+  >
+    <Fragment slot="title">
+      专业企业建站，<br />助力品牌 <span class="text-accent dark:text-white">数字化升级</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        威拓星耀为企业提供从零到一的全流程网站建设服务。</span
+      >
+      无论您需要简单的品牌展示站，还是具备 SEO 优化和 GEO 本地化推广的营销型网站，我们都能按需定制，快速交付。
+    </Fragment>
+  </Hero2>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    title="为什么选择威拓星耀建站？"
+    subtitle="我们不仅建站，更注重效果。每个环节都围绕转化率和品牌价值展开。"
+    columns={2}
+    items={[
+      {
+        title: '专业响应式设计',
+        description:
+          '所有站点均采用现代前端技术，完美适配 PC、平板、手机端，确保全球客户在任何设备上都能获得一致的浏览体验。',
+        icon: 'tabler:devices',
+      },
+      {
+        title: 'SEO 深度优化',
+        description: `内置搜索引擎优化架构，从 TDK 标签、结构化数据、站点地图到加载速度全面调优，帮助您的网站在 Google 等搜索引擎中获得更高排名。`,
+        icon: 'tabler:search',
+      },
+      {
+        title: 'GEO 本地化推广',
+        description:
+          '针对外贸企业的目标市场，进行 Google Maps 本地化优化，提升在目标国家/地区的本地搜索可见度，精准获取海外客户。',
+        icon: 'tabler:world',
+      },
+      {
+        title: '极速加载性能',
+        description: `采用 Astro 静态站点生成技术，页面加载速度可达 90+ 分（Lighthouse），降低跳出率，提升用户体验和搜索引擎评分。`,
+        icon: 'tabler:rocket',
+      },
+      {
+        title: '按需定制开发',
+        description: `不套模板、不限制功能。根据您的业务需求定制页面结构、交互功能、数据展示方式，真正做到 "一企一策"。`,
+        icon: 'tabler:settings',
+      },
+      {
+        title: '一站式运维托管',
+        description: `建站完成后提供 7×24 小时稳定托管、安全防护、数据备份及内容更新服务，让您专注业务，无后顾之忧。`,
+        icon: 'tabler:shield-check',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    title="灵活建站套餐"
+    subtitle="根据企业不同发展阶段，提供三种高性价比建站方案，丰俭由人。"
+    isReversed
+    items={[
+      {
+        title: '简单建站 — ¥500/个',
+        description:
+          '适合初创企业或轻量品牌展示需求。提供 5 页以内静态企业官网，包含首页、关于我们、产品/服务展示、联系我们、新闻动态。采用成熟模板高效搭建，7 个工作日内交付，赠送基础 SEO 设置（TDK 标签优化 + 站点地图提交）。免费赠送 1 年 .com 域名（需续费自理）及 1 年基础云主机。',
+      },
+      {
+        title: 'SEO 优化套餐 — ¥3,000/年',
+        description: `在简单建站的基础上，深度植入 SEO 全流程优化。包含：关键词策略研究与布局、页面 TDK 精细化撰写、网站结构化数据（JSON-LD）部署、Google Search Console 接入与监控、月度 SEO 效果报告、全年技术运维支持。适合有意愿长期做搜索引擎排名的外贸企业。额外赠送：5 篇 SEO 优化新闻稿撰写与发布。`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: '建站套餐方案',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        透明定价 · 按需升级
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent={true}
+    items={[
+      {
+        title: 'GEO + SEO 全效套餐 — ¥5,000/年',
+        description: `在 SEO 优化套餐基础上，增加 GEO（本地搜索引擎优化）模块。针对外贸企业目标市场国家/地区，优化 Google My Business 资料、本地化关键词布局、目标区域外链建设、多语言页面适配。帮助企业在海外目标城市的本地搜索结果中获得优先展示，精准触达潜在买家。额外赠送：每月 1 次竞品网站分析报告 + 年度网站运营策略建议书。`,
+      },
+      {
+        title: '为什么选择按年付费？',
+        description: `网站建设不是一次性工程。搜索引擎排名需要持续的优化与维护，内容需要定期更新，技术安全需要长期保障。按年付费模式确保您获得持续的技术支持和效果跟踪，而非 "建完不管"。我们提供 30 天内免费修改，满意后再确认交付。`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: '全效建站方案',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        GEO + SEO 全效套餐<br /><span class="text-2xl">面向海外市场的本地化推广型网站</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent={true}
+    items={[
+      {
+        title: '定制化开发流程：',
+        description: `需求沟通 → 方案确认 → UI 设计稿 → 前端开发 → 内容填充 → SEO 部署 → 测试上线 → 运维交接。整个过程透明可控，每个节点均与客户确认后再进入下一阶段。支持多轮修改，直到您满意为止。所有源码归属客户，支持随时迁移。`,
+      },
+      {
+        title: '增值服务：',
+        description: `除建站外，我们还提供：企业邮箱配置（Google Workspace / 阿里云企业邮）、多语言网站翻译与部署、社交媒体账号打通（微信 / Facebook / LinkedIn）、Google Analytics 分析与优化建议、AI 智能客服机器人接入。一站式解决企业数字化需求。`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: '定制化开发',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        全流程定制开发<br /><span class="text-2xl">从需求到上线，全程无忧</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    items={[
+      {
+        title: '服务优势：',
+        description: `技术栈先进：采用 Astro + Tailwind CSS 等现代技术栈，站点性能卓越、安全性高、易于维护。<br />外贸基因：我们深刻理解外贸企业的获客需求，将 SEO、GEO、社媒运营融入网站建设，让网站成为获客引擎。<br />快速交付：简单建站 7 个工作日内交付，定制化建站 15-20 个工作日交付。<br />售后无忧：提供 7×12 小时在线技术支持，紧急问题 2 小时内响应。`,
+      },
+      {
+        title: '适用客户：',
+        description: `有出海需求的外贸 B2B / B2C 企业<br />希望提升品牌形象的中小企业<br />需要多语言官网的跨国业务团队<br />正在从 B2B 平台（阿里国际站等）向独立站转型的企业<br />已经拥有独立站但需要 SEO / GEO 优化升级的老客户`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: '威拓星耀服务优势',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        为什么选择威拓星耀？<br /><span class="text-2xl">技术 + 营销双驱动</span>
+      </h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Pricing Widget ******************* -->
+
+  <Pricing
+    id="pricing"
+    title="透明定价 · 灵活选择"
+    prices={[
+      {
+        title: '简单建站',
+        subtitle: '适合品牌展示 / 初创企业快速上线',
+        price: '500',
+        period: '/ 一次性',
+        callToAction: {
+          target: '_blank',
+          text: '立即咨询',
+          href: '/contact',
+        },
+      },
+      {
+        title: 'SEO 优化套餐',
+        subtitle: '深度 SEO 优化 + 全年运维支持',
+        price: '3000',
+        period: '/ 年',
+        callToAction: {
+          target: '_blank',
+          text: '了解详情',
+          href: '/contact',
+        },
+        hasRibbon: true,
+        ribbonTitle: '推荐',
+      },
+      {
+        title: 'GEO + SEO 全效',
+        subtitle: '本地化推广型网站 + 精准获客',
+        price: '5000',
+        period: '/ 年',
+        callToAction: {
+          target: '_blank',
+          text: '预约演示',
+          href: '/contact',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="常见问题"
+    items={[
+      {
+        title: '建站需要提供哪些资料？',
+        description:
+          '您需要提供：公司基本信息（名称、简介、联系方式）、Logo 源文件、产品/服务图文资料、网站功能需求清单。如有现有网站，我们可协助迁移内容。资料齐全后，简单建站 3 个工作日可出初稿。',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '建站后是否提供修改服务？',
+        description: `是的。所有套餐均提供 30 天内免费修改服务，您可以在上线前提出修改意见，我们免费调整。上线后如需新增页面或功能，可根据需求评估后按工作量收费。SEO 优化套餐及全效套餐客户享有全年内容更新支持。`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'SEO 优化具体包括哪些内容？',
+        description:
+          '包括但不限于：关键词策略研究与布局、全站 TDK 标签优化、网站结构化数据（JSON-LD）接入、图片 Alt 标签优化、内链结构优化、站点地图生成与提交、Google Search Console 接入与监控、加载速度优化、月度排名跟踪报告。我们承诺在优化期内持续跟进效果。',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'GEO 优化和 SEO 优化有什么区别？',
+        description: `SEO 侧重于在 Google 等搜索引擎的全局搜索中获得排名，而 GEO（本地搜索引擎优化）侧重于在目标地区（如某个国家或城市）的本地搜索结果中优先展示。对于外贸企业，GEO 优化能帮助您在海外客户的 "附近商家" 搜索结果中脱颖而出，精准触达有本地采购需求的买家。`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: '域名和服务器如何配置？',
+        description: `简单建站套餐赠送 1 年 .com 域名及基础云主机（第二年续费自理）。SEO 及全效套餐客户可根据网站规模推荐更优配置。所有站点部署于 Cloudflare 全球加速网络，确保海外访问速度。如需使用客户自有域名，我们免费协助解析与配置。`,
+        icon: 'tabler:chevrons-right',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="联系我们"
+    subtitle="有任何建站需求或疑问？欢迎随时与我们取得联系。"
+    callToAction={{
+      text: '立即咨询',
+      href: '/contact',
+    }}
+    items={[
+      {
+        title: '在线咨询',
+        description: '通过官网联系表单提交需求，我们将在 24 小时内回复',
+        icon: 'tabler:mail',
+      },
+      {
+        title: '邮件联系',
+        description: 'vectoflare@hotmail.com',
+        icon: 'tabler:headset',
+      },
+      {
+        title: '更多服务',
+        description: '查看全部服务与解决方案',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="关注威拓星耀的最新动态"
+    information={`浏览我们的行业洞察、技术分享与客户案例，了解更多关于网站建设、SEO 优化和外贸数字营销的实用信息。`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
