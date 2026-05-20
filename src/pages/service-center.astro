@@ -1,0 +1,49 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: '技术中心',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="技术中心"
+    image={{
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80',
+      alt: '技术中心',
+    }}
+  >
+    <Fragment slot="title">
+      技术赋能，<span class="text-accent dark:text-white">服务全球</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      提供全方位的技术支持和解决方案，助力企业数字化转型与全球化布局。
+    </Fragment>
+  </Hero>
+
+  <Features
+    id="services"
+    tagline="技术服务"
+    title="核心服务能力"
+    items={[
+      {
+        title: '技术支持',
+        description: '全流程技术咨询与售后支持服务体系。',
+        icon: 'tabler:headset',
+      },
+      {
+        title: '定制开发',
+        description: '根据客户需求提供个性化产品定制开发服务。',
+        icon: 'tabler:code',
+      },
+      {
+        title: '培训服务',
+        description: '专业技术培训，助力团队快速掌握核心技能。',
+        icon: 'tabler:books',
+      },
+    ]}
+  />
+</Layout>

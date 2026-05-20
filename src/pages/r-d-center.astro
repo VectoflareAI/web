@@ -1,0 +1,49 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: '研发中心',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="研发中心"
+    image={{
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
+      alt: '研发中心',
+    }}
+  >
+    <Fragment slot="title">
+      持续创新，<span class="text-accent dark:text-white">驱动未来</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      我们致力于产品研发和技术创新，为客户提供最前沿的解决方案。
+    </Fragment>
+  </Hero>
+
+  <Features
+    id="research"
+    tagline="研究方向"
+    title="核心技术领域"
+    items={[
+      {
+        title: '材料科学',
+        description: '石墨材料及其复合材料的性能优化与应用研究。',
+        icon: 'tabler:flask',
+      },
+      {
+        title: '工艺创新',
+        description: '智能化生产流程与自动化控制技术研发。',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: '产品设计',
+        description: '基于客户需求定制化产品设计与原型开发。',
+        icon: 'tabler:cube',
+      },
+    ]}
+  />
+</Layout>

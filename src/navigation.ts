@@ -24,8 +24,12 @@ export const headerData = {
       ],
     },
     {
-      text: 'Pages',
+      text: '研发中心',
       links: [
+        {
+          text: '研发中心',
+          href: getPermalink('/r-d-center'),
+        },
         {
           text: 'Features (Anchor Link)',
           href: getPermalink('/#features'),
@@ -127,8 +131,12 @@ export const headerData = {
       ],
     },
     {
-      text: '社区',
+      text: '技术中心',
       links: [
+        {
+          text: '技术中心',
+          href: getPermalink('/service-center'),
+        },
         {
           text: '新闻',
           href: getBlogPermalink(),
