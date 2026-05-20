@@ -229,6 +229,6 @@ export const footerData = {
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/VectoflareAI/web' },
   ],
   footNote: `
-    Made by <a class="text-blue-600 underline dark:text-muted" href="https://vectoflare.com/"> Vectoflare</a> · All rights reserved.
+    &copy; <span id="footer-year"></span> By Vectoflare. All Rights Reserved.
   `,
 };

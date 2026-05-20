@@ -102,3 +102,10 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var el = document.getElementById('footer-year');
+    if (el) el.textContent = new Date().getFullYear().toString();
+  })();
+</script>
