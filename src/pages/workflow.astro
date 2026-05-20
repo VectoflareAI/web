@@ -10,12 +10,45 @@ import Steps from '~/components/widgets/Steps.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
-  title: '自动化工作流定制 — Vectoflare',
-  description: '为外贸B2B企业量身打造的高效工作流定制方案，涵盖询盘自动化、客户追踪与数据采集。',
+  title: '外贸自动化工作流定制 (Workflow Automation) — Vectoflare',
+  description: '为 B2B 外贸出海企业深度定制智能工作流，打通 Facebook/Google Maps 客户数据自动采集、AI 询盘秒级响应及 Email 防封群发系统。',
+  canonical: 'https://vectoflare.com/workflow',
+  openGraph: {
+    title: '智能化外贸工作流定制服务 — VectoflareAI',
+    description: '助力外贸B2B获客效率提升300%，打造全天候无人值守的自动化出海引擎。',
+    type: 'website',
+    images: [
+      {
+        url: 'https://vectoflare.com/images/workflow-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Vectoflare 外贸工作流架构图',
+      },
+    ],
+  },
+};
+
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: '外贸自动化工作流定制 / B2B Workflow Automation',
+  provider: {
+    '@type': 'Organization',
+    name: 'VectoflareAI',
+    url: 'https://vectoflare.com',
+  },
+  description: '提供工业级外贸获客工具、海外社媒数据采集、Email防封群发系统的全套定制解决方案。',
+  areaServed: 'Global',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'USD',
+  },
 };
 ---
 
 <Layout metadata={metadata}>
+  <script type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
+
   <Hero
     tagline="专业外贸解决方案"
     title="智能化外贸工作流定制服务"

@@ -1,2 +1,18 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# 明确允许主流 AI 爬虫抓取（建立 AI 知识库）
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+# 绑定全站站点地图
+Sitemap: https://vectoflare.com/sitemap-index.xml

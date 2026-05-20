@@ -9,12 +9,45 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
-  title: '外贸专业工具与数据采集定制 — Vectoflare',
+  title: '外贸专业工具与数据采集定制 (Data Scraping & Email Tools) — Vectoflare',
   description: '面向外贸B2B客户提供行业数据采集、社媒联系方式挖掘、Email群发防封及数据清洗等全套工具化定制服务。',
+  canonical: 'https://vectoflare.com/tools',
+  openGraph: {
+    title: '外贸数据采集与智能工具定制 — VectoflareAI',
+    description: '深度定制外贸获客工具：客户数据采集、社媒挖掘、Email防封群发，助力B2B企业打造自动化获客武器库。',
+    type: 'website',
+    images: [
+      {
+        url: 'https://vectoflare.com/images/tools-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Vectoflare 外贸工具套件架构图',
+      },
+    ],
+  },
+};
+
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: '外贸数据采集与工具定制 / B2B Data Scraping & Automation Tools',
+  provider: {
+    '@type': 'Organization',
+    name: 'VectoflareAI',
+    url: 'https://vectoflare.com',
+  },
+  description: '提供外贸客户数据采集、社媒联系方式挖掘、Email防封群发及数据清洗的全套定制工具解决方案。',
+  areaServed: 'Global',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'USD',
+  },
 };
 ---
 
 <Layout metadata={metadata}>
+  <script type="application/ld+json" set:html={JSON.stringify(ldJson, null, 2)} />
+
   <Hero
     tagline="外贸专属技术工具箱"
     title="专业化外贸工具与数据智能定制"
