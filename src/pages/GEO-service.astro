@@ -1,0 +1,288 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Content from '~/components/widgets/Content.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+
+const metadata = {
+  title: 'GEO优化服务 — 威拓星耀',
+  description: '威拓星耀 GEO（本地搜索引擎优化）服务，帮助外贸企业在目标国家/地区的 Google Maps 和本地搜索结果中获得优先展示，精准触达海外潜在买家。',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="威拓星耀 · GEO 优化服务"
+    image={{
+      src: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+      alt: 'GEO优化服务示意',
+    }}
+  >
+    <Fragment slot="title">
+      <span class="text-accent dark:text-white">GEO 本地化优化</span>：<br />让您的企业在海外目标城市 <span
+        class="hidden xl:inline">优先被看到</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        针对外贸企业的目标市场，深度优化 Google My Business 及本地搜索排名。
+      </span>
+      精准触达有本地采购需求的海外买家，提升到店咨询量与官网转化率。
+    </Fragment>
+
+    <div slot="actions" class="flex max-w-sm gap-4">
+      <a href="/contact" class="btn-primary font-semibold px-6 py-3.5 rounded-full text-center">免费诊断</a>
+      <a href="#pricing" class="btn-secondary font-semibold px-6 py-3.5 rounded-full text-center">查看套餐</a>
+    </div>
+  </Hero2>
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    id="features"
+    title="GEO 优化服务内容"
+    subtitle="从 Google 企业档案搭建到本地关键词排名，全链路提升您在目标市场的本地搜索可见度。"
+    tagline="七步本地化引擎"
+    columns={2}
+    items={[
+      {
+        title: 'Google My Business 优化',
+        description: `完整创建并优化 Google 企业档案 / Google My Business 资料，确保企业名称、地址、电话、网站、营业时间等信息准确一致，提升本地搜索权重。`,
+        icon: 'tabler:building',
+      },
+      {
+        title: '本地关键词策略',
+        description:
+          '针对目标城市 / 区域挖掘高价值本地化搜索词，如 "shanghai graphite mold supplier"，布局到网站及企业档案中。',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'NAP 一致性建设',
+        description: '确保企业 Name / Address / Phone 在全网（黄页、地图、社交平台、行业目录）完全一致，这是 GEO 排名的核心基础。',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: '本地外链 +  citations',
+        description: `在目标国家的本地化目录、行业协会网站、商业黄页等平台建设高质量结构化引用（citations），增强本地相关性信号。`,
+        icon: 'tabler:link',
+      },
+      {
+        title: '多语言本地化适配',
+        description: '根据目标市场语言习惯，将网站及企业资料翻译为当地语言（英/日/德/法/西等），消除语言障碍，提升本地用户信任感。',
+        icon: 'tabler:language',
+      },
+      {
+        title: '好评管理与监控',
+        description: '协助引导客户留好评并妥善回复差评，提升 Google My Business 评分与活跃度。评分越高，本地搜索排名越靠前。',
+        icon: 'tabler:star',
+      },
+      {
+        title: '本地化内容运营',
+        description: '围绕目标城市创作本地化博客文章、案例研究、新闻稿（如 "Top 5 graphite suppliers in Houston"），持续增强本地 SEO 信号。',
+        icon: 'tabler:article',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'GEO优化流程图',
+    }}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: '精准本地曝光',
+        description:
+          'GEO 优化让您的企业在海外目标城市的 "near me" 及本地搜索结果中优先展示。当潜在买家搜索 "graphite supplier in [城市名]" 时，您的企业排在前列。',
+        icon: 'tabler:target',
+      },
+      {
+        title: '高质量主动询盘',
+        description:
+          '通过 GEO 获取的客户均为有明确本地采购需求的买家，转化率远高于普通展示广告。统计显示 GEO 带来的询盘成交率比传统 SEO 高出 2-3 倍。',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: '竞争对手壁垒',
+        description:
+          '率先在目标城市完成 GEO 优化布局，形成先发优势。本地搜索排名一旦稳定，竞争对手将极难超越。',
+        icon: 'tabler:shield',
+      },
+      {
+        title: 'ROI 清晰可量化',
+        description: '每月提供完整的 GEO 效果报告，包括：本地搜索展示次数、地图点击量、网站引流量、询盘转化数。每一分投入都有数据可查。',
+        icon: 'tabler:chart-bar',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
+      alt: 'GEO优化数据看板',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">GEO 优化核心价值</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: '适用场景一：工厂 / 制造商出海',
+        description: '如果您是石墨模具、机械零部件等工业品制造商，GEO 能帮您在海外工业城市的本地搜索中优先触达采购商，绕过中间商直接对接终端客户。',
+        icon: 'tabler:building',
+      },
+      {
+        title: '适用场景二：外贸 B2B 企业',
+        description: '已经在阿里国际站等平台获客的企业，通过 GEO 建立独立本地搜索存在，降低平台依赖，提升利润率。',
+        icon: 'tabler:world',
+      },
+      {
+        title: '适用场景三：海外仓 / 本地服务商',
+        description: '在海外设有仓库或办事处的企业，GEO 可精准覆盖周边区域买家，提升到店咨询与本地业务转化。',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: '为什么选择威拓星耀？',
+        description: '我们深刻理解外贸 GEO 的技术细节与实操要点：Google My Business 合规运营、本地 citation 建设、多语言内容部署。不套模板，每个项目均为定制化策略。',
+        icon: 'tabler:star',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: '外贸场景示意',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">适用场景与优势</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="GEO 优化效果数据"
+    stats={[
+      { amount: '200%+', icon: 'tabler:trending-up', title: '本地搜索曝光增长' },
+      { amount: '2-3x', icon: 'tabler:users', title: '询盘转化率提升' },
+      { amount: '4.7', icon: 'tabler:star', title: '平均 Google 评分' },
+    ]}
+  />
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    id="pricing"
+    title="标准 GEO 优化套餐"
+    testimonials={[
+      {
+        testimonial: `单城市基础 GEO 优化：<br /><br />
+          • 1 个目标城市 Google My Business 完整优化<br />
+          • 本地关键词策略报告（20+ 关键词）<br />
+          • NAP 全网一致性检测与修复<br />
+          • 10+ 本地 citations 建设<br />
+          • 月度效果报告<br /><br />
+          <strong class="text-primary text-xl">¥2,800 / 年</strong>`,
+        name: '基础套餐',
+        job: '适合单一目标市场试水',
+        image: {
+          src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          alt: '基础套餐',
+        },
+      },
+      {
+        testimonial: `多城市标准 GEO 优化：<br /><br />
+          • 3 个目标城市 GEO 全流程优化<br />
+          • 每城市 30+ 本地关键词<br />
+          • NAP 全网一致性 + 50+ citations<br />
+          • 多语言本地化适配（含翻译）<br />
+          • 好评管理指导 + 回复模板<br />
+          • 双周效果跟踪报告<br /><br />
+          <strong class="text-primary text-xl">¥6,800 / 年</strong>`,
+        name: '标准套餐',
+        job: '⭐ 推荐 · 适合多城市布局',
+        image: {
+          src: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          alt: '标准套餐',
+        },
+      },
+      {
+        testimonial: `全球化企业 GEO 定制：<br /><br />
+          • 不限目标城市 / 国家<br />
+          • 本地化内容运营（每季度 4 篇本地化文章）<br />
+          • 竞品 GEO 分析与超越策略<br />
+          • 专属客户成功经理<br />
+          • 月度策略复盘会议<br />
+          • 全托管式运营<br /><br />
+          <strong class="text-primary text-xl">按需报价</strong>`,
+        name: '企业定制',
+        job: '适合大规模海外市场拓展',
+        image: {
+          src: 'https://images.unsplash.com/photo-1512361436605-a484bdb34b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+          alt: '企业定制',
+        },
+      },
+    ]}
+    callToAction={{
+      target: '_blank',
+      text: '免费咨询 GEO 方案',
+      href: '/contact',
+      icon: 'tabler:chevron-right',
+    }}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="GEO 优化常见问题"
+    items={[
+      {
+        title: 'GEO 和 SEO 有什么区别？',
+        description:
+          'SEO（搜索引擎优化）主要针对 Google 等搜索引擎的全局搜索排名，而 GEO（本地搜索引擎优化）专注于在特定城市/区域的本地搜索结果（如 Google Maps 及 "near me" 搜索）中获得优先展示。对于有线下业务或针对特定区域销售的外贸企业，GEO 更为精准高效。',
+      },
+      {
+        title: 'GEO 优化需要多长时间见效？',
+        description:
+          '通常在优化启动后 4-8 周可以观察到明显的本地搜索排名提升。具体时间取决于目标城市的竞争激烈程度、Google My Business 资料的完善度以及 citations 建设的速度。我们会在前两个月重点打好基础。',
+      },
+      {
+        title: '没有海外办事处也能做 GEO 吗？',
+        description: `可以。虽然没有实体地址会影响 Google My Business 的验证（Google 要求使用真实地址），但我们可通过灵活策略（如使用虚拟办公室、服务区域设定等方式）帮助您合规完成 GEO 优化。具体方案请联系我们评估。`,
+      },
+      {
+        title: 'GEO 优化的数据如何衡量？',
+        description:
+          '我们提供 Google My Business 数据报告和 Google Search Console 本地搜索报告，涵盖：本地搜索展示次数、地图浏览量、网站点击量、电话点击量、路线查询量、搜索关键词排名等核心指标。',
+      },
+      {
+        title: '可以只做一个城市的 GEO 吗？',
+        description:
+          '完全可以。基础套餐即为单城市 GEO 优化。您可以选择任意海外城市作为目标市场，我们为您针对性部署本地化策略。后续可根据效果扩展至更多城市。',
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="让您的海外目标客户率先找到您"
+    subtitle="立即联系威拓星耀，获取免费 GEO 诊断报告，了解您企业在目标市场的本地搜索现状与优化空间。"
+  >
+    <div slot="actions" class="flex max-w-sm gap-4">
+      <a href="/contact" class="btn-primary font-semibold px-6 py-3.5 rounded-full text-center">免费获取诊断报告</a>
+    </div>
+  </CallToAction>
+</Layout>

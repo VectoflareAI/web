@@ -16,7 +16,7 @@ export const headerData = {
         },
         {
           text: 'GEO优化',
-          href: getPermalink('/homes/mobile-app'),
+          href: getPermalink('/GEO-service'),
         },
         {
           text: '品牌推广',
