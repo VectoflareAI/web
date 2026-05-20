@@ -77,7 +77,7 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
       { url: '/about', title: '关于我们', desc: '了解威拓星耀' },
       { url: '/services', title: '服务', desc: '产品与服务' },
       { url: '/r-d-center', title: '研发中心', desc: '持续创新，驱动未来' },
-      { url: '/service-center', title: '技术中心', desc: '技术赋能，服务全球' },
+      { url: '/service-center', title: '技术支持', desc: '技术赋能，服务全球' },
       { url: '/products', title: '全部产品', desc: '浏览全部产品分类' },
       { url: '/products/graphite-molds', title: '石墨模具', desc: '石墨模具产品系列' },
       { url: '/products/graphite-products', title: '石墨制品', desc: '石墨制品产品系列' },
@@ -149,13 +149,19 @@ const { iconClass = 'w-5 h-5' } = Astro.props;
         results.appendChild(a);
       });
 
+      var viewAll = document.createElement('a');
+      viewAll.href = '/search?q=' + encodeURIComponent(query);
+      viewAll.className = 'search-result-item flex items-center justify-center gap-2 px-4 py-3 mt-1 rounded-xl text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors font-medium';
+      viewAll.innerHTML = '查看全部 ' + matches.length + ' 个结果 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>';
+      results.appendChild(viewAll);
+
       return matches;
     }
 
     function executeSearch() {
-      var matches = doSearch(input.value);
-      if (matches && matches.length > 0) {
-        window.location.href = matches[0].url;
+      var q = input.value.trim();
+      if (q) {
+        window.location.href = '/search?q=' + encodeURIComponent(q);
       }
     }
 
