@@ -5,13 +5,13 @@
   </button>
 
   <div class="chat-options" id="chatOptions">
-    <a href="https://weixin://dl/chat" target="_blank" rel="noopener noreferrer" class="chat-item wechat-direct" id="wechatDirect">
+    <button class="chat-item wechat-direct" id="wechatDirect">
       <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 3h7C17 3 18 4 18 5.5v3c0 1.5-1 2.5-2.5 2.5h-7C7 11 6 10 6 8.5v-3C6 4 7 3 8.5 3zM6 15.5C6 14 7 13 8.5 13h3M6 19c0 1.5 1 2.5 2.5 2.5h7c1.5 0 2.5-1 2.5-2.5v-3c0-1.5-1-2.5-2.5-2.5h-7C7 13.5 6 14.5 6 16v3z"/></svg></span>
       <div class="chat-text">
         <p class="title">微信客服</p>
         <p class="status">点击直接打开微信</p>
       </div>
-    </a>
+    </button>
 
     <button class="chat-item qr-option" id="qrOption">
       <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M18 17h3v3h-3zM14 18v3h3"/></svg></span>
@@ -188,15 +188,26 @@
   (function () {
     var mainBtn = document.getElementById('mainChatBtn');
     var options = document.getElementById('chatOptions');
+    var wechatDirect = document.getElementById('wechatDirect');
     var qrOption = document.getElementById('qrOption');
     var modal = document.getElementById('wechatModal');
     var closeBtn = document.getElementById('closeModal');
     var copyBtn = document.getElementById('copyBtn');
 
-    if (!mainBtn || !options || !qrOption || !modal || !closeBtn || !copyBtn) return;
+    if (!mainBtn || !options || !wechatDirect || !qrOption || !modal || !closeBtn || !copyBtn) return;
 
     mainBtn.addEventListener('click', function () {
       options.classList.toggle('show');
+    });
+
+    wechatDirect.addEventListener('click', function () {
+      options.classList.remove('show');
+      try {
+        window.location.href = 'weixin://';
+      } catch (e) {}
+      setTimeout(function () {
+        modal.classList.add('show');
+      }, 600);
     });
 
     qrOption.addEventListener('click', function () {
