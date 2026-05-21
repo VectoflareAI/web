@@ -6,18 +6,10 @@
 
   <div class="chat-options" id="chatOptions">
     <button class="chat-item wechat-direct" id="wechatDirect">
-      <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 3h7C17 3 18 4 18 5.5v3c0 1.5-1 2.5-2.5 2.5h-7C7 11 6 10 6 8.5v-3C6 4 7 3 8.5 3zM6 15.5C6 14 7 13 8.5 13h3M6 19c0 1.5 1 2.5 2.5 2.5h7c1.5 0 2.5-1 2.5-2.5v-3c0-1.5-1-2.5-2.5-2.5h-7C7 13.5 6 14.5 6 16v3z"/></svg></span>
+      <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#07c160" stroke="none"><path d="M8.5 3h7C17 3 18 4 18 5.5v3c0 1.5-1 2.5-2.5 2.5h-7C7 11 6 10 6 8.5v-3C6 4 7 3 8.5 3zM6 15.5C6 14 7 13 8.5 13h3M6 19c0 1.5 1 2.5 2.5 2.5h7c1.5 0 2.5-1 2.5-2.5v-3c0-1.5-1-2.5-2.5-2.5h-7C7 13.5 6 14.5 6 16v3z"/></svg></span>
       <div class="chat-text">
         <p class="title">微信客服</p>
-        <p class="status">点击直接打开微信</p>
-      </div>
-    </button>
-
-    <button class="chat-item qr-option" id="qrOption">
-      <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M18 17h3v3h-3zM14 18v3h3"/></svg></span>
-      <div class="chat-text">
-        <p class="title">扫码关注</p>
-        <p class="status">显示企业微信二维码</p>
+        <p class="status">打开微信 · 扫码开始对话</p>
       </div>
     </button>
   </div>
@@ -25,9 +17,10 @@
   <div class="wechat-modal" id="wechatModal">
     <div class="modal-content">
       <button class="close-modal" id="closeModal">&times;</button>
-      <h3>扫码联系威拓星耀</h3>
+      <h3>微信客服 · 威拓星耀</h3>
+      <p class="modal-tip">打开微信后，请使用「扫一扫」扫描下方二维码</p>
       <img src="/images/wechat-qr.jpg" alt="威拓星耀企业微信二维码" class="qr-code" />
-      <p>长按识别二维码添加客服</p>
+      <p>扫码即可开始对话</p>
       <p class="greeting-text">威拓星耀欢迎您，有什么需要我们为您服务的吗？</p>
       <button class="copy-btn" id="copyBtn">复制问候语</button>
     </div>
@@ -151,6 +144,11 @@
     background: none; border: none; font-size: 28px; cursor: pointer; color: #999;
     line-height: 1;
   }
+  .modal-tip {
+    font-size: 13px;
+    color: #07c160;
+    margin-bottom: 4px;
+  }
   .greeting-text {
     background: #f0faf0;
     color: #333;
@@ -189,12 +187,11 @@
     var mainBtn = document.getElementById('mainChatBtn');
     var options = document.getElementById('chatOptions');
     var wechatDirect = document.getElementById('wechatDirect');
-    var qrOption = document.getElementById('qrOption');
     var modal = document.getElementById('wechatModal');
     var closeBtn = document.getElementById('closeModal');
     var copyBtn = document.getElementById('copyBtn');
 
-    if (!mainBtn || !options || !wechatDirect || !qrOption || !modal || !closeBtn || !copyBtn) return;
+    if (!mainBtn || !options || !wechatDirect || !modal || !closeBtn || !copyBtn) return;
 
     mainBtn.addEventListener('click', function () {
       options.classList.toggle('show');
@@ -208,11 +205,6 @@
       setTimeout(function () {
         modal.classList.add('show');
       }, 600);
-    });
-
-    qrOption.addEventListener('click', function () {
-      options.classList.remove('show');
-      modal.classList.add('show');
     });
 
     closeBtn.addEventListener('click', function () {
