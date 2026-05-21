@@ -193,6 +193,10 @@
 
     if (!mainBtn || !options || !wechatDirect || !modal || !closeBtn || !copyBtn) return;
 
+    function showQR() {
+      modal.classList.add('show');
+    }
+
     mainBtn.addEventListener('click', function () {
       options.classList.toggle('show');
     });
@@ -202,9 +206,19 @@
       try {
         window.location.href = 'weixin://';
       } catch (e) {}
-      setTimeout(function () {
-        modal.classList.add('show');
-      }, 600);
+      setTimeout(showQR, 600);
+    });
+
+    document.addEventListener('click', function (e) {
+      var target = e.target;
+      while (target) {
+        if (target.tagName === 'A' && target.getAttribute('href') === '#wechat-qr') {
+          e.preventDefault();
+          showQR();
+          return;
+        }
+        target = target.parentElement;
+      }
     });
 
     closeBtn.addEventListener('click', function () {

@@ -99,7 +99,7 @@ export const footerData = {
     {
       ariaLabel: '微信视频号',
       icon: 'tabler:brand-wechat',
-      href: 'https://weixin.qq.com/cgi-bin/readtemplate?action=gotohome&t=weixin&lang=zh_CN',
+      href: '#wechat-qr',
     },
     { ariaLabel: '抖音', icon: 'tabler:brand-tiktok', href: 'https://www.douyin.com/user/' },
     { ariaLabel: '小红书', icon: 'tabler:brand-reddit', href: 'https://www.xiaohongshu.com/user/' },
